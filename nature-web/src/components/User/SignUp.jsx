@@ -48,10 +48,16 @@ function SignUp() {
           <label>Password Confirm</label>
           <input type="password" name="password-confirm" onChange={(e) => setPwdConfirm(e.target.value)} />
         </div>
-        <button className="green" type="submit">가입</button>
+        {/* <button className="green" type="submit">가입</button>
         <Link to='/'>
           <button className="green">로그인</button>
-        </Link>
+        </Link> */}
+        <div className="btn-wrap">
+          <button className="green" type="submit">등록</button>
+          <Link to='/'>
+            로그인
+          </Link>
+        </div>
       </form>
     </div>
   );

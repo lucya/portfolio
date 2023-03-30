@@ -3,5 +3,5 @@ export const UserState = {
   password: '',
   username: '',
   photoURL: '',
-  auth: '2',
+  auth: '1' | '2',
 }

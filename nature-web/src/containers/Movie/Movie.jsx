@@ -4,14 +4,18 @@ import Movies from "../../components/Movie/Moives";
 import MovieDetail from "../../components/Movie/MovieDetail";
 import './Movie.css';
 
+export const IMG_BASE_URL = process.env.REACT_APP_MOVIE_IMG_BASE_URL;
+
 function Movie() {
   return (
-    <div className="app-container">
+    <div>
       <Header />
-      <Routes>
-        <Route path="/" element={<Movies />} />
-        <Route path="/:id" element={<MovieDetail />} />
-      </Routes>
+      <div className="movie-container">
+        <Routes>
+          <Route path="/" element={<Movies />} />
+          <Route path="/:id" element={<MovieDetail />} />
+        </Routes>
+      </div>
     </div>
   );
 }

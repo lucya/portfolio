@@ -1,14 +1,16 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { login } from '../../actions/user/actions';
+import userAction from '../../actions/user/actions';
 import { UserState } from '../../actions/user/types';
 import logo from '../../logo.png';
 
 
 function Login() {
   const [userState, setUserState] = useState(UserState)
-  // const dispatch = useDispatch();
+  const user = useSelector(state => state.userReducer);
+  console.log(user);
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     setUserState({
@@ -20,12 +22,13 @@ function Login() {
     e.preventDefault();
     console.log(userState)
     // TODO: dispatch call action
-    // dispatch(login(userState));
+    dispatch(userAction.login(userState));
   }
+
   return (
     <div className='user-wrap'>
       <img src={logo} className="app-logo" alt="logo" />
-
+      <h3>로그인</h3>
       <form className="form-container" onSubmit={handleSubmit}>
         <div className="form-wrap">
           <label>Email</label>
@@ -35,10 +38,12 @@ function Login() {
           <label>Password</label>
           <input type="password" name="password" onChange={handleChange} />
         </div>
-        <button className="green" type="submit">로그인</button>
-        <Link to='/signup'>
-          <button className="green">가입</button>
-        </Link>
+        <div className="btn-wrap">
+          <button className="green" type="submit">로그인</button>
+          <Link to='/signup'>
+            회원 가입
+          </Link>
+        </div>
       </form>
     </div>
   )
