@@ -7,7 +7,6 @@ const bodyParser = require("body-parser");
 
 /* const socketIO = require("socket.io"); */
 const indexRouter = require('./routes');
-// const userRoutes = require('./routes/userRoutes');
 
 const PORT = process.env.PORT || 8081
 

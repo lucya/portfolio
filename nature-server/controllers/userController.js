@@ -1,12 +1,12 @@
 const {
-  //  auth ,
+  auth,
   app
 } = require('../db/firebaseDb')
 const { getUser, addUser } = require('../services/userService')
 const User = require('../models/user')
 // const firestore = firebase.firestore();
 
-const { getAuth } = require('firebase-admin/auth')
+// const { getAuth } = require('firebase-admin/auth')
 const {
   // getAuth,
   signInWithEmailAndPassword,
@@ -14,12 +14,14 @@ const {
   signOut
 } = require('firebase/auth');
 
+// const auth = getAuth(app);
+
 const login = async (req, res, next) => {
 
   const User = req.body;
   console.log('xxxx', User)
-  // TODO:  login call
-  const auth = getAuth();
+  
+  // const auth = getAuth();
   await signInWithEmailAndPassword(auth, User.email, User.password)
     .then((userCredential) => {
       console.log('wwww', userCredential)
