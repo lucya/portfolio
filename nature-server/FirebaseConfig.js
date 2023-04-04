@@ -1,12 +1,8 @@
+const { initializeApp } = require('firebase/app')
 const dotenv = require("dotenv")
-const firebase = require('firebase-admin');
-
 dotenv.config();
 
 const {
-  PORT,
-  HOST,
-  HOST_URL,
   API_KEY,
   AUTH_DOMAIN,
   PROJECT_ID,
@@ -24,10 +20,8 @@ const firebaseConfig = {
   appId: APP_ID,
 }
 
+const app = initializeApp(firebaseConfig);
 
 module.exports = {
-  port: PORT,
-  host: HOST,
-  url: HOST_URL,
-  firebaseConfig: firebaseConfig
-};
+  app,
+}
