@@ -5,7 +5,8 @@ const login = async (req, res, next) => {
   const User = req.body;
 
   try {
-    const data = await doLogin(User);
+    const data = await doLogin(User, res);
+
     res.status(200).send(data);
   } catch (error) {
     res.status(400).send(error.message);
@@ -14,7 +15,8 @@ const login = async (req, res, next) => {
 
 const logout = async (req, res, next) => {
   try {
-    await doLogout();
+    await doLogout(res);
+
     res.status(200).send("로그아웃!");
   } catch (error) {
     res.status(400).send(error.message);

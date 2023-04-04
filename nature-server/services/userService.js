@@ -14,6 +14,26 @@ const {
   deleteUser,
 } = require('firebase/auth');
 
+const cookieConfig = {
+  //cookieConfig는 키, 밸류 외에 설정을 보낼 수 있다.
+  maxAge: 1800000,
+  //밀리초 단위로 들어가는데 30분 만료 쿠키를 생성한다. 
+  // path: '/',
+  httpOnly: true,
+  //통신할때만 접속할 수 있다. 기본값은 false임 
+  signed: true,
+  //쿠키를 암호화 시킨다. 
+};
+const setCookies = (res, token) => {
+  const accessToken = token.accessToken;
+  const refreshToken = token.refreshToken;
+  res.cookie('access_token', accessToken)
+  res.cookie('refresh_token', refreshToken)
+}
+const clearCookies = (res) => {
+  res.clearCookie('access_token');
+  res.clearCookie('refresh_token');
+}
 
 const getUser = async (uid) => {
   try {
@@ -25,7 +45,6 @@ const getUser = async (uid) => {
       throw new Error('Has no user')
     }
     const user = userSnapshot.data();
-    console.log('*** getUser **', user);
     return user;
   } catch (error) {
     throw error;
@@ -62,12 +81,15 @@ const deleteUserAuthenticated = async () => {
   });
 }
 
-const doLogin = async (userInfo) => {
+const doLogin = async (userInfo, res) => {
   const auth = getAuth();
   return await signInWithEmailAndPassword(auth, userInfo.email, userInfo.password)
     .then((userCredential) => {
       // Signed in
       const user = userCredential.user;
+      // console.log('doLogin success', user);
+      setCookies(res, user.stsTokenManager);
+
       const uid = userCredential.user.uid;
       return getUser(uid);
 
@@ -89,10 +111,13 @@ const doSignup = async (userInfo) => {
       throw error;
     });
 }
-const doLogout = async () => {
+const doLogout = async (res) => {
   const auth = getAuth();
+  clearCookies(res)
   return await signOut(auth);
 }
+
+
 
 module.exports = {
   doLogin,
