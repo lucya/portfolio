@@ -7,7 +7,9 @@
   width: 424px;
   min-width: 430px;
   height: 100vh;
-  background-color: #282c34;
+  /* background-color: #282c34; */
+  background: rgb(2, 0, 36);
+  background: linear-gradient(188deg, rgba(2, 0, 36, 1) 0%, rgba(85, 89, 98, 1) 35%, rgba(0, 212, 255, 1) 100%);
   display: flex;
   /* flex-wrap: wrap; */
   justify-content: center;

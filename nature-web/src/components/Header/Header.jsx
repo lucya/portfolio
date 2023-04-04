@@ -30,18 +30,20 @@ function Header() {
             display: 'flex'
           }}>
             <img
-              style={{ width: "123px" }}
               src='https://firebasestorage.googleapis.com/v0/b/nature-portfolio-7b1db.appspot.com/o/text_logo.png?alt=media&token=8159f504-72fa-40e0-b279-4981c06de99a'
               alt='로고'></img>
           </Link>
+          <Header />
+        </div>
+        <div className='header-right-wrap'>
           <ul>
             <li>
-              <Link className='header-nav-item' to='movies'>
+              <Link className='header-nav-item' to='/movies'>
                 영화
               </Link>
             </li>
             <li>
-              <Link className='header-nav-item' to='producs'>
+              <Link className='header-nav-item' to='/products'>
                 홍당무
               </Link>
             </li>
