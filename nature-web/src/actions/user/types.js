@@ -1,4 +1,4 @@
-export const UserState = {
+export const User = {
   email: '',
   password: '',
   username: '',

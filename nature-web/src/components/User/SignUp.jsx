@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { UserState } from "../../actions/user/types";
+import { User } from "../../actions/user/types";
 
 function SignUp() {
 
-  const [userState, setUserState] = useState(UserState);
+  const [userState, setUserState] = useState(User);
   const [pwdConfirm, setPwdConfirm] = useState('');
   // const dispatch = useDispatch();
 

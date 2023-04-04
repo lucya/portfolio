@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { UserState } from '../actions/user/types';
+import { User } from '../actions/user/types';
 
 const initialState = {
-  userState: UserState,
+  userState: User,
   loggedIn: false
 }
 const userSlice = createSlice({
@@ -11,7 +11,7 @@ const userSlice = createSlice({
   reducers: {
     login: (state, action) => {
       //...state와 자동 return
-      state.userState = action.payload.data;
+      state.userState = action.payload.userInfo;
       state.loggedIn = true;
     },
     logout: (state) => {

@@ -1,15 +1,13 @@
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import userAction from '../../actions/user/actions';
-import { UserState } from '../../actions/user/types';
+import { User } from '../../actions/user/types';
 import logo from '../../logo.png';
 
 
 function Login() {
-  const [userState, setUserState] = useState(UserState)
-  const user = useSelector(state => state.userReducer);
-  console.log(user);
+  const [userState, setUserState] = useState(User)
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
