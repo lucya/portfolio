@@ -11,10 +11,10 @@ const indexRouter = require('./routes');
 const PORT = process.env.PORT || 8081
 
 const corsOptions = {
-  origin: [process.env.WEB_ORIGIN], // '*'
-  credential: true,
+  origin: [process.env.WEB_DOMAIM], // '*'
+  credentials: true,
   methods: ['GET', 'PUT', 'POST', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
+  // allowedHeaders: ['Content-Type', 'Authorization'],
   optionsSuccessStatus: 200,
 }
 app.use(express.json());
