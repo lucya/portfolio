@@ -1,29 +1,17 @@
 import React, { useEffect } from "react";
-import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Login from "../../components/User/Login";
 import SignUp from "../../components/User/SignUp";
 import './User.css';
 import { useSelector } from "react-redux";
-import { useCookies } from 'react-cookie';
+import AuthService from "../../services/AuthService";
 
 function User() {
   const user = useSelector(state => state.userReducer);
-  const navigate = useNavigate();
-  const [cookies, setCookie, removeCookie] = useCookies(['access-token', 'refresh-token']);
+  const authService = AuthService();
 
-  const authCheck = () => {
-    const token = cookies;
-    console.log('cookies', token);
-    // Todo: 서버에서 체크 해야함
-    if (token['access_token']) {
-      navigate('/movies');
-      // window.location.href = '/movies';
-    } else {
-      navigate('/');
-    }
-  }
   useEffect(() => {
-    authCheck();
+    authService.authCheck();
     console.log('처음 렌더링 때만 실행');
   }, []);
 

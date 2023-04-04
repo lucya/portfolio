@@ -39,6 +39,27 @@
   padding: 5px;
 }
 
+.user-wrap .form-container .form-wrap.profile-wrap {
+  position: relative;
+}
+
+.form-wrap.profile-wrap svg {
+  position: absolute;
+  left: 4px;
+  top: 4px;
+  width: 100px;
+  height: 100px;
+}
+
+.form-wrap.profile-wrap img {
+  position: relative;
+  left: 4px;
+  top: 4px;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
 .user-wrap .form-container .form-wrap label {
   padding: 5px;
   display: block;
@@ -82,7 +103,7 @@
 
 .btn-wrap button {
   width: 38%;
-  border: 2px solid rgb(72, 69, 70);
+  /* border: 2px solid rgb(72, 69, 70); */
 }
 
 .btn-wrap a {

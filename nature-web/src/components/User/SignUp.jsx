@@ -25,13 +25,21 @@ function SignUp() {
     // TODO: dispatch call action
     // dispatch(signup(userState));
   }
+  const handleUpload = () => {
 
+  }
 
   return (
     <div className='user-wrap'>
       <h3>회원 가입</h3>
 
       <form className="form-container" onSubmit={handleSubmit}>
+        <div className="form-wrap profile-wrap">
+          <svg>기본 프로필 아이콘 이미지</svg>
+          <img src="https://firebasestorage.googleapis.com/v0/b/nature-portfolio-7b1db.appspot.com/o/noun_Cat_215103.png?alt=media&token=2d820331-5301-4269-afce-cd8e0089ee97" alt="profile" />
+          <input type="file" name="photo" onChange={handleUpload} />
+          <label>프로필 이미지</label>
+        </div>
         <div className="form-wrap">
           <label >Username</label>
           <input type="text" name="username" onChange={handleChange} />
@@ -53,7 +61,7 @@ function SignUp() {
           <button className="green">로그인</button>
         </Link> */}
         <div className="btn-wrap">
-          <button className="green" type="submit">등록</button>
+          <button type="submit">등록</button>
           <Link to='/'>
             로그인
           </Link>

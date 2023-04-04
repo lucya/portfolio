@@ -2,12 +2,14 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
 import userAction from "../../actions/user/actions";
+import AuthService from "../../services/AuthService";
+
 import logo from "../../assets/images/text_logo.png";
 import './Header.css';
 
 function Header() {
   const [active, setActive] = useState(false);
-
+  const authService = AuthService();
   const dispatch = useDispatch();
   const user = useSelector(state => state.userReducer);
 
@@ -16,14 +18,7 @@ function Header() {
     dispatch(userAction.logout());
   }
   useEffect(() => {
-    // authService.onAuthStateChanged((user) => {
-    //   if (user) {
-    //     setIsLoggedIn(true);
-    //   } else {
-    //     setIsLoggedIn(false);
-    //   }
-    //   setInit(true);
-    // });
+    authService.authCheck();
   }, []);
 
   return (

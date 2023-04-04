@@ -37,7 +37,7 @@ function Login() {
           <input type="password" name="password" onChange={handleChange} />
         </div>
         <div className="btn-wrap">
-          <button className="green" type="submit">로그인</button>
+          <button type="submit">로그인</button>
           <Link to='/signup'>
             회원 가입
           </Link>
