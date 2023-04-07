@@ -4,10 +4,12 @@ import { IMG_BASE_URL } from "../../containers/Movie/Movie";
 
 
 function Movie({ movie }) {
-
+  const handleSaveScroll = () => {
+    localStorage.setItem('movies-scrollY', document.querySelector('.movie-container-wrap').scrollTop)
+  }
   return (
     <div className='movie-wrap'>
-      <Link to={`/movie/${movie.id}`} state={movie}>
+      <Link to={`/movie/${movie.id}`} state={movie} onClick={handleSaveScroll}>
         <img src={IMG_BASE_URL + movie.poster_path} alt={movie.title} />
       </Link>
       <div className='movie-info'>

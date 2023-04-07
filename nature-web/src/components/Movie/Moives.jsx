@@ -41,19 +41,10 @@ function Movies() {
     setPage(1)
     getMovies()
 
-    // const watch = () => {
-    //   console.log('moviesRef.current', moviesRef.current.offsetTop)
-    //   const handleUpActive = () => {
-    //     console.log('moviesRef.current', moviesRef.current.scrollTop)
-    //       (moviesRef.current.scrollTop > 500) ? setUpActive(true) : setUpActive(false);
-    //   }
-
-    //   moviesRef.current.addEventListener("scroll", handleUpActive, false)
-    //   return () => {
-    //     moviesRef.current.removeEventListener("scroll", handleUpActive, false)
-    //   }
-    // }
-    // watch();
+    if (localStorage.getItem('movies-scrollY')) {
+      moviesRef.current.scrollTop = localStorage.getItem('movies-scrollY');
+      localStorage.removeItem('movies-scrollY');
+    }
   }, [])
   return (
     <div className="movie-container-wrap" ref={moviesRef} onScroll={handleScroll}>
