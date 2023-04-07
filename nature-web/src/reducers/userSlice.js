@@ -11,15 +11,20 @@ const userSlice = createSlice({
   reducers: {
     login: (state, action) => {
       //...state와 자동 return
-      state.userState = action.payload.userInfo;
+      const { userInfo, accessToken } = action.payload;
+      state.user = userInfo;
+      state.token = accessToken;
       state.loggedIn = true;
     },
     logout: (state) => {
-      state.userState = null;
+      state.user = null;
+      state.token = null;
       state.loggedIn = false;
     },
     signup: (state, action) => {
-      state.value = action.payload.data;
+      const { userInfo, accessToken } = action.payload;
+      state.user = userInfo;
+      state.token = accessToken;
       state.loggedIn = true;
     },
   },
@@ -27,3 +32,5 @@ const userSlice = createSlice({
 
 export const userActions = userSlice.actions;
 export default userSlice.reducer;
+export const selectCurrentUser = (state) => state.auth.user
+export const selectCurrentToken = (state) => state.auth.token

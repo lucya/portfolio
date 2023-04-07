@@ -1,4 +1,4 @@
-import { userActions } from "../../reducers/userReducer";
+import { userActions } from "../../reducers/userSlice";
 import http from "../../app/http-common";
 // action
 const login = (user) => {
@@ -7,41 +7,79 @@ const login = (user) => {
   // 그럴 땐 로그인 하고 토큰을 받아왔을 때 넣어줍시다.
   // http.defaults.headers.common["Authorization"] = USER_TOKEN; 
   return async (dispatch, getState) => {
-    await http
-      .post('/user/login', user)
-      .then((res) => {
-        console.log('res', res)
-        let userInfo = res.data;
-        console.log('userinfo', userInfo);
-        // payload : {userInfo}
-        dispatch(userActions.login({ userInfo }));
-      })
-      .catch((err) => {
-        console.log(err);
-        throw err;
-        // dispatch({ type: 'LOGIN_ERROR', payload: err });
-      });
+    const res = await http.post('/user/login', user).catch((error) => {
+      alert(error.message);
+      throw error;
+    });
+
+    if (res) {
+      console.log('res', res)
+      let data = res.data;
+      console.log('userinfo', data.userInfo);
+      // payload : {userInfo}
+      dispatch(userActions.login({
+        userInfo: data.userInfo,
+        accessToken: data.accessToken,
+        refreshToken: data.refreshToken,
+      }));
+    }
   }
 }
 const logout = () => {
-  return (dispatch, getState) => {
-    http
-      .post('/user/logout')
-      .then((res) => {
-        dispatch(userActions.logout());
-      })
-      .catch((err) => {
-        console.log(err);
-        throw err;
-        // dispatch({ type: 'LOGIN_ERROR', payload: err });
-      });
+  return async (dispatch, getState) => {
+    const res = await http.post('/user/logout').catch((error) => {
+      alert(error.message);
+      throw error;
+    })
+    if (res) {
+      dispatch(userActions.logout());
+    }
   }
 }
-const signup = (userState) => {
+const signup = (formData) => {
+  console.log('signup', formData);
+  return async (dispatch, getState) => {
+    const res = await http.post('/user/signup', formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+
+    }).catch((error) => {
+      alert(error.message)
+      throw error;
+    })
+
+    if (res) {
+      console.log('res', res)
+      let data = res.data;
+      console.log('userinfo', data.userInfo);
+      // payload : {userInfo}
+      dispatch(userActions.signup({
+        userInfo: data.userInfo,
+        accessToken: data.accessToken,
+        refreshToken: data.refreshToken,
+      }));
+    }
+  }
 }
+// const upload = (formData) => {
+//   return async (dispatch, getState) => {
+//     const res = await http.post('/user/upload', formData, {
+//       headers: { 'Content-Type': 'multipart/form-data' }
+//     }).catch((error) => {
+//       alert(error.message)
+//       throw error
+//     })
+//     if (res) {
+//       console.log('file upload', res)
+//       return res;
+//     }
+//   }
+// }
+
 
 const userAction = {
   login,
-  logout
+  logout,
+  signup,
+  // upload
 }
 export default userAction;

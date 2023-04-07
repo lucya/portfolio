@@ -1,0 +1,130 @@
+/* movie info */
+.movie-info-header {
+  /* background: linear-gradient(to bottom right, #4a3520, #4a3520d6); */
+  background: rgb(0, 0, 0);
+  background: radial-gradient(circle, rgba(0, 0, 0, 1) 0%, rgba(145, 105, 61, 1) 2%, rgba(74, 53, 32, 1) 100%);
+}
+
+div.movie-info-header.large {
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+div.movie-info-header.large {
+  border-bottom: 1px solid rgba(73.5, 52.5, 31.5, 1);
+  /* background-position: left calc((50vw - 170px) - 340px) top; */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: rgba(73.5, 52.5, 31.5, 1);
+  background-blend-mode: multiply;
+}
+
+div.movie-info-bg {
+  padding: 30px 40px;
+  /* background-image: url(https://image.tmdb.org/t/p/w440_and_h660_face/vSUls0b7dNhC7tJoExF1MBYWWyh.jpg); */
+  /* background-repeat: no-repeat;
+  background-size: cover; */
+}
+
+.movie-info-column {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.poster-wrap {
+  height: auto;
+  border-width: 0px;
+  max-width: 300px;
+  min-width: 200px;
+  width: 300px;
+  min-height: auto;
+  max-height: 450px;
+  /* height: 450px; */
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.poster-wrap img {
+  width: 100%;
+  height: 100%;
+  min-height: auto;
+}
+
+.description-wrap {
+  color: #ffffff;
+  display: flex;
+  padding-top: 20px;
+}
+
+.header.poster {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  align-content: flex-start;
+  box-sizing: border-box;
+  padding-left: 40px;
+}
+
+.title.header {
+  width: 100%;
+  margin: 0;
+  padding: 10px 0 10px 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  border-top: 1px solid #fff;
+}
+
+.title.header .title {
+  font-weight: 700;
+}
+
+.title.header .release_date {
+  font-weight: 400;
+  opacity: 0.8;
+}
+
+div.facts {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+div.facts span.certification {
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  color: #ffffff;
+  display: inline-flex;
+  white-space: nowrap;
+  align-items: center;
+  /* align-content: center; */
+  padding: 3px 4px 1px 4px;
+  line-height: 1;
+  border-radius: 2px;
+  margin-right: 7px;
+}
+
+div.header_info h3.tagline {
+  margin-bottom: 0;
+  font-size: 1.1em;
+  font-weight: 400;
+  font-style: italic;
+  opacity: 0.7;
+  width: 100%;
+  margin: 0 0 8px 0;
+}
+
+div.header_info h3.tagline {
+  width: 100%;
+  margin: 10px 0 8px 0;
+}
+
+div.header_info h3 {
+  margin: 10px 0 10px 0;
+  font-weight: 600;
+  font-size: 1.3em;
+}
+
+div.overview p {
+  line-height: 150%;
+}

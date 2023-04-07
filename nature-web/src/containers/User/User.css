@@ -41,23 +41,38 @@
 
 .user-wrap .form-container .form-wrap.profile-wrap {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.form-wrap.profile-wrap svg {
+/* .form-wrap.profile-wrap svg {
   position: absolute;
   left: 4px;
   top: 4px;
   width: 100px;
   height: 100px;
+} */
+
+.form-wrap.profile-wrap span {
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 70%;
+  width: 110px;
+  height: 110px;
 }
 
 .form-wrap.profile-wrap img {
   position: relative;
-  left: 4px;
-  top: 4px;
-  width: 100px;
-  height: 100px;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+}
+
+.form-wrap.profile-wrap label {
+  text-align: center;
+  top: 5px;
+  position: relative;
 }
 
 .user-wrap .form-container .form-wrap label {
@@ -96,7 +111,6 @@
   font-size: 15px;
   border-radius: 15px;
   border: 1px solid rgb(72, 69, 70);
-  ;
   cursor: pointer;
   width: 33%;
 }

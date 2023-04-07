@@ -1,43 +1,86 @@
-import { useState } from "react";
+import { useState } from "react"
+import { useDispatch } from 'react-redux'
 import { Link } from "react-router-dom";
 import { User } from "../../actions/user/types";
+import { useRef } from 'react';
+import userAction from '../../actions/user/actions';
+import profile_base from '../../assets/images/profile_base.png'
 
 function SignUp() {
-
-  const [userState, setUserState] = useState(User);
+  const [userInfo, setUserInfo] = useState(User);
   const [pwdConfirm, setPwdConfirm] = useState('');
-  // const dispatch = useDispatch();
+  const [file, setFile] = useState(null);
+  const [imagePreviewUrl, setImagePreviewUrl] = useState(null);
+
+  const dispatch = useDispatch();
+  const profileImg = useRef(null);
 
   const handleChange = (e) => {
-    setUserState({
-      ...userState,
+    setUserInfo({
+      ...userInfo,
       [e.target.name]: e.target.value
     });
   }
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(userState);
+    // console.log(userInfo);
 
-    if (userState.password !== pwdConfirm) {
-      alert("비밀번호가 다릅니다.")
+    if (userInfo.password !== pwdConfirm) {
+      alert("비밀번호가 일치하지 않습니다.")
       return;
     }
-    // TODO: dispatch call action
-    // dispatch(signup(userState));
-  }
-  const handleUpload = () => {
+    const formData = new FormData();
+    console.log('formData', file);
+    formData.append('file', file);
+    // formData.append('user', userInfo);
 
+    // formData.append('user', new Blob([JSON.stringify(userInfo)], {
+    //   type: "application/json"
+    // }));
+    formData.append('user', JSON.stringify(userInfo));
+
+    console.log('xxx', Object.fromEntries(formData).file)
+    for (let key of formData.keys()) {
+      console.log('aaa', key);
+    }
+    for (let value of formData.values()) {
+      console.log('aaa', value);
+    }
+    dispatch(userAction.signup(Object.fromEntries(formData)));
   }
 
+  const handleUpload = (e) => {
+    e.preventDefault();
+    const reader = new FileReader();
+    const file = e.target.files[0];
+    console.log(file);
+
+    reader.onloadend = () => {
+      setFile(file)
+      setImagePreviewUrl(reader.result);
+    };
+    reader?.readAsDataURL(file);
+
+    // let formData = new FormData();
+    // formData.append('file', file);
+    // console.log(formData);
+    // dispatch(userAction.upload(formData))
+  }
+  const handleUploadClick = (e) => {
+    e.preventDefault();
+    profileImg.current.click();
+  }
   return (
     <div className='user-wrap'>
       <h3>회원 가입</h3>
 
       <form className="form-container" onSubmit={handleSubmit}>
         <div className="form-wrap profile-wrap">
-          <svg>기본 프로필 아이콘 이미지</svg>
-          <img src="https://firebasestorage.googleapis.com/v0/b/nature-portfolio-7b1db.appspot.com/o/noun_Cat_215103.png?alt=media&token=2d820331-5301-4269-afce-cd8e0089ee97" alt="profile" />
-          <input type="file" name="photo" onChange={handleUpload} />
+          {/* <svg>기본 프로필 이미지</svg> */}
+          <span onClick={handleUploadClick}>
+            <img src={imagePreviewUrl ? imagePreviewUrl : profile_base} alt="profile" />
+          </span>
+          <input type="file" name="photoURL" accept="image/*" ref={profileImg} style={{ display: 'none' }} onChange={handleUpload} />
           <label>프로필 이미지</label>
         </div>
         <div className="form-wrap">

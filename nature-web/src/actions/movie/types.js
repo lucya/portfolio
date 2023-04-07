@@ -1,0 +1,16 @@
+export const Movie = {
+  adult: false,
+  backdropPath: '',
+  genreIDS: [],
+  id: 0,
+  originalLanguage: '',
+  originalTitle: '',
+  overview: '',
+  popularity: 0,
+  posterPath: '',
+  releaseDate: '',
+  title: '',
+  video: false,
+  voteAverage: 0,
+  voteCount: 0,
+}

@@ -5,6 +5,7 @@ import userAction from "../../actions/user/actions";
 import AuthService from "../../services/AuthService";
 
 import logo from "../../assets/images/text_logo.png";
+import profile_base from "../../assets/images/profile_base.png";
 import './Header.css';
 
 function Header() {
@@ -41,7 +42,7 @@ function Header() {
               <ul className="right-menu">
                 <li>
                   <Link className='header-nav-item' to='/movies'>
-                    최신영화
+                    인기영화
                   </Link>
                 </li>,
                 <li>
@@ -57,8 +58,8 @@ function Header() {
                 <li className="header-nav-user"
                   onMouseEnter={() => setActive(true)}
                   onMouseLeave={() => setActive(false)} >
-                  <img src={user.userState.photoURL} alt="user" />
-                  <span className="username">{user.userState.username}</span>
+                  <img src={user?.user?.photoURL || profile_base} alt="user" />
+                  <span className="username">{user?.user?.username}</span>
                   <div className={active ? 'logout active' : 'logout'}>
                     <ul>
                       <li
