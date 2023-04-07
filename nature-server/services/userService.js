@@ -16,8 +16,8 @@ const {
 
 const cookieConfig = {
   //cookieConfig는 키, 밸류 외에 설정을 보낼 수 있다.
-  maxAge: 1800000,
-  //밀리초 단위로 들어가는데 30분 만료 쿠키를 생성한다. 
+  maxAge: 60000, // 1분
+  //밀리초 단위로 들어가는데 30분(1800000) 만료 쿠키를 생성한다. 
   // path: '/',
   httpOnly: true,
   //통신할때만 접속할 수 있다. 기본값은 false임 
@@ -44,20 +44,22 @@ const getUser = async (uid) => {
     if (!userSnapshot.exists()) {
       throw new Error('Has no user')
     }
-    const user = userSnapshot.data();
-    return user;
+    const userInfo = userSnapshot.data();
+    delete userInfo.password;
+    return userInfo;
   } catch (error) {
     throw error;
   }
 }
 
-const addUser = async (user) => {
+const addUser = async (userInfo) => {
   try {
-    const usersRef = doc(db, "users", user.uid);
-    return await setDoc(usersRef, user)
+    const usersRef = doc(db, "users", userInfo.uid);
+    return await setDoc(usersRef, userInfo)
       .then(() => {
-        console.log('*** addUser  **', user);
-        return user;
+        console.log('*** addUser  **', userInfo);
+        delete userInfo.password;
+        return userInfo;
       })
       .catch((error) => {
         throw error;
@@ -90,8 +92,19 @@ const doLogin = async (userInfo, res) => {
       // console.log('doLogin success', user);
       setCookies(res, user.stsTokenManager);
 
+      const token = user.stsTokenManager;
+      console.log('doLogin success', token);
       const uid = userCredential.user.uid;
-      return getUser(uid);
+      let loginUser = null;
+      return (async () => {
+        loginUser = await getUser(uid);
+        console.log('doLogin success userInfo', loginUser)
+        return {
+          userInfo: loginUser,
+          accessToken: token.accessToken,
+          refreshToken: token.refreshToken
+        };
+      })();
 
     })
     .catch((error) => {
@@ -100,16 +113,51 @@ const doLogin = async (userInfo, res) => {
 }
 
 const doSignup = async (userInfo) => {
+
+  console.log('doSignup userInfo', userInfo);
   const auth = getAuth();
-  return await createUserWithEmailAndPassword(auth, userInfo.email, userInfo.password)
+  // console.log('doSignup auth', auth)
+  const userCredential = await createUserWithEmailAndPassword(auth, userInfo.email, userInfo.password)
+    .catch((error) => {
+      console.log(error);
+      throw error;
+    });
+  // console.log('userCredential', userCredential)
+
+  const user = userCredential.user;
+  userInfo.uid = user.uid;
+
+  const token = user.stsTokenManager;
+  const loginUser = await addUser(userInfo);
+  console.log('doLogin success userInfo', loginUser)
+  return {
+    userInfo: loginUser,
+    accessToken: token.accessToken,
+    refreshToken: token.refreshToken
+  };
+
+  /* return await createUserWithEmailAndPassword(auth, userInfo.email, userInfo.password)
     .then((userCredential) => {
-      const uid = userCredential.user.uid;
-      userInfo.uid = uid;
-      return addUser(userInfo);
+      const user = userCredential.user;
+      userInfo.uid = user.uid;
+
+      console.log('userCredential', userCredential)
+      // TODO: set photoURL after file upload 
+      const token = user.stsTokenManager;
+      let loginUser = null;
+      return (async () => {
+        loginUser = await addUser(userInfo);
+        console.log('doLogin success userInfo', loginUser)
+        return {
+          userInfo: loginUser,
+          accessToken: token.accessToken,
+          refreshToken: token.refreshToken
+        };
+      })();
     })
     .catch((error) => {
       throw error;
-    });
+    }); */
 }
 const doLogout = async (res) => {
   const auth = getAuth();

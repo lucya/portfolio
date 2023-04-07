@@ -4,6 +4,8 @@ const app = express()
 const server = http.createServer(app);
 const cors = require('cors')
 const bodyParser = require("body-parser");
+const multer = require('multer');
+
 
 /* const socketIO = require("socket.io"); */
 const indexRouter = require('./routes');
@@ -19,8 +21,10 @@ const corsOptions = {
 }
 app.use(express.json());
 app.use(cors(corsOptions));
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
+app.use(multer().any());
 
 // 전체 router 설정
 app.use('/', indexRouter);
