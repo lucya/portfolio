@@ -7,7 +7,7 @@ import AuthService from "../../services/AuthService";
 import logo from "../../assets/images/text_logo.png";
 import profile_base from "../../assets/images/profile_base.png";
 import './Header.css';
-import Hamburger from "./Hamberger";
+import DropdownMenu from "./DropdownMenu";
 
 function Header() {
   const authService = AuthService();
@@ -56,8 +56,8 @@ function Header() {
                   <li className="header-nav-item">|</li>
                   <li className="header-nav-item" onClick={handleLogout}>로그아웃</li>
                 </ul>
-                <div className="hamburger">
-                  <Hamburger />
+                <div className="dropdown-menu">
+                  <DropdownMenu />
                 </div>
                 <div className="header-nav-user">
                   <img src={user?.user?.photoURL || profile_base} alt="user" />

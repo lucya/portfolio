@@ -138,12 +138,12 @@
   font-weight: 600;
 }
 
-/* hamaburger menu */
-.hamburger {
+/* DropdownMenu menu */
+.dropdown-menu {
   display: none;
 }
 
-.hamburger {
+.dropdown-menu {
   width: 2rem;
   height: 2rem;
   cursor: pointer;
@@ -152,7 +152,7 @@
   z-index: 10;
 }
 
-.hamburger-menu {
+.drop-menu {
   position: fixed;
   top: 61px;
   right: 47px;
@@ -163,24 +163,24 @@
 }
 
 @media (max-width: 767px) {
-  .hamburger, .hamburger-menu {
+  .dropdown-menu, .drop-menu {
     display: block;
     z-index: 10;
   }
 }
 
 
-.hamburger-menu li {
+.drop-menu li {
   padding: 4px;
   text-align: left;
   color: #fff;
   font-weight: 600;
 }
 
-.hamburger-menu li a {
+.drop-menu li a {
   color: #fff;
 }
 
-.hamburger-menu li:last-child {
+.drop-menu li:last-child {
   border-top: 0.5px solid;
 }

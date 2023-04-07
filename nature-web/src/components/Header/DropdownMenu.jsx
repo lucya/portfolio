@@ -4,32 +4,32 @@ import { useDispatch } from 'react-redux';
 import userAction from "../../actions/user/actions";
 import { Link } from 'react-router-dom';
 
-function Hamburger() {
+function DropdownMenu() {
   const dropMenuRef = useRef(null);
   const dispatch = useDispatch();
   const handleLogout = (e) => {
     e.preventDefault();
     dispatch(userAction.logout());
   }
-  const [hamburgerOpen, setHamburgerOpen] = useState(false)
-  const handleHamberger = () => {
-    setHamburgerOpen(!hamburgerOpen);
+  const [menuOpen, setMenuOpen] = useState(false)
+  const handleOpen = () => {
+    setMenuOpen(!menuOpen);
   }
   useEffect(() => {
 
     const handleOutsideClose = (e) => {
       e.preventDefault();
       // useRef current에 담긴 엘리먼트 바깥을 클릭 시 드롭메뉴 닫힘
-      if (hamburgerOpen && (!dropMenuRef.current.contains(e.target))) setHamburgerOpen(false);
+      if (menuOpen && (!dropMenuRef.current.contains(e.target))) setMenuOpen(false);
     }
 
     document.addEventListener('click', handleOutsideClose);
     return () => document.removeEventListener('click', handleOutsideClose);
-  }, [hamburgerOpen])
+  }, [menuOpen])
   return (
     <>
-      <img src={menu} alt='menu' ref={dropMenuRef} onClick={handleHamberger} />
-      <div className='hamburger-menu' style={{ display: hamburgerOpen ? 'block' : 'none' }}>
+      <img src={menu} alt='menu' ref={dropMenuRef} onClick={handleOpen} />
+      <div className='drop-menu' style={{ display: menuOpen ? 'block' : 'none' }}>
         <ul>
           <li><Link to="/movies">인기영화</Link></li>
           <li>홍당무</li>
@@ -39,4 +39,4 @@ function Hamburger() {
     </>
   )
 }
-export default Hamburger;
+export default DropdownMenu;
