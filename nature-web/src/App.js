@@ -7,7 +7,7 @@ import ScrollToTop from './app/utils/ScrollToTop';
 function App() {
   return (
     <BrowserRouter>
-      <ScrollToTop />
+      {/* <ScrollToTop /> */}
       <div className="App">
         <Routes>
           <Route path='/movies' element={<Movie />} />

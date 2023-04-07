@@ -21,6 +21,7 @@ function Header() {
 
   useEffect(() => {
     authService.authCheck();
+
   }, []);
 
   return (

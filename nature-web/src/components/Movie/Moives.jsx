@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import movieAction from '../../actions/movie/actions';
 
 import Movie from "./Movie";
@@ -8,12 +8,12 @@ import { useDispatch, useSelector } from "react-redux";
 function Movies() {
   const [page, setPage] = useState(1)
   const [upActive, setUpActive] = useState(false);
-
+  const moviesRef = useRef();
   const dispatch = useDispatch();
   const data = useSelector(state => state.movieReducer)
-  console.log('dddd', data)
+
   const movies = data.movies;
-  console.log(movies);
+  // console.log(movies);
   // setPage(data.page);
 
   const getMovies = () => {
@@ -26,30 +26,37 @@ function Movies() {
   }
   const handleGoup = (e) => {
     e.preventDefault();
-    window.scrollTo({
+    moviesRef.current.scroll({
       top: 0,
       behavior: 'smooth'
     })
   }
+  const handleScroll = (e) => {
+    console.log(e.currentTarget.scrollTop);
+    //let scrollArea = e.currentTarget
+    (e.currentTarget.scrollTop > 500) ? setUpActive(true) : setUpActive(false);
+  };
 
   useEffect(() => {
     setPage(1)
     getMovies()
 
-    const watch = () => {
-      const handleUpActive = () => {
-        (window.scrollY > 500) ? setUpActive(true) : setUpActive(false);
-      }
+    // const watch = () => {
+    //   console.log('moviesRef.current', moviesRef.current.offsetTop)
+    //   const handleUpActive = () => {
+    //     console.log('moviesRef.current', moviesRef.current.scrollTop)
+    //       (moviesRef.current.scrollTop > 500) ? setUpActive(true) : setUpActive(false);
+    //   }
 
-      window.addEventListener("scroll", handleUpActive)
-      return () => {
-        window.removeEventListener("scroll", handleUpActive)
-      }
-    }
-    watch();
+    //   moviesRef.current.addEventListener("scroll", handleUpActive, false)
+    //   return () => {
+    //     moviesRef.current.removeEventListener("scroll", handleUpActive, false)
+    //   }
+    // }
+    // watch();
   }, [])
   return (
-    <>
+    <div className="movie-container-wrap" ref={moviesRef} onScroll={handleScroll}>
       <div className='movie-container'>
         {movies?.map((movie) => {
           return (
@@ -64,7 +71,7 @@ function Movies() {
         <button onClick={handleMore}>More</button>
       </div>
       <div className={upActive ? 'goup active' : 'goup'} onClick={handleGoup}>🔝</div>
-    </>
+    </div>
   )
 }
 export default Movies;

@@ -22,7 +22,7 @@ function MovieInfo() {
   }, [])
 
   return (
-    <div className='movie-info-header large' style={{ backgroundImage: `url(${backgroundImg})` }}>
+    <div className='movie-info-container' style={{ backgroundImage: `url(${backgroundImg})` }}>
       <div className="movie-info-bg">
         <section className="movie-info-column">
           <div className="poster-wrap">
@@ -39,22 +39,22 @@ function MovieInfo() {
               </h2>
               <div class="facts">
                 <span class="certification">
-                  {movie.adult ? 19 : '전체관람'}
+                  {movie.adult ? 19 : '전체'}
                 </span>
 
-                <span class="release">
-                  {movie.release_date} (KR)&nbsp;
-                </span>
-                <span class="genres">
+                <div class="release">
+                  {movie.release_date}&nbsp;
+                </div>
+                <div class="genres">
                   {
                     movie?.genres?.map((gen) => (
                       <span>{gen.name},&nbsp;</span>
                     ))
                   }
-                </span>
-                <span class="runtime">
+                </div>
+                <div class="runtime">
                   {Math.floor(movie.runtime / 60)}시간 {movie.runtime % 60}분
-                </span>
+                </div>
               </div>
               <div class="header_info">
                 <h3 class="tagline">{movie.tagline}</h3>

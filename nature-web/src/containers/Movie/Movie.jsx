@@ -7,11 +7,12 @@ import './Movie.css';
 export const IMG_BASE_URL = process.env.REACT_APP_MOVIE_IMG_BASE_URL;
 
 function Movie() {
+ 
   return (
     <div>
       <Header />
       <div className="movies-container">
-        <Routes> 
+        <Routes>
           <Route path="/" element={<Movies />} />
           <Route path="/:id" element={<MovieDetail />} />
         </Routes>

@@ -4,8 +4,13 @@
   bottom: 0;
   /* width: 100%; */
   margin: 10px;
+  
 }
 
+.movie-container-wrap {
+  overflow-y: scroll;
+  height: calc(100vh - 64px);
+}
 
 .page-container {
   max-width: 1400px;
@@ -18,11 +23,13 @@
   flex-wrap: wrap;
   justify-content: center;
   /* padding: 10px; */
+  /* overflow-y: scroll;
+  height: calc(100vh - 64px); */
 }
 
 .goup {
   position: fixed;
-  right: 5px;
+  right: 26px;
   bottom: 50px;
   border-radius: 40%;
   padding: 7px;
@@ -62,6 +69,7 @@
 
 .movie-more {
   text-align: center;
+  margin: 10px 0 20px 0;
 }
 
 .movie-more button {
