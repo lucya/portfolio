@@ -18,10 +18,6 @@ function MovieInfo() {
 
   const backgroundImg = IMG_BASE_URL + movie.backdrop_path
   useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      // behavior: 'smooth'
-    })
     getMovieInfo();
   }, [])
 
