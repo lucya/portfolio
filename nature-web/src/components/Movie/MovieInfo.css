@@ -31,8 +31,10 @@ div.movie-info-bg {
 
 .movie-info-column {
   display: flex;
-  justify-content: space-around;
+  /* justify-content: space-around; */
   flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
 }
 
 .poster-wrap {
@@ -56,8 +58,9 @@ div.movie-info-bg {
 
 .description-wrap {
   color: #ffffff;
-  display: flex;
+  /* display: flex; */
   padding-top: 20px;
+  width: 100%;
 }
 
 .header.poster {

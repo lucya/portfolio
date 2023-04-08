@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { User } from '../actions/user/types';
+import { PURGE } from "redux-persist";
 
 const initialState = {
   userState: User,
@@ -28,6 +29,10 @@ const userSlice = createSlice({
       state.loggedIn = true;
     },
   },
+  //초기화하고 싶은 state가 있는 slice마다 아래를 추가해야한다.
+  extraReducers: (builder) => {
+    builder.addCase(PURGE, () => initialState);
+  }
 });
 
 export const userActions = userSlice.actions;

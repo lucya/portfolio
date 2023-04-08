@@ -3,22 +3,19 @@ import movieAction from '../../actions/movie/actions';
 
 import Movie from "./Movie";
 import { useDispatch, useSelector } from "react-redux";
+import Loading from "../../app/pages/Loading";
 
 
 function Movies() {
-  const [page, setPage] = useState(1)
   const [upActive, setUpActive] = useState(false);
   const moviesRef = useRef();
   const dispatch = useDispatch();
-  const data = useSelector(state => state.movieReducer)
+  const { movies, page } = useSelector(state => state.movieReducer)
 
-  const movies = data.movies;
   // console.log(movies);
-  // setPage(data.page);
 
   const getMovies = () => {
-    setPage(page + 1)
-    dispatch(movieAction.getMovies(page))
+    dispatch(movieAction.getMovies(page + 1))
   }
   const handleMore = (e) => {
     e.preventDefault();
@@ -32,20 +29,24 @@ function Movies() {
     })
   }
   const handleScroll = (e) => {
-    console.log(e.currentTarget.scrollTop);
-    //let scrollArea = e.currentTarget
     (e.currentTarget.scrollTop > 500) ? setUpActive(true) : setUpActive(false);
   };
+  useEffect(() => {
+    dispatch(movieAction.initMovie())
+  }, [])
+  useEffect(() => {
+    !page && getMovies()
+  }, [])
 
   useEffect(() => {
-    setPage(1)
-    getMovies()
-
     if (localStorage.getItem('movies-scrollY')) {
       moviesRef.current.scrollTop = localStorage.getItem('movies-scrollY');
       localStorage.removeItem('movies-scrollY');
     }
   }, [])
+  if (!movies || movies.length === 0) {
+    return <Loading />
+  }
   return (
     <div className="movie-container-wrap" ref={moviesRef} onScroll={handleScroll}>
       <div className='movie-container'>

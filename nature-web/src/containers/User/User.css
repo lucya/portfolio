@@ -46,6 +46,10 @@
   align-items: center;
 }
 
+.user-wrap .form-container .form-wrap.profile-wrap input[type="file"] {
+  display: none;
+}
+
 /* .form-wrap.profile-wrap svg {
   position: absolute;
   left: 4px;
@@ -112,11 +116,11 @@
   border-radius: 15px;
   border: 1px solid rgb(72, 69, 70);
   cursor: pointer;
-  width: 33%;
+  width: 23%;
 }
 
 .btn-wrap button {
-  width: 38%;
+  width: 56%;
   /* border: 2px solid rgb(72, 69, 70); */
 }
 

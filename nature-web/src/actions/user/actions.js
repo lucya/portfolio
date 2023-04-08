@@ -1,5 +1,11 @@
+/**
+ * @author nature
+ * @description 사용자 로그인, 로그아웃, 신규가입
+ */
 import { userActions } from "../../reducers/userSlice";
 import http from "../../app/http-common";
+import { persistor } from '../../app/store'
+
 // action
 const login = (user) => {
   console.log('useractions', user)
@@ -8,7 +14,7 @@ const login = (user) => {
   // http.defaults.headers.common["Authorization"] = USER_TOKEN; 
   return async (dispatch, getState) => {
     const res = await http.post('/user/login', user).catch((error) => {
-      alert(error.message);
+      alert('login error ', error.message);
       throw error;
     });
 
@@ -26,11 +32,15 @@ const login = (user) => {
   }
 }
 const logout = () => {
+  const purge = async () => {
+    await persistor.purge();
+  }
   return async (dispatch, getState) => {
     const res = await http.post('/user/logout').catch((error) => {
       alert(error.message);
       throw error;
     })
+    await purge(); // state 초기화
     if (res) {
       dispatch(userActions.logout());
     }
@@ -39,11 +49,13 @@ const logout = () => {
 const signup = (formData) => {
   console.log('signup', formData);
   return async (dispatch, getState) => {
-    const res = await http.post('/user/signup', formData, {
-      headers: { "Content-Type": "multipart/form-data" },
+    const res = await http.post('/user/signup', formData
+      , {
+        headers: { "Content-Type": "mutipart/form-data" },
 
-    }).catch((error) => {
-      alert(error.message)
+      }
+    ).catch((error) => {
+      alert('why!!!!!' + error.message)
       throw error;
     })
 

@@ -3,7 +3,7 @@
   top: 0;
   bottom: 0;
   /* width: 100%; */
-  margin: 10px 0 10px 10px;
+  margin: 10px;
 }
 
 .movie-container-wrap {
@@ -28,7 +28,7 @@
 
 .goup {
   position: fixed;
-  right: 15px;
+  right: 6px;
   bottom: 50px;
   border-radius: 40%;
   padding: 7px;

@@ -23,30 +23,18 @@ function SignUp() {
   }
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(userInfo);
 
     if (userInfo.password !== pwdConfirm) {
       alert("비밀번호가 일치하지 않습니다.")
       return;
     }
     const formData = new FormData();
-    console.log('formData', file);
     formData.append('file', file);
-    // formData.append('user', userInfo);
-
-    // formData.append('user', new Blob([JSON.stringify(userInfo)], {
-    //   type: "application/json"
-    // }));
     formData.append('user', JSON.stringify(userInfo));
 
-    console.log('xxx', Object.fromEntries(formData).file)
-    for (let key of formData.keys()) {
-      console.log('aaa', key);
-    }
-    for (let value of formData.values()) {
-      console.log('aaa', value);
-    }
-    dispatch(userAction.signup(Object.fromEntries(formData)));
+    console.log('formData', Object.fromEntries(formData))
+
+    dispatch(userAction.signup(formData));
   }
 
   const handleUpload = (e) => {
@@ -59,12 +47,7 @@ function SignUp() {
       setFile(file)
       setImagePreviewUrl(reader.result);
     };
-    reader?.readAsDataURL(file);
-
-    // let formData = new FormData();
-    // formData.append('file', file);
-    // console.log(formData);
-    // dispatch(userAction.upload(formData))
+    reader?.readAsDataURL(file); // by Blob
   }
   const handleUploadClick = (e) => {
     e.preventDefault();
@@ -80,31 +63,33 @@ function SignUp() {
           <span onClick={handleUploadClick}>
             <img src={imagePreviewUrl ? imagePreviewUrl : profile_base} alt="profile" />
           </span>
-          <input type="file" name="photoURL" accept="image/*" ref={profileImg} style={{ display: 'none' }} onChange={handleUpload} />
+          <input type="file" name="photoURL" accept="image/*" ref={profileImg} onChange={handleUpload} />
           <label>프로필 이미지</label>
         </div>
         <div className="form-wrap">
-          <label >Username</label>
-          <input type="text" name="username" onChange={handleChange} />
+          <label >Username <span className="warnning">*</span></label>
+          <input type="text" name="username" autocomplete="off"
+            onChange={handleChange} maxLength="20" required />
         </div>
         <div className="form-wrap">
-          <label >Email</label>
-          <input type="email" name="email" onChange={handleChange} />
+          <label >Email <span className="warnning">*</span></label>
+          <input type="email" name="email" autocomplete="off"
+            onChange={handleChange} required />
         </div>
         <div className="form-wrap">
-          <label>Password</label>
-          <input type="password" name="password" onChange={handleChange} />
+          <label>Password <span className="warnning">*</span></label>
+          <input type="password" name="password" autocomplete="off"
+            placeholder="최소 6자 이상"
+            onChange={handleChange} required />
         </div>
         <div className="form-wrap">
-          <label>Password Confirm</label>
-          <input type="password" name="password-confirm" onChange={(e) => setPwdConfirm(e.target.value)} />
+          <label>Password Confirm <span className="warnning">*</span></label>
+          <input type="password" name="password-confirm" autocomplete="off"
+            placeholder="최소 6자 이상"
+            onChange={(e) => setPwdConfirm(e.target.value)} required />
         </div>
-        {/* <button className="green" type="submit">가입</button>
-        <Link to='/'>
-          <button className="green">로그인</button>
-        </Link> */}
         <div className="btn-wrap">
-          <button type="submit">등록</button>
+          <button type="submit">가입</button>
           <Link to='/'>
             로그인
           </Link>

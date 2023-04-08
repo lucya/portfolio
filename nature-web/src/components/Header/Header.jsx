@@ -1,27 +1,28 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
 import userAction from "../../actions/user/actions";
 import AuthService from "../../services/AuthService";
-
 import logo from "../../assets/images/text_logo.png";
 import profile_base from "../../assets/images/profile_base.png";
 import './Header.css';
 import DropdownMenu from "./DropdownMenu";
 
 function Header() {
+  const [isShow, setIsShow] = useState(false);
   const authService = AuthService();
   const dispatch = useDispatch();
   const user = useSelector(state => state.userReducer);
 
+
   const handleLogout = (e) => {
     e.preventDefault();
     dispatch(userAction.logout());
+
   }
 
   useEffect(() => {
     authService.authCheck();
-
   }, []);
 
   return (
@@ -50,24 +51,24 @@ function Header() {
                   </li>
                   <li>
                     <Link className='header-nav-item' to='/products'>
-                      홍당무
+                      얘놀자
                     </Link>
                   </li>
                   <li className="header-nav-item">|</li>
-                  <li className="header-nav-item" onClick={handleLogout}>로그아웃</li>
+                  <li>
+                    <Link className='header-nav-item' onClick={handleLogout}>
+                      로그아웃
+                    </Link>
+                  </li>
                 </ul>
                 <div className="dropdown-menu">
                   <DropdownMenu />
                 </div>
-                <div className="header-nav-user">
+                <div className="header-nav-user"
+                  onMouseEnter={() => setIsShow(true)}
+                  onMouseLeave={() => setIsShow(false)}>
                   <img src={user?.user?.photoURL || profile_base} alt="user" />
-                  <span className="username">{user?.user?.username}</span>
-                  {/* <div className={active ? 'logout active' : 'logout'}>
-                    <ul>
-                      <li
-                        onClick={handleLogout}>로그아웃</li>
-                    </ul>
-                  </div> */}
+                  <span className={isShow ? 'username show' : 'username'}>{user?.user?.username}</span>
                 </div>
               </div>
             </div>

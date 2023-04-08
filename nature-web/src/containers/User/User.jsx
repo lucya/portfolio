@@ -10,10 +10,10 @@ function User() {
   const user = useSelector(state => state.userReducer);
   const authService = AuthService();
 
-  useEffect(() => {
-    authService.authCheck();
-    console.log('처음 렌더링 때만 실행');
-  }, []);
+  // useEffect(() => {
+  //   authService.authCheck();
+  //   console.log('처음 렌더링 때만 실행');
+  // }, []);
 
   return (
     <div className="app-container">

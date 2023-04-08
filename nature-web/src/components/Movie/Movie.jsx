@@ -9,7 +9,7 @@ function Movie({ movie }) {
   }
   return (
     <div className='movie-wrap'>
-      <Link to={`/movie/${movie.id}`} state={movie} onClick={handleSaveScroll}>
+      <Link to={`/movie/${movie.id}`} onClick={handleSaveScroll}>
         <img src={IMG_BASE_URL + movie.poster_path} alt={movie.title} />
       </Link>
       <div className='movie-info'>

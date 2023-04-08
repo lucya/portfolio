@@ -105,17 +105,24 @@
 }
 
 .header-nav-user img {
-  width: 30px;
+  width: 35px;
+  height: 35px;
   border-radius: 70%;
   border: 0.5px solid #111111;
 }
 
 .header-nav-user .username {
-  padding-left: 8px;
-  padding-bottom: 5px;
-  margin-top: 2px;
-  font-weight: 800;
-  /* position: relative; */
+  position: absolute;
+  background-color: #020024;
+  top: 55px;
+  right: 45px;
+  border-radius: 5px;
+  padding: 4px;
+  display: none;
+}
+
+.header-nav-user .username.show {
+  display: block;
 }
 
 .header-nav-user .logout {
@@ -153,7 +160,7 @@
 }
 
 .drop-menu {
-  position: fixed;
+  position: absolute;
   top: 61px;
   right: 47px;
   width: 100px;

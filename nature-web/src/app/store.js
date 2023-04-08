@@ -2,13 +2,23 @@ import { configureStore } from "@reduxjs/toolkit";
 import logger from 'redux-logger';
 import rootReducer from "../reducers";
 import thunk from 'redux-thunk'
-import { persistStore } from "redux-persist";
+import {
+  persistStore,
+  PERSIST,
+  PURGE
+} from "redux-persist";
 
 
 const store = configureStore({
   reducer: rootReducer,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware()
-    .concat(logger).concat(thunk),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware(
+      {
+        serializableCheck: {
+          ignoredActions: [PERSIST, PURGE],
+        },
+      }
+    ).concat(logger).concat(thunk),
   devTools: process.env.NODE_ENV !== 'production',
 });// redux store 정의
 

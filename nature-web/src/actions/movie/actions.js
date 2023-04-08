@@ -17,10 +17,18 @@ const getMovie = (id) => {
     console.log('xxx', res);
     const movie = res.data
     dispatch(movieActions.getMovie({ movie }))
+    // return movie
+  }
+}
+const initMovie = () => {
+  return async (dispatch, getState) => {
+    dispatch(movieActions.initMovie())
+    // return movie
   }
 }
 const movieAction = {
   getMovies,
-  getMovie
+  getMovie,
+  initMovie
 }
 export default movieAction
