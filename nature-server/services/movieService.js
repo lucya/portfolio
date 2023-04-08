@@ -6,7 +6,7 @@ const _getPopularMovies = async (_page) => {
 
   try {
     const res = await moviedb.moviePopular({ page, language: 'ko' })
-    console.log(res.results)
+    // console.log(res.results)
     return res.results;
   } catch (err) {
     console.log(err)

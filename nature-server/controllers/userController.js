@@ -26,17 +26,19 @@ const logout = async (req, res, next) => {
 }
 
 const signup = async (req, res, next) => {
-  console.log('signup', req.body);
-  const user = req.body.user;
-  const file = req.body.file;
+  console.log('signup req', req.body);
+  console.log('signup req', req.files);
+
+  const userInfo = JSON.parse(req.body.user);
+  const file = req.files[0];
   /* try {
     console.log('signup  ', user)
     console.log('signup file ', file)
-    // if (file) {
-    //   const photoURL = await uploadProfile(file);
-    //   console.log('upload', photoURL);
-    //   user.photoURL = photoURL;
-    // }
+    if (file) {
+      const photoURL = await uploadProfile(file);
+      console.log('upload', photoURL);
+      user.photoURL = photoURL;
+    }
     const data = await doSignup(user);
     console.log('xxx', data);
     res.status(200).send(data);
@@ -50,7 +52,16 @@ const signup = async (req, res, next) => {
   //   console.log('upload', photoURL);
   //   user.photoURL = photoURL;
   // }
-  const data = await doSignup(user).catch(error => {
+
+  console.log('signup file ', file)
+  if (file) {
+    let photoURL = await uploadProfile(file);
+    console.log('upload', photoURL);
+
+    userInfo.photoURL = photoURL;
+  }
+  userInfo.createDate = Date.now();
+  const data = await doSignup(userInfo).catch(error => {
     res.status(400).send(error.message);
   })
   console.log('xxx', data);

@@ -12,6 +12,7 @@ const {
   createUserWithEmailAndPassword,
   signOut,
   deleteUser,
+  signInAnonymously,
 } = require('firebase/auth');
 
 const cookieConfig = {
@@ -116,7 +117,6 @@ const doSignup = async (userInfo) => {
 
   console.log('doSignup userInfo', userInfo);
   const auth = getAuth();
-  // console.log('doSignup auth', auth)
   const userCredential = await createUserWithEmailAndPassword(auth, userInfo.email, userInfo.password)
     .catch((error) => {
       console.log(error);
@@ -135,6 +135,7 @@ const doSignup = async (userInfo) => {
     accessToken: token.accessToken,
     refreshToken: token.refreshToken
   };
+
 
   /* return await createUserWithEmailAndPassword(auth, userInfo.email, userInfo.password)
     .then((userCredential) => {
