@@ -47,12 +47,13 @@ function Loading() {
           box-shadow: 0 0 5px rgba(255,255,255,.3);
         }
         span{
-          color: #737373;
+          color: white;
           font-size:20px;
           text-transform:uppercase;
           letter-spacing:1px;
           line-height:200px;
-          animation:text 3s ease-in-out linear infinite;
+          animation:text 3s linear infinite;
+          animation-timing-function: ease-in-out;
         }
         @keyframes text {
           50%{
