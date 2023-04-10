@@ -11,7 +11,7 @@ const server = http.createServer(app);
 const PORT = process.env.PORT || 8081
 
 const corsOptions = {
-  origin: [process.env.WEB_DOMAIM], // '*'
+  origin: '*', //[process.env.WEB_DOMAIM], 
   credentials: true,
   methods: ['GET', 'PUT', 'POST', 'DELETE'],
   // allowedHeaders: ['Content-Type', 'Authorization'],
