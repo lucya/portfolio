@@ -21,8 +21,8 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // built-in middleware to handle urlencoded form data
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(bodyParser.json()); // for parsing application/json responses
+app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded responses
 
 // built-in middleware for json
 app.use(express.json());
@@ -57,7 +57,7 @@ io.on("connection", (socket) => {
   console.log('클라이언트와 socket 연결되었습니다.');
 }); */
 
-
+server.keepAliveTimeout = 60 * 1000
 server.listen(PORT, () => {
   console.log(`Nature Server listening on port ${PORT}`)
 })
