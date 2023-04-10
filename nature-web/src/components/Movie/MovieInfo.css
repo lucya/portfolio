@@ -1,4 +1,13 @@
 /* movie info */
+.movie-info.goback {
+  padding-bottom: 8px;
+}
+
+.movie-info.goback span {
+  cursor: pointer;
+  width: fit-content;
+}
+
 .movie-info-container {
   /* background: linear-gradient(to bottom right, #4a3520, #4a3520d6); */
   background: rgb(0, 0, 0);
@@ -10,7 +19,7 @@ div.movie-info-container {
   position: relative;
   z-index: 1;
   overflow-y: scroll;
-  height: calc(100vh - 84px);
+  height: calc(100vh - 108px);
 }
 
 div.movie-info-container {

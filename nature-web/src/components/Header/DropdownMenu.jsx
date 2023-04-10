@@ -32,7 +32,7 @@ function DropdownMenu() {
       <div className='drop-menu' style={{ display: menuOpen ? 'block' : 'none' }}>
         <ul>
           <li><Link to="/movies">인기영화</Link></li>
-          <li>홍당무</li>
+          <li><Link to="/fortune">운세마법사</Link></li>
           <li onClick={handleLogout}>로그아웃</li>
         </ul>
       </div>

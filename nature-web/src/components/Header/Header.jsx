@@ -50,8 +50,8 @@ function Header() {
                     </Link>
                   </li>
                   <li>
-                    <Link className='header-nav-item' to='/products'>
-                      얘놀자
+                    <Link className='header-nav-item' to='/fortune'>
+                      운세마법사
                     </Link>
                   </li>
                   <li className="header-nav-item">|</li>
