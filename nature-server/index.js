@@ -1,3 +1,4 @@
+const serverless = require('serverless-http');
 const express = require('express')
 const app = express()
 const http = require("http"); // node 기본모듈
@@ -63,7 +64,8 @@ io.on("connection", (socket) => {
   console.log('클라이언트와 socket 연결되었습니다.');
 }); */
 
-server.keepAliveTimeout = 60 * 1000
+/* server.keepAliveTimeout = 60 * 1000
 server.listen(PORT, () => {
   console.log(`Nature Server listening on port ${PORT}`)
-})
+}) */
+module.exports.handler = serverless(app);
