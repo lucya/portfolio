@@ -102,6 +102,7 @@ function Fortune() {
         handleScroll();
       }).catch((error) => {
         alert(error.message);
+        msgContentRef.current.lastChild.remove()
         setWaiting(false)
       })
   }

@@ -10,10 +10,18 @@ const indexRouter = require('./routes');
 const server = http.createServer(app);
 const PORT = process.env.PORT || 8081
 
+process.env.NODE_ENV = (process.env.NODE_ENV && (process.env.NODE_ENV).trim().toLowerCase() == 'production') ? 'production' : 'development';
+
+if (process.env.NODE_ENV == 'production') {
+  process.env.WEB_DOMAIM = process.env.WEB_DOMAIM_PRODUCTION;
+}
+console.log('process.env.WEB_DOMAIM', process.env.WEB_DOMAIM);
 const corsOptions = {
-  origin: '*', //[process.env.WEB_DOMAIM], 
+  origin: [process.env.WEB_DOMAIM, process.env.OPENAI_API_URL, process.env.OPENAI_API_URL_PORT], // '*'
   credentials: true,
   methods: ['GET', 'PUT', 'POST', 'DELETE'],
+  // preflightContinue: false,
+
   // allowedHeaders: ['Content-Type', 'Authorization'],
   optionsSuccessStatus: 200,
 }

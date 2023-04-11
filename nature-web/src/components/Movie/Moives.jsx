@@ -39,10 +39,12 @@ function Movies() {
   }, [])
 
   useEffect(() => {
-    if (localStorage.getItem('movies-scrollY')) {
-      moviesRef.current.scrollTop = localStorage.getItem('movies-scrollY');
-      localStorage.removeItem('movies-scrollY');
-    }
+    setTimeout(() => {
+      if (localStorage.getItem('movies-scrollY')) {
+        moviesRef.current.scrollTop = localStorage.getItem('movies-scrollY');
+        localStorage.removeItem('movies-scrollY');
+      }
+    }, 500)
   }, [])
   if (!movies || movies.length === 0) {
     return <Loading />
