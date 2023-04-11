@@ -101,7 +101,8 @@ function Fortune() {
         msgContentRef.current.lastChild.className = 'message'
         handleScroll();
       }).catch((error) => {
-        alert(error.message);
+
+        alert(error);
         msgContentRef.current.lastChild.remove()
         setWaiting(false)
       })
@@ -119,7 +120,7 @@ function Fortune() {
   }, [waiting])
 
   useEffect(() => {
-    let data = { answer: '네이처는 훌륭한 운세 마법사예요.\n당신의 운세를 알려줄게요.\n태어난 년월일과 별자리를 입력하면 더 자세하게 알려줄께요.\n당신에게는 무료니 걱정말아요.' }
+    let data = { answer: '네이처는 훌륭한 운세 마법사예요.\n당신의 운세를 알려줄게요.\n생년월일과 별자리를 입력해 주세요.\n당신에게는 무료니 걱정말아요.' }
     msgContentRef.current.append(appendAssistChat(data))
     setTimeout(() => {
       msgContentRef.current.lastChild.className = 'message'

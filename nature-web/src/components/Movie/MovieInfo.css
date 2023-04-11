@@ -53,7 +53,7 @@ div.movie-info-bg {
   min-width: 200px;
   width: 300px;
   min-height: auto;
-  max-height: 450px;
+  max-width: fit-content;
   /* height: 450px; */
   overflow: hidden;
   border-radius: 8px;

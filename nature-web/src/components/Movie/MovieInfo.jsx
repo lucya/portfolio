@@ -2,8 +2,7 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { IMG_BASE_URL } from "../../containers/Movie/Movie";
 import movieAction from '../../actions/movie/actions';
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { Movie } from '../../actions/movie/types';
+import { useEffect, useState } from "react";
 
 import './MovieInfo.css'
 import Loading from "../../app/pages/Loading";
@@ -14,19 +13,21 @@ function MovieInfo() {
   // const { state } = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [movieId, setMovieId] = useState(null);
   const { movie } = useSelector(state => state.movieReducer)
   const backgroundImg = IMG_BASE_URL + movie.backdrop_path
 
   const handleBack = () => {
     navigate(-1);
   }
-
   useEffect(() => {
-    if (!movie.id)
+    setMovieId(movie.id);
+    if (!movieId) {
       dispatch(movieAction.getMovie(id))
-  }, [id])
+    }
+  }, [movie])
 
-  if (!movie.id) {
+  if (!movieId) {
     return <Loading />
   }
   return (
