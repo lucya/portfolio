@@ -15,16 +15,18 @@ process.env.NODE_ENV = (process.env.NODE_ENV && (process.env.NODE_ENV).trim().to
 if (process.env.NODE_ENV == 'production') {
   process.env.WEB_DOMAIM = process.env.WEB_DOMAIM_PRODUCTION;
 }
-console.log('process.env.WEB_DOMAIM', process.env.WEB_DOMAIM);
-const corsOptions = {
-  origin: [process.env.WEB_DOMAIM], // '*'
-  credentials: true,
-  methods: ['GET', 'PUT', 'POST', 'DELETE'],
-  // allowedHeaders: ['Content-Type', 'Authorization'],
-  optionsSuccessStatus: 200,
-}
-// Cross Origin Resource Sharing
-app.use(cors(corsOptions));
+// console.log('process.env.WEB_DOMAIM', process.env.WEB_DOMAIM);
+// const corsOptions = {
+//   origin: [process.env.WEB_DOMAIM], // '*'
+//   credentials: true,
+//   methods: ['GET', 'PUT', 'POST', 'DELETE'],
+//   // allowedHeaders: ['Content-Type', 'Authorization'],
+//   optionsSuccessStatus: 200,
+// }
+// // Cross Origin Resource Sharing
+// app.use(cors(corsOptions));
+
+app.use(cors());
 
 // built-in middleware to handle urlencoded form data
 app.use(bodyParser.json()); // for parsing application/json responses
