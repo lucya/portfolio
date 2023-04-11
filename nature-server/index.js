@@ -1,4 +1,3 @@
-// const serverless = require('serverless-http');
 const express = require('express')
 const app = express()
 const http = require("http"); // node 기본모듈
@@ -18,7 +17,7 @@ if (process.env.NODE_ENV == 'production') {
 }
 console.log('process.env.WEB_DOMAIM', process.env.WEB_DOMAIM);
 const corsOptions = {
-  origin: [process.env.WEB_DOMAIM], // '*'
+  origin: [process.env.WEB_DOMAIM, 'https://api.openai.com', 'https://api.openai.com:443'], // '*'
   credentials: true,
   methods: ['GET', 'PUT', 'POST', 'DELETE'],
   // allowedHeaders: ['Content-Type', 'Authorization'],

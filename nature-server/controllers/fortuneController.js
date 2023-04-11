@@ -40,17 +40,22 @@ const doConversation = async (req, res) => {
       });
       break;
     } catch (error) {
-        retries++;
-        console.log(error);
-        console.log(`Error fetching data, retrying (${retries}/${maxRetries})...`);
+      retries++;
+      console.log(error);
+      console.log(`Error fetching data, retrying (${retries}/${maxRetries})...`);
     }
   }
+
+  // let completion = await openai.createChatCompletion({
+  //   model: "gpt-3.5-turbo",
+  //   messages: messages
+  // });
 
   let fortune = completion.data.choices[0].message['content']
   console.log(fortune);
   res.status(200).send({ 'assistant': fortune })
 }
- 
+
 
 module.exports = {
   doConversation
