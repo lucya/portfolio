@@ -16,6 +16,8 @@ if (process.env.NODE_ENV == 'production') {
   process.env.WEB_DOMAIM = process.env.WEB_DOMAIM_PRODUCTION;
 }
 console.log('process.env.WEB_DOMAIM', process.env.WEB_DOMAIM);
+console.log('process.env.API_KEY', process.env.API_KEY);
+console.log('process.env.APP_ID', process.env.APP_ID);
 const corsOptions = {
   origin: [process.env.WEB_DOMAIM, process.env.OPENAI_API_URL, process.env.OPENAI_API_URL_PORT], // '*'
   credentials: true,
