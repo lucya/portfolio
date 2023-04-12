@@ -1,10 +1,9 @@
 const { Configuration, OpenAIApi } = require("openai");
-const config = require('../apikey')
 
 const configuration = new Configuration({
-  apiKey: config.apiKey,//process.env.OPENAI_API_KEY,
+  apiKey: process.env.OPENAI_API_KEY,
 });
-
+console.log('process.env.OPENAI_API_KEY', process.env.OPENAI_API_KEY)
 const openai = new OpenAIApi(configuration);
 
 const doConversation = async (req, res) => {
