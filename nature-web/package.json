@@ -23,7 +23,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build:start:prod": "env-cmd -f .env.production react-scripts start",
+    "start:prod": "env-cmd -f .env.production react-scripts start",
     "build": "env-cmd -f .env.production react-scripts build",
     "build:dev": "env-cmd -f .env.local react-scripts build",
     "test": "react-scripts test",
