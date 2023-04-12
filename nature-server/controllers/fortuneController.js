@@ -48,16 +48,10 @@ const doConversation = async (req, res) => {
     }
   }
 
-  // let completion = await openai.createChatCompletion({
-  //   model: "gpt-3.5-turbo",
-  //   messages: messages
-  // });
-
   let fortune = completion.data.choices[0].message['content']
   console.log(fortune);
   res.status(200).send({ 'assistant': fortune })
 }
-
 
 module.exports = {
   doConversation
