@@ -10,11 +10,6 @@ const indexRouter = require('./routes');
 const server = http.createServer(app);
 const PORT = process.env.PORT || 8081
 
-process.env.NODE_ENV = (process.env.NODE_ENV && (process.env.NODE_ENV).trim().toLowerCase() == 'production') ? 'production' : 'development';
-
-if (process.env.NODE_ENV == 'production') {
-  process.env.WEB_DOMAIM = process.env.WEB_DOMAIM_PRODUCTION;
-}
 console.log('process.env.WEB_DOMAIM', process.env.WEB_DOMAIM);
 console.log('process.env.API_KEY', process.env.API_KEY);
 console.log('process.env.APP_ID', process.env.APP_ID);
