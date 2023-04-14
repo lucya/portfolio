@@ -16,10 +16,11 @@
 
 div.movie-info-container {
   width: 100%;
-  position: relative;
+  /* position: relative;
   z-index: 1;
-  overflow-y: scroll;
-  height: calc(100vh - 108px);
+   */
+  height: 100%;
+  /* overflow-y: scroll; */
 }
 
 div.movie-info-container {

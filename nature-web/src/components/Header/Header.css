@@ -1,7 +1,12 @@
 .header-container {
-  /* background-color: #282c34; */
-  background: #020024;
-  background: radial-gradient(circle, #020024 0%, #555962 35%, #00d4ff 100%);
+  top: 0;
+  left: 0;
+  right: 0;
+  position: fixed;
+  z-index: 3;
+  width: 100%;
+  background: var(--color-base);
+  background: radial-gradient(circle, var(--color-base) 0%, var(--color-mid) 35%, var(--color-last) 100%);
 }
 
 .header-wrap {
@@ -12,7 +17,7 @@
   /* display: flex;
   align-items: center;
   justify-content: space-between; */
-  padding: 0 35px;
+  padding: 0 10px;
   display: flex;
   /* align-items: center; */
   justify-content: space-between;
@@ -25,8 +30,9 @@
   margin: 5px;
 }
 
-.header-left-wrap img {
-  width: 123px;
+.header-left-wrap .logo {
+  width: 160px;
+  min-width: 120px;
 }
 
 .header-right-wrap {
@@ -54,7 +60,7 @@
 }
 
 .header-right-wrap .navigation ul.right-menu>li>a:hover {
-  color: #39d9c8;
+  color: var(--color-hover);
   transition: all .3s ease
 }
 
@@ -67,7 +73,7 @@
 .header-right-wrap .navigation ul.right-menu>li:after {
   display: block;
   content: '';
-  border-bottom: solid 3px #39d9c8;
+  border-bottom: solid 3px var(--color-hover);
   transform: scaleX(0);
   transition: transform 250ms ease-in-out;
 }
@@ -114,9 +120,11 @@
 
 .header-nav-user .username {
   position: absolute;
-  background-color: #020024;
-  top: 55px;
-  right: 45px;
+  background-color: #fff;
+  border: 2px solid var(--color-base);
+  color: var(--color-base);
+  top: 63px;
+  right: 14px;
   border-radius: 5px;
   padding: 4px;
   display: none;
@@ -127,19 +135,18 @@
   z-index: 10;
 }
 
-.header-nav-user .logout {
+/* .header-nav-user .logout {
   position: absolute;
   top: 45px;
   right: 0px;
   background-color: #1b1a1a;
-  /* border: 2px solid #0e0e0e; */
   padding: 3px;
   display: none;
 }
 
 .header-nav-user .logout.active {
   display: block;
-}
+} */
 
 .header-nav-user .logout ul li {
   color: #fff;
@@ -163,11 +170,14 @@
 
 .drop-menu {
   position: absolute;
-  top: 61px;
-  right: 47px;
+  top: 60px;
+  right: 57px;
   width: 100px;
-  background-color: #1b1a1a;
+  background-color: #ffffff;
   margin: 3px;
+  border-radius: 5px;
+  border: 2px solid var(--color-base);
+  ;
   display: none;
 }
 
@@ -182,14 +192,14 @@
 .drop-menu li {
   padding: 4px;
   text-align: left;
-  color: #fff;
+  color: #1b1a1a;
   font-weight: 600;
 }
 
 .drop-menu li a {
-  color: #fff;
+  color: #1b1a1a;
 }
 
 .drop-menu li:last-child {
-  border-top: 0.5px solid;
+  border-top: 1px solid;
 }

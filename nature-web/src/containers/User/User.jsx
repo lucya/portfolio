@@ -5,6 +5,7 @@ import SignUp from "../../components/User/SignUp";
 import './User.css';
 import { useSelector } from "react-redux";
 import AuthService from "../../services/AuthService";
+import Footer from "../../components/Footer/Footer";
 
 function User() {
   const user = useSelector(state => state.userReducer);
@@ -16,7 +17,7 @@ function User() {
   // }, []);
 
   return (
-    <div className="app-container">
+    <div className="user-container">
       {(user && user.loggedIn) && (
         <Navigate to="/movies" replace={true} />
       )}
@@ -24,7 +25,7 @@ function User() {
         <Route path="/" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
       </Routes>
-
+      <Footer />
     </div>
   );
 }

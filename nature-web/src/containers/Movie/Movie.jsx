@@ -9,14 +9,11 @@ export const IMG_BASE_URL = process.env.REACT_APP_MOVIE_IMG_BASE_URL;
 function Movie() {
 
   return (
-    <div>
-      <Header />
-      <div className="movies-container">
-        <Routes>
-          <Route path="/" element={<Movies />} />
-          <Route path="/:id" element={<MovieInfo />} />
-        </Routes>
-      </div>
+    <div className="movies-container">
+      <Routes>
+        <Route path="/" element={<Movies />} />
+        <Route path="/:id" element={<MovieInfo />} />
+      </Routes>
     </div>
   );
 }

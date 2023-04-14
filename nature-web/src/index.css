@@ -1,5 +1,7 @@
 *, *::before, *::after {
   box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
 }
 
 html, body {
@@ -89,4 +91,14 @@ img {
 
 .warnning {
   color: red
+}
+
+:root {
+  --color-rgb-base: 1, 0, 36;
+  --color-rgb-mid: 85, 89, 98;
+  --color-rgb-last: 0, 212, 255;
+  --color-base: #020024;
+  --color-mid: #555962;
+  --color-last: #00d4ff;
+  --color-hover: #39d9c8;
 }

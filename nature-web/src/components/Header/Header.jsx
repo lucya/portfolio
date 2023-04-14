@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
 import userAction from "../../actions/user/actions";
 import AuthService from "../../services/AuthService";
-import logo from "../../assets/images/text_logo.png";
+import logo from "../../assets/images/logo.png";
 import profile_base from "../../assets/images/profile_base.png";
-import './Header.css';
 import DropdownMenu from "./DropdownMenu";
+import './Header.css';
 
 function Header() {
   const [isShow, setIsShow] = useState(false);
@@ -36,7 +36,7 @@ function Header() {
               <Link to='/' style={{
                 display: 'flex'
               }}>
-                <img
+                <img className="logo"
                   src={logo}
                   alt='로고'></img>
               </Link>

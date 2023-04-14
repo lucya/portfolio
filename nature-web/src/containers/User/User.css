@@ -1,6 +1,8 @@
-.app-container {
+.user-container {
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .user-wrap {
@@ -8,8 +10,8 @@
   min-width: 430px;
   height: 100vh;
   /* background-color: #282c34; */
-  background: rgb(2, 0, 36);
-  background: linear-gradient(188deg, rgba(2, 0, 36, 1) 0%, rgba(85, 89, 98, 1) 35%, rgba(0, 212, 255, 1) 100%);
+  background: #020024;
+  background: linear-gradient(188deg, rgba(var(--color-rgb-base), 1) 0%, rgba(var(--color-rgb-mid), 1) 35%, rgba(var(--color-rgb-last), 1) 100%);
   display: flex;
   /* flex-wrap: wrap; */
   justify-content: center;

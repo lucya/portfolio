@@ -4,11 +4,12 @@
   bottom: 0;
   /* width: 100%; */
   margin: 0 10px 10px 10px;
+  padding-top: 10px;
 }
 
 .movie-container-wrap {
-  overflow-y: scroll;
-  height: calc(100vh - 64px);
+  /* overflow-y: scroll;
+  height: calc(100vh - 64px); */
 }
 
 .page-container {
@@ -76,7 +77,7 @@
   width: 70%;
   font-weight: 800;
   font-size: 20px;
-  padding: 10px 100px 10px 100px;
+  padding: 10px 0 10px 0;
   border-radius: 5px;
   border: none;
   background-color: #020024;

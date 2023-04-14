@@ -20,13 +20,11 @@
  * 
  * 
  */
-import Header from "../Header/Header";
 import fortuneAction from "../../actions/chatgpt/fortune.actions";
 import { useEffect, useRef, useState } from "react";
 import fortuneBall from '../../assets/images/crystal-ball.png';
-import './Fortune.css'
 
-function Fortune() {
+function FortuneConversation() {
   const [waiting, setWaiting] = useState(false)
   const msgContentRef = useRef(null);
   const questionRef = useRef(null);
@@ -103,7 +101,9 @@ function Fortune() {
       }).catch((error) => {
 
         alert(error);
-        msgContentRef.current.lastChild.remove()
+        // msgContentRef.current.lastChild.remove()
+        msgContentRef.current.lastChild.lastChild.innerText = '운세 마법사가 오늘 컨디션이 안좋안가봐요.\n질문을 다시 해줄래요?';
+        msgContentRef.current.lastChild.className = 'message'
         setWaiting(false)
       })
   }
@@ -129,27 +129,22 @@ function Fortune() {
     questionRef.current.focus();
   }, [])
   return (
-    <div>
-      <Header />
-      <div className="fortune-container">
-        <div className="chat">
-          <div className="chat-title">
-            <h1>환영해요! 운세 마법사 네이처예요!</h1>
-            <h2>당신의 운세가 궁금한가요? </h2>
-            <figure className="avatar">
-              <img src={fortuneBall} alt="fortuneBall" /></figure>
-          </div>
-          <div className="messages">
-            <div className="messages-content" ref={msgContentRef}>
-            </div>
-          </div>
-          <div className="message-box">
-            <textarea type="text" className="message-input" name="question" ref={questionRef} placeholder="궁금한걸 얘기해봐요..."></textarea>
-            <button type="submit" className="message-submit" onClick={getFortune}>Send</button>
-          </div>
+    <div className="chat">
+      <div className="chat-title">
+        <h1>환영해요! 운세 마법사 네이처예요!</h1>
+        <h2>당신의 운세가 궁금한가요? </h2>
+        <figure className="avatar">
+          <img src={fortuneBall} alt="fortuneBall" /></figure>
+      </div>
+      <div className="messages">
+        <div className="messages-content" ref={msgContentRef}>
         </div>
+      </div>
+      <div className="message-box">
+        <textarea type="text" className="message-input" name="question" ref={questionRef} placeholder="궁금한걸 얘기해봐요..."></textarea>
+        <button type="submit" className="message-submit" onClick={getFortune}>Send</button>
       </div>
     </div>
   )
 }
-export default Fortune;
+export default FortuneConversation;
