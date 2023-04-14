@@ -1,6 +1,7 @@
 {
   "name": "nature-web",
   "version": "0.1.0",
+  "description": "네이처의 포트폴리오",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.3",
