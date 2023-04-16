@@ -73,7 +73,7 @@ function SignUp() {
         </div>
         <div className="form-wrap">
           <label >Email <span className="warnning">*</span></label>
-          <input type="email" name="email" autoComplete="off"
+          <input type="email" name="email" autoComplete="off" inputMode="email"
             onChange={handleChange} required />
         </div>
         <div className="form-wrap">

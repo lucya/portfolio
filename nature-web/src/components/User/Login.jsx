@@ -30,7 +30,7 @@ function Login() {
       <form className="form-container" autoComplete="off" onSubmit={handleSubmit}>
         <div className="form-wrap">
           <label>Email</label>
-          <input type="email" name="email" onChange={handleChange} />
+          <input type="email" name="email" inputMode='email' onChange={handleChange} />
         </div>
         <div className="form-wrap">
           <label>Password</label>
