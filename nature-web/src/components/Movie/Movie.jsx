@@ -1,10 +1,9 @@
-import React from "react";
+import React, { memo } from "react";
 import { Link } from "react-router-dom";
 import { IMG_BASE_URL } from "../../containers/Movie/Movie";
 import * as config from '../../app/config';
 
 function Movie({ movie }) {
-  console.log('config.SET_SCROLLY', config.SET_SCROLLY)
 
   const handleSaveScroll = () => {
     localStorage.setItem(config.SET_SCROLLY, document.querySelector('.App').children[0].scrollTop)
@@ -22,4 +21,4 @@ function Movie({ movie }) {
     </div>
   );
 }
-export default Movie;
+export default memo(Movie);

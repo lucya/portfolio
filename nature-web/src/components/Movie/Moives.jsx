@@ -8,7 +8,6 @@ import ScrollToTop from "../../app/utils/ScrollToTop";
 
 
 function Movies() {
-  const [upActive, setUpActive] = useState(false);
   const moviesRef = useRef();
   const dispatch = useDispatch();
   const { movies, page } = useSelector(state => state.movieReducer)
@@ -20,16 +19,7 @@ function Movies() {
     e.preventDefault();
     getMovies();
   }
-  const handleGoup = (e) => {
-    e.preventDefault();
-    moviesRef.current.scroll({
-      top: 0,
-      behavior: 'smooth'
-    })
-  }
-  const handleScroll = (e) => {
-    (e.currentTarget.scrollTop > 500) ? setUpActive(true) : setUpActive(false);
-  };
+
   useEffect(() => {
     dispatch(movieAction.initMovie())
   }, [])
@@ -44,7 +34,7 @@ function Movies() {
   return (
     <>
       <ScrollToTop stay={true} />
-      <div className='movie-container' onScroll={handleScroll}>
+      <div className='movie-container'>
         {movies?.map((movie) => {
           return (
             <Movie
@@ -57,7 +47,7 @@ function Movies() {
       <div className="movie-more">
         <button onClick={handleMore}>More</button>
       </div>
-      <div className={upActive ? 'goup active' : 'goup'} onClick={handleGoup}>🔝</div>
+
     </>
   )
 }

@@ -1,4 +1,4 @@
-import { Route, Routes, Router } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import User from './containers/User/User';
 import PageNotFound from './app/pages/PageNotFound';
 import Main from './containers/Main';

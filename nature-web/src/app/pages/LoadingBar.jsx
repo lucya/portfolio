@@ -30,10 +30,10 @@ const Loader = styled.div`
   }
   &:after {
     content: "AI LOADING ...";
-    padding: 5px;
+    padding: 5px 5px 5px 20px;
     color: #fff;
     font-family:  Lato,"Helvetica Neue" ;
-    font-weight: 200;
+    font-weight: 500;
     font-size: 16px;
     position: absolute;
     width: 100%;

@@ -5,6 +5,7 @@ import Movie from "./Movie/Movie"
 import Fortune from "./Fortune/Fortune"
 import PageNotFound from "../app/pages/PageNotFound"
 import './Main.css'
+import GoToTop from "../app/utils/GoToTop"
 
 function Main() {
   return (
@@ -16,6 +17,7 @@ function Main() {
         <Route path='/fortune' element={<Fortune />} />
         <Route path='*' element={<PageNotFound />} />
       </Routes>
+      <GoToTop />
       <Footer />
     </div>
   )
