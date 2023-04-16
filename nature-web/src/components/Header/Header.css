@@ -2,7 +2,7 @@
   top: 0;
   left: 0;
   right: 0;
-  position: fixed;
+  position: sticky;
   z-index: 3;
   width: 100%;
   background: var(--color-base);
@@ -124,7 +124,7 @@
   border: 2px solid var(--color-base);
   color: var(--color-base);
   top: 63px;
-  right: 14px;
+  right: 45px;
   border-radius: 5px;
   padding: 4px;
   display: none;
@@ -132,7 +132,6 @@
 
 .header-nav-user .username.show {
   display: block;
-  z-index: 10;
 }
 
 /* .header-nav-user .logout {

@@ -1,5 +1,4 @@
 import { Route, Routes } from "react-router-dom";
-import Header from "../../components/Header/Header";
 import Movies from "../../components/Movie/Moives";
 import MovieInfo from "../../components/Movie/MovieInfo";
 import './Movie.css';

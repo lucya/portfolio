@@ -68,23 +68,23 @@ function SignUp() {
         </div>
         <div className="form-wrap">
           <label >Username <span className="warnning">*</span></label>
-          <input type="text" name="username" autocomplete="off"
+          <input type="text" name="username" autoComplete="off"
             onChange={handleChange} maxLength="20" required />
         </div>
         <div className="form-wrap">
           <label >Email <span className="warnning">*</span></label>
-          <input type="email" name="email" autocomplete="off"
+          <input type="email" name="email" autoComplete="off"
             onChange={handleChange} required />
         </div>
         <div className="form-wrap">
           <label>Password <span className="warnning">*</span></label>
-          <input type="password" name="password" autocomplete="off"
+          <input type="password" name="password" autoComplete="off"
             placeholder="최소 6자 이상"
             onChange={handleChange} required />
         </div>
         <div className="form-wrap">
           <label>Password Confirm <span className="warnning">*</span></label>
-          <input type="password" name="password-confirm" autocomplete="off"
+          <input type="password" name="password-confirm" autoComplete="off"
             placeholder="최소 6자 이상"
             onChange={(e) => setPwdConfirm(e.target.value)} required />
         </div>

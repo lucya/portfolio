@@ -141,7 +141,8 @@ function FortuneConversation() {
         </div>
       </div>
       <div className="message-box">
-        <textarea type="text" className="message-input" name="question" ref={questionRef} placeholder="궁금한걸 얘기해봐요..."></textarea>
+        <textarea type="text" className="message-input" name="question"
+          inputmode='none' ref={questionRef} placeholder="궁금한걸 얘기해봐요..."></textarea>
         <button type="submit" className="message-submit" onClick={getFortune}>Send</button>
       </div>
     </div>

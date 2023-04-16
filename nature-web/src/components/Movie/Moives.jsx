@@ -4,6 +4,7 @@ import movieAction from '../../actions/movie/actions';
 import Movie from "./Movie";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "../../app/pages/Loading";
+import ScrollToTop from "../../app/utils/ScrollToTop";
 
 
 function Movies() {
@@ -11,8 +12,6 @@ function Movies() {
   const moviesRef = useRef();
   const dispatch = useDispatch();
   const { movies, page } = useSelector(state => state.movieReducer)
-
-  // console.log(movies);
 
   const getMovies = () => {
     dispatch(movieAction.getMovies(page + 1))
@@ -34,24 +33,18 @@ function Movies() {
   useEffect(() => {
     dispatch(movieAction.initMovie())
   }, [])
+
   useEffect(() => {
     !page && getMovies()
   }, [])
 
-  useEffect(() => {
-    setTimeout(() => {
-      if (localStorage.getItem('movies-scrollY')) {
-        moviesRef.current.scrollTop = localStorage.getItem('movies-scrollY');
-        localStorage.removeItem('movies-scrollY');
-      }
-    }, 500)
-  }, [])
   if (!movies || movies.length === 0) {
     return <Loading />
   }
   return (
-    <div className="movie-container-wrap" ref={moviesRef} onScroll={handleScroll}>
-      <div className='movie-container'>
+    <>
+      <ScrollToTop stay={true} />
+      <div className='movie-container' onScroll={handleScroll}>
         {movies?.map((movie) => {
           return (
             <Movie
@@ -65,7 +58,7 @@ function Movies() {
         <button onClick={handleMore}>More</button>
       </div>
       <div className={upActive ? 'goup active' : 'goup'} onClick={handleGoup}>🔝</div>
-    </div>
+    </>
   )
 }
 export default Movies;

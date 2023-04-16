@@ -27,7 +27,7 @@ function Login() {
     <div className='user-wrap'>
       <img src={logo} className="app-logo" alt="logo" />
       <h3>로그인</h3>
-      <form className="form-container" autocomplete="off" onSubmit={handleSubmit}>
+      <form className="form-container" autoComplete="off" onSubmit={handleSubmit}>
         <div className="form-wrap">
           <label>Email</label>
           <input type="email" name="email" onChange={handleChange} />

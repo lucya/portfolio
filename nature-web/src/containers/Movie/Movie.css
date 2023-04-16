@@ -4,12 +4,7 @@
   bottom: 0;
   /* width: 100%; */
   margin: 0 10px 10px 10px;
-  padding-top: 10px;
-}
-
-.movie-container-wrap {
-  /* overflow-y: scroll;
-  height: calc(100vh - 64px); */
+  /* padding-top: 10px; */
 }
 
 .page-container {
@@ -70,7 +65,7 @@
 
 .movie-more {
   text-align: center;
-  margin: 10px 0 20px 0;
+  margin: 10px 0 0 0;
 }
 
 .movie-more button {
