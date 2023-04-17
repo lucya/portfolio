@@ -9,14 +9,11 @@
   width: 424px;
   min-width: 430px;
   height: 100vh;
-  /* background-color: #282c34; */
   background: #020024;
   background: linear-gradient(188deg, rgba(var(--color-rgb-base), 1) 0%, rgba(var(--color-rgb-mid), 1) 35%, rgba(var(--color-rgb-last), 1) 100%);
   display: flex;
-  /* flex-wrap: wrap; */
   justify-content: center;
   align-items: center;
-  /* align-content: center; */
   flex-direction: column;
 }
 
@@ -51,14 +48,6 @@
 .user-wrap .form-container .form-wrap.profile-wrap input[type="file"] {
   display: none;
 }
-
-/* .form-wrap.profile-wrap svg {
-  position: absolute;
-  left: 4px;
-  top: 4px;
-  width: 100px;
-  height: 100px;
-} */
 
 .form-wrap.profile-wrap span {
   cursor: pointer;
@@ -123,7 +112,6 @@
 
 .btn-wrap button {
   width: 56%;
-  /* border: 2px solid rgb(72, 69, 70); */
 }
 
 .btn-wrap a {

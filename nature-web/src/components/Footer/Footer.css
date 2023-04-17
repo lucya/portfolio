@@ -1,13 +1,11 @@
 .user-container .footer-container {
   display: block;
   position: absolute;
-  bottom: -47px;
+  bottom: 1px;
   border-top: 0px;
 }
 
 .main-container .footer-container {
-  /* position: relative; */
-  /* transform: translate(0px, -33px); */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -28,11 +26,7 @@
 
 .footer-container {
   border-top: 0.1rem solid #dde0ea;
-  /* bottom: 0px; */
-  /* background: #020024; */
-  /* background: radial-gradient(circle, #020024 0%, #555962 35%, #00d4ff 100%); */
   width: 100%;
-  /* border-bottom-left-radius: 2px; */
 }
 
 .footer-wrap {

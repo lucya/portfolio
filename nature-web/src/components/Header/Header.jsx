@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
 import userAction from "../../actions/user/actions";
 import AuthService from "../../services/AuthService";
-import logo from "../../assets/images/logo.png";
+import logo110 from "../../assets/images/nature_logo110.png";
+import logo160 from "../../assets/images/nature_logo160.png";
 import profile_base from "../../assets/images/profile_base.png";
 import DropdownMenu from "./DropdownMenu";
 import './Header.css';
@@ -33,12 +34,13 @@ function Header() {
         <div className='header-container'>
           <div className='header-wrap'>
             <div className='header-left-wrap'>
-              <Link to='/' style={{
-                display: 'flex'
-              }}>
-                <img className="logo"
-                  src={logo}
-                  alt='로고'></img>
+              <Link to='/'>
+                <picture>
+                  <source srcset={logo160} media="all and (min-width: 767px)" />
+                  {/* <source srcset={logo110} media="(min-width: 200px)" /> */}
+                  <source srcset={logo110} media="(min-width: 100px)" />
+                  <img src={logo160} alt="로고" />
+                </picture>
               </Link>
             </div>
             <div className='header-right-wrap'>
