@@ -1,7 +1,7 @@
-# Axios document
-https://axios-http.com/kr/docs/intro
-
-# Available Scripts
+# Nature Front-end
+React + Redux + Next.js + Webpack + babel  
+Netlify
+## Available Scripts
 `
     "start": "react-scripts start",  
 
@@ -15,15 +15,18 @@ https://axios-http.com/kr/docs/intro
     "dev:build": "webpack --mode=development",  
     "prod:build": "webpack --mode=production"  
 `
-## 서버 구동  ( 버그 확인 필요할때 )
+### 서버 구동  ( 버그 확인 필요할때 )
 로컬 API : `npm start`  
 production API 주소 : `npm run start:prod`
-## 웹 서버 배포를 위한 빌드 ( 버그 확인 필요할때 )
+### 웹 서버 배포를 위한 빌드 ( 버그 확인 필요할때 )
 production API 주소 : `npm run build`  
 로컬 API 주소 빌드 : `npm run build:dev`
-## webpack 서버 구동
+### webpack 서버 구동
 development : `npm run dev`  
 production : `npm run prod`
-## 웹 서버 배포를 위한 webpack 빌드
+### 웹 서버 배포를 위한 webpack 빌드
 development : `npm run dev:build`  
-production : `npm run prod:build`
+production : `npm run prod:build`  
+
+## Axios document
+https://axios-http.com/kr/docs/intro

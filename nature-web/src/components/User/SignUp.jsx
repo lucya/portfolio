@@ -57,7 +57,7 @@ function SignUp() {
     <div className='user-wrap'>
       <h3>회원 가입</h3>
 
-      <form className="form-container" onSubmit={handleSubmit}>
+      <form className="form-container" onSubmit={handleSubmit} autoComplete="off">
         <div className="form-wrap profile-wrap">
           {/* <svg>기본 프로필 이미지</svg> */}
           <span onClick={handleUploadClick}>

@@ -15,7 +15,8 @@ const login = (user) => {
   return async (dispatch, getState) => {
     const res = await http.post('/user/login', user)
       .catch((error) => {
-        alert('login error ', error.message);
+        alert('없는 계정이거나 email 또는 비밀번호를 확인해주세요.');
+        console.error('login error', error)
         throw error;
       });
 
@@ -55,7 +56,8 @@ const signup = (formData) => {
         headers: { "Content-Type": "mutipart/form-data" },
       }
     ).catch((error) => {
-      alert('why!!!!!' + error.message)
+      alert('일시적인 오류가 발생했습니다. 재시도해주세요.')
+      console.error(error);
       throw error;
     })
 

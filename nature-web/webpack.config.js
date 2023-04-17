@@ -23,7 +23,7 @@ const config = ({ isDev }) => ({
   },
   output: {
     path: path.join(__dirname, 'dist'), // __dirname은 현재폴더라는 뜻
-    publicPath: '/',
+    publicPath: '/', // 파일들이 위치할 서버 상의 경로
     filename: '[name].js', //[name].js로 설정할 시, entry에서 설정한 key 값이 파일명으로 설정된다.main.js
     // filename: 'app.js',//app.js 한개의 파일로 여러개 파일을 하나로 합친다
   },
@@ -31,6 +31,7 @@ const config = ({ isDev }) => ({
     rules: [
       {
         test: /\.(png|jpe?g|svg|gif|ico)$/,
+        exclude: '/node_modules',
         loader: 'url-loader',
         options: {
           name: '[name].[ext]?[hash]',
@@ -47,11 +48,14 @@ const config = ({ isDev }) => ({
       },
       {
         test: /\.(js|jsx)$/,
-        exclude: '/node_modules',  // loader를 배제시킬 파일 명시
+        exclude: ['/node_modules'],  // loader를 배제시킬 파일 명시
         loader: "babel-loader",   // 사용할 loader es6 > es5 변환 (transpiler),webpack과 babel 을 이어주는 녀석
         options: {
           presets: [
-            ['@babel/preset-env', { targets: { esmodules: true, browsers: ['> 5% in KR', 'last 2 chrome versions'] } }],
+            ['@babel/preset-env', { //preset-env는 브라우저에 필요한 ecmascript 버전을 자동으로 파악해서 알아서 polyfill을 넣어줌
+              targets: { esmodules: true, browsers: ['> 5% in KR', 'last 2 chrome versions'] }, // 지원 환경
+              debug: true,
+            }],
             ['@babel/preset-react', { "runtime": "automatic" }].filter(Boolean),
           ],
           plugins: [isDev && 'react-refresh/babel'].filter(Boolean),
@@ -85,10 +89,12 @@ const config = ({ isDev }) => ({
   devServer: {
     static: path.join(__dirname, "dist"), // 빌드 결과물의 path
     // publicPath: '/',				// 브라우저에서 접근하는 path. (기본값: '/')
+    contentBase: path.join(__dirname, "public"), // 콘텐츠를 제공할 경로지정
     port: 3000, 				// 개발서버 포트 (기본값: 8080)
     historyApiFallback: true,			// 404 응답 시 index.html로 리다이렉트
     open: true,
-    hot: true, // 핫 모듈 교체(HMR) 활성화설정
+    hot: true, // 핫 모듈 교체(HMR) 활성화설정(새로 고침 안해도 변경된 모듈 자동으로 적용)
+    compress: true, // 모든 항목에 대해 gzip압축 사용
     liveReload: true,
 
     proxy: {
@@ -110,8 +116,10 @@ const config = ({ isDev }) => ({
     }),
     // 분리된 css, js 파일들을 각각 html에 link 자동화
     new HtmlWebpackPlugin({
-      template: `./public/index.html`,
-      hash: true,
+      template: `./public/index.html`, // 적용될 html 경로
+      filename: "./index.html", // 결과 파일명
+      hash: true,       // 모든 스크립트, css 파일에 고유한 컴파일 해시 추가하여 캐시를 무효화
+      showErrors: true, // 오류 정보가 html에 기록됨
       favicon: "public/favicon.ico",
     }),
     isDev && new ReactRefreshWebpackPlugin(),
