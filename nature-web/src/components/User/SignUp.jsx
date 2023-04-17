@@ -32,8 +32,6 @@ function SignUp() {
     formData.append('file', file);
     formData.append('user', JSON.stringify(userInfo));
 
-    console.log('formData', Object.fromEntries(formData))
-
     dispatch(userAction.signup(formData));
   }
 
@@ -41,7 +39,6 @@ function SignUp() {
     e.preventDefault();
     const reader = new FileReader();
     const file = e.target.files[0];
-    console.log(file);
 
     reader.onloadend = () => {
       setFile(file)

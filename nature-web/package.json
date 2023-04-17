@@ -29,10 +29,10 @@
     "build:dev": "env-cmd -f .env.local react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "dev": "webpack serve --mode=development",
-    "prod": "webpack serve --mode=production",
-    "dev:build": "webpack --mode=development",
-    "prod:build": "webpack --mode=production"
+    "dev": "NODE_ENV=development webpack serve --mode=development",
+    "prod": "NODE_ENV=production webpack serve --mode=production",
+    "dev:build": "NODE_ENV=development webpack --mode=development",
+    "prod:build": "NODE_ENV=production webpack --mode=production"
   },
   "eslintConfig": {
     "extends": [
@@ -64,7 +64,6 @@
     "html-loader": "^4.2.0",
     "html-webpack-plugin": "^5.5.1",
     "redux-persist": "^6.0.0",
-    "remove-console-webpack-plugin": "^0.2.0",
     "url-loader": "^4.1.1",
     "webpack": "^5.79.0",
     "webpack-cli": "^5.0.1",

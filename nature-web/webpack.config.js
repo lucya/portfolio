@@ -4,7 +4,6 @@ const Dotenv = require('dotenv-webpack');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const RemoveConsolePlugin = require('remove-console-webpack-plugin')
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 
@@ -32,34 +31,35 @@ const config = ({ isDev }) => ({
       {
         test: /\.(png|jpe?g|svg|gif|ico)$/,
         exclude: '/node_modules',
-        loader: 'url-loader',
-        options: {
-          name: '[name].[ext]?[hash]',
-          // limit: 5000,
-          mimetype: 'image/png',
-        },
-
-        // use: ["file-loader"],
-        // use: [
-        //   {
-        //     loader: "file-loader",
-        //   },
-        // ],
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192,
+              name: '[name].[ext]?[hash]',
+            }
+          },
+        ],
+        type: 'javascript/auto',
       },
       {
         test: /\.(js|jsx)$/,
         exclude: ['/node_modules'],  // loader를 배제시킬 파일 명시
-        loader: "babel-loader",   // 사용할 loader es6 > es5 변환 (transpiler),webpack과 babel 을 이어주는 녀석
-        options: {
-          presets: [
-            ['@babel/preset-env', { //preset-env는 브라우저에 필요한 ecmascript 버전을 자동으로 파악해서 알아서 polyfill을 넣어줌
-              targets: { esmodules: true, browsers: ['> 5% in KR', 'last 2 chrome versions'] }, // 지원 환경
-              debug: true,
-            }],
-            ['@babel/preset-react', { "runtime": "automatic" }].filter(Boolean),
-          ],
-          plugins: [isDev && 'react-refresh/babel'].filter(Boolean),
-        },
+        use: [
+          {
+            loader: "babel-loader",   // 사용할 loader es6 > es5 변환 (transpiler),webpack과 babel 을 이어주는 녀석
+            options: {
+              presets: [
+                ['@babel/preset-env', { //preset-env는 브라우저에 필요한 ecmascript 버전을 자동으로 파악해서 알아서 polyfill을 넣어줌
+                  targets: { esmodules: true, browsers: ['> 5% in KR', 'last 2 chrome versions'] }, // 지원 환경
+                  // debug: true,
+                }],
+                ['@babel/preset-react', { "runtime": "automatic" }].filter(Boolean),
+              ],
+              plugins: [isDev && 'react-refresh/babel'].filter(Boolean),
+            },
+          }
+        ],
       },
       {
         test: /\.css$/,
@@ -68,28 +68,12 @@ const config = ({ isDev }) => ({
         // use에 선언된 가장 오른쪽의 로더가 먼저 실행 (오른쪽에서 왼쪽 순으로)
         use: ["style-loader", "css-loader"],
       },
-      // {
-      //   test: /\.html$/i,
-      //   loader: "html-loader",
-      //   options: {
-      //     sources: {
-      //       list: [
-      //         {
-      //           tag: "link",
-      //           attribute: "href",
-      //           type: "src",
-      //         },
-      //       ],
-      //     },
-      //   },
-      // },
     ],
   },
   // webpack 서버 설정
   devServer: {
     static: path.join(__dirname, "dist"), // 빌드 결과물의 path
     // publicPath: '/',				// 브라우저에서 접근하는 path. (기본값: '/')
-    contentBase: path.join(__dirname, "public"), // 콘텐츠를 제공할 경로지정
     port: 3000, 				// 개발서버 포트 (기본값: 8080)
     historyApiFallback: true,			// 404 응답 시 index.html로 리다이렉트
     open: true,
@@ -123,7 +107,6 @@ const config = ({ isDev }) => ({
       favicon: "public/favicon.ico",
     }),
     isDev && new ReactRefreshWebpackPlugin(),
-    // new RemoveConsolePlugin({ include: ['log', 'warn'] }),
   ].filter(Boolean),
 });
 

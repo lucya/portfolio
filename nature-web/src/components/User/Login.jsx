@@ -18,8 +18,6 @@ function Login() {
   }
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(userState)
-    // TODO: dispatch call action
     dispatch(userAction.login(userState));
   }
 
