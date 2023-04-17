@@ -60,7 +60,6 @@ const signup = async (req, res, next) => {
 
     userInfo.photoURL = photoURL;
   }
-  userInfo.createDate = Date.now();
   const data = await doSignup(userInfo).catch(error => {
     res.status(400).send(error.message);
   })

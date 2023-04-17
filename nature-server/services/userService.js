@@ -54,13 +54,15 @@ const getUser = async (uid) => {
 }
 
 const addUser = async (userInfo) => {
+  delete userInfo.password;
+  userInfo.createDate = Date.now();
+
   try {
     const usersRef = doc(db, "users", userInfo.uid);
     return await setDoc(usersRef, userInfo)
       .then(() => {
-        console.log('*** addUser  **', userInfo);
-        delete userInfo.password;
         return userInfo;
+        console.log('*** addUser  **', userInfo);
       })
       .catch((error) => {
         throw error;
