@@ -19,7 +19,7 @@ function AuthService() {
       navigate('/');
     } */
     if (!loggedIn) {
-      navigate('/');
+      navigate('/home');
     }
 
   }

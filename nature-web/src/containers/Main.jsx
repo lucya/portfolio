@@ -6,12 +6,14 @@ import Fortune from "./Fortune/Fortune"
 import PageNotFound from "../app/pages/PageNotFound"
 import './Main.css'
 import GoToTop from "../app/utils/GoToTop"
+import Home from "../components/Home/Home"
 
 function Main() {
   return (
     <div className="main-container">
       <Header />
       <Routes>
+        <Route path='/home' element={<Home />} />
         <Route path='/movies' element={<Movie />} />
         <Route path='/movie/*' element={<Movie />} />
         <Route path='/fortune' element={<Fortune />} />

@@ -81,8 +81,6 @@ a {
 
 a:hover, a:active {
   text-decoration: none;
-  /* color: #fff;
-  background-color: #f59000; */
 }
 
 img {
@@ -101,4 +99,5 @@ img {
   --color-mid: #555962;
   --color-last: #00d4ff;
   --color-hover: #39d9c8;
+  --color-active: #eb822c;
 }

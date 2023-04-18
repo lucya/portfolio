@@ -34,11 +34,10 @@ function Header() {
         <div className='header-container'>
           <div className='header-wrap'>
             <div className='header-left-wrap'>
-              <Link to='/'>
+              <Link to='/home'>
                 <picture>
-                  <source srcset={logo160} media="all and (min-width: 767px)" />
-                  {/* <source srcset={logo110} media="(min-width: 200px)" /> */}
-                  <source srcset={logo110} media="(min-width: 100px)" />
+                  <source srcSet={logo160} media="all and (min-width: 767px)" />
+                  <source srcSet={logo110} media="(min-width: 100px)" />
                   <img src={logo160} alt="로고" />
                 </picture>
               </Link>

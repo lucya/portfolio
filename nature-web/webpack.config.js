@@ -29,7 +29,7 @@ const config = ({ isDev }) => ({
   module: {
     rules: [
       {
-        test: /\.(png|jpe?g|svg|gif|ico)$/,
+        test: /\.(pdf|png|jpe?g|svg|gif|ico)$/,
         exclude: '/node_modules',
         use: [
           {
@@ -41,6 +41,7 @@ const config = ({ isDev }) => ({
           },
         ],
         type: 'javascript/auto',
+        // type: 'asset/resource',
       },
       {
         test: /\.(js|jsx)$/,

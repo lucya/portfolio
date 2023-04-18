@@ -1,0 +1,88 @@
+.home-container {
+  display: flex;
+  flex-direction: column;
+  width: calc(100vw - 10%);
+  margin: 0 auto;
+}
+
+.home-container .breadcrumb {
+  width: calc(100vw - 8px);
+  margin-left: calc(-50vw + 50%);
+  position: sticky;
+  top: 64px;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  background-color: #ede8ed;
+  align-items: center;
+}
+
+.home-container .breadcrumb .portfolio-link {
+  /* border: 1px dotted; */
+  /* padding: 10px 0 10px 15px; */
+  padding-left: 10%;
+  text-align: center;
+}
+
+@media (max-width: 400px) {
+  .home-container .breadcrumb .portfolio-link {
+    padding-left: 4%;
+  }
+}
+
+.home-container .breadcrumb a {
+  padding: 10px;
+  color: black;
+  font-weight: 700;
+  margin: 10px;
+}
+
+.home-container .breadcrumb .portfolio-link a {
+  padding: 0;
+}
+
+.home-container .breadcrumb a:hover {
+  color: var(--color-active);
+  transition: all .3s ease;
+}
+
+.home-container h2 {
+  font-size: 26px;
+  font-weight: 700;
+  padding: 10px;
+}
+
+.home-container .fe-wrap {
+  height: 500px;
+  padding: 10px;
+  border-bottom: 1px dotted #641818;
+}
+
+.home-container .be-wrap {
+  height: 500px;
+  padding: 10px;
+  border-bottom: 1px dotted #641818;
+
+}
+
+.home-container .resume-wrap {
+  /* background-color: var(--color-base);
+  color: white; */
+}
+
+.home-container .resume-wrap>div {
+  /* height: 100%; */
+  padding: 10px;
+  border: 1px solid;
+  margin: 10px;
+  overflow: auto;
+}
+
+.home-container .resume-wrap .react-pdf__Document {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.home-container .resume-wrap .react-pdf__Document .react-pdf__Page {
+  border-bottom: 1px solid #641818;
+}

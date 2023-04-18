@@ -5,8 +5,8 @@ const GoUp = styled.div`
 & {
   position: fixed;
   right: 16px;
-  bottom: 50px;
-  border-radius: 40%;
+  bottom: 30px;
+  border-radius: 50%;
   padding: 7px;
   background-color: #2fcece;
   cursor: pointer;
@@ -17,7 +17,7 @@ const GoUp = styled.div`
   outline: none;
 }
 &:hover {
-  background-color: #eb822c;
+  background-color: var(--color-active);
 }
 `
 function GoToTop() {
@@ -32,7 +32,8 @@ function GoToTop() {
     })
   }
   const handleScroll = (e) => {
-    (elm.scrollTop > 600) ? setUpActive(true) : setUpActive(false);
+    const hasScroll = elm.scrollHeight > elm.offsetHeight
+    hasScroll ? setUpActive(true) : setUpActive(false);
   };
 
   useEffect(() => {

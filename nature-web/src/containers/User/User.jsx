@@ -19,7 +19,7 @@ function User() {
   return (
     <div className="user-container">
       {(user && user.loggedIn) && (
-        <Navigate to="/movies" replace={true} />
+        <Navigate to="/home" replace={true} />
       )}
       <Routes>
         <Route path="/" element={<Login />} />
