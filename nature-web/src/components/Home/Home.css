@@ -6,21 +6,21 @@
 }
 
 .home-container .breadcrumb {
-  width: calc(100vw - 8px);
+  width: 100vw;
   margin-left: calc(-50vw + 50%);
   position: sticky;
   top: 64px;
   z-index: 2;
   display: flex;
   justify-content: space-between;
-  background-color: #ede8ed;
+  background-color: #f0f0f0;
   align-items: center;
 }
 
 .home-container .breadcrumb .portfolio-link {
   /* border: 1px dotted; */
   /* padding: 10px 0 10px 15px; */
-  padding-left: 10%;
+  padding-left: 11%;
   text-align: center;
 }
 
@@ -53,15 +53,13 @@
 }
 
 .home-container .fe-wrap {
-  height: 500px;
   padding: 10px;
-  border-bottom: 1px dotted #641818;
+  border-bottom: 1px dotted var(--color-black);
 }
 
 .home-container .be-wrap {
-  height: 500px;
   padding: 10px;
-  border-bottom: 1px dotted #641818;
+  border-bottom: 1px dotted var(--color-black);
 
 }
 
@@ -84,5 +82,5 @@
 }
 
 .home-container .resume-wrap .react-pdf__Document .react-pdf__Page {
-  border-bottom: 1px solid #641818;
+  border-bottom: 1px solid var(--color-black);
 }
