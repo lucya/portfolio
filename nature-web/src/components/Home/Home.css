@@ -6,7 +6,8 @@
 }
 
 .home-container .breadcrumb {
-  width: 100vw;
+  width: calc(100vw - 8px);
+  height: 61px;
   margin-left: calc(-50vw + 50%);
   position: sticky;
   top: 64px;
@@ -24,24 +25,50 @@
   text-align: center;
 }
 
-@media (max-width: 400px) {
-  .home-container .breadcrumb .portfolio-link {
-    padding-left: 4%;
-  }
-}
-
-.home-container .breadcrumb a {
+.home-container .breadcrumb button {
   padding: 10px;
   color: black;
   font-weight: 700;
+  font-size: 1.1em;
   margin: 10px;
+  border: none;
 }
 
-.home-container .breadcrumb .portfolio-link a {
+@media (max-width: 530px) {
+  .home-container .breadcrumb .portfolio-link {
+    padding-left: 4%;
+    font-size: 0.9em;
+  }
+
+  .home-container .breadcrumb .portfolio-link>span {
+    display: none;
+  }
+
+  .home-container .breadcrumb>button {
+    font-size: 0.9em;
+  }
+}
+
+@media (max-width: 400px) {
+  .home-container .breadcrumb .portfolio-link {
+    padding-left: 4%;
+    font-size: 0.8em;
+  }
+
+  .home-container .breadcrumb .portfolio-link>span {
+    display: none;
+  }
+
+  .home-container .breadcrumb>button {
+    font-size: 0.8em;
+  }
+}
+
+.home-container .breadcrumb .portfolio-link button {
   padding: 0;
 }
 
-.home-container .breadcrumb a:hover {
+.home-container .breadcrumb button:hover {
   color: var(--color-active);
   transition: all .3s ease;
 }
@@ -52,15 +79,15 @@
   padding: 10px;
 }
 
-.home-container .fe-wrap {
+.home-container .fe-wrap, .home-container .be-wrap {
   padding: 10px;
   border-bottom: 1px dotted var(--color-black);
 }
 
-.home-container .be-wrap {
-  padding: 10px;
-  border-bottom: 1px dotted var(--color-black);
-
+.home-container .fe-wrap img, .home-container .be-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .home-container .resume-wrap {

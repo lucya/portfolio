@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect } from "react";
 import movieAction from '../../actions/movie/actions';
 
 import Movie from "./Movie";
@@ -8,7 +8,6 @@ import ScrollToTop from "../../app/utils/ScrollToTop";
 
 
 function Movies() {
-  const moviesRef = useRef();
   const dispatch = useDispatch();
   const { movies, page } = useSelector(state => state.movieReducer)
 
@@ -33,7 +32,7 @@ function Movies() {
   }
   return (
     <>
-      <ScrollToTop stay={true} />
+      <ScrollToTop stay />
       <div className='movie-container'>
         {movies?.map((movie) => {
           return (

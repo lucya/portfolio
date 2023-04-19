@@ -1,38 +1,59 @@
-import { HashLink } from 'react-router-hash-link';
-
 import './Home.css';
 import Resume from './Resume';
+import { useRef, useState } from 'react';
+import ScrollToTop from '../../app/utils/ScrollToTop';
+import * as config from '../../app/config'
+
 function Home() {
+  const brcRef = useRef()
+  const feRef = useRef()
+  const beRef = useRef()
+  const resumeRef = useRef()
+  const [top, setTop] = useState(0)
+
+  const frontEnd = config.GET_FIREBASE_FILE_URL('nature_web.png');
+  const backEnd = config.GET_FIREBASE_FILE_URL('nature_server.png');
+
+  const handleHashMove = (e, ref) => {
+    e.preventDefault();
+    let breadcrumbHeight = brcRef.current.clientHeight
+    let h = ref.current?.offsetTop - (breadcrumbHeight + 64);
+    setTop(h)
+  }
+
   return (
-    <div className="home-container">
-      <div className="breadcrumb">
-        <div className='portfolio-link'>
-          <span>포트폴리오 </span>
-          <HashLink to="#frontend">Front-end</HashLink>
-          <span>➕</span>
-          <HashLink to="#backend">Back-end</HashLink>
+    <>
+      <ScrollToTop top={top} />
+      <div className="home-container">
+        <div className="breadcrumb" ref={brcRef}>
+          <div className='portfolio-link'>
+            <span>포트폴리오 </span>
+            <button onClick={(e) => handleHashMove(e, feRef)} >Front-end</button>
+            <span>➕</span>
+            <button onClick={(e) => handleHashMove(e, beRef)} >Back-end</button>
+          </div>
+          <button onClick={(e) => handleHashMove(e, resumeRef)} >About Nature!</button>
         </div>
-        <HashLink to="#resume">About Nature!</HashLink>
-      </div>
-      <div className="fe-wrap" id="frontend">
-        <h2 >Front-end</h2>
-        <div>
-          <img src="https://firebasestorage.googleapis.com/v0/b/nature-portfolio-7b1db.appspot.com/o/nature_web.png?alt=media" alt='web' />
+        <div className="fe-wrap" ref={feRef}>
+          <h2 >Front-end</h2>
+          <div>
+            <img src={frontEnd} alt='web' />
+          </div>
+        </div>
+        <div className="be-wrap" ref={beRef}>
+          <h2 >Back-end</h2>
+          <div>
+            <img src={backEnd} alt='server' />
+          </div>
+        </div>
+        <div className="resume-wrap" ref={resumeRef}>
+          <h2>About Nature</h2>
+          <div>
+            <Resume />
+          </div>
         </div>
       </div>
-      <div className="be-wrap" id="backend">
-        <h2 >Back-end</h2>
-        <div>
-          <img src="https://firebasestorage.googleapis.com/v0/b/nature-portfolio-7b1db.appspot.com/o/nature_server.png?alt=media" alt='web' />
-        </div>
-      </div>
-      <div className="resume-wrap" id="resume">
-        <h2>About Nature</h2>
-        <div>
-          <Resume />
-        </div>
-      </div>
-    </div>
+    </>
   )
 }
 export default Home
