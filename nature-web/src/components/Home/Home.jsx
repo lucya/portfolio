@@ -1,4 +1,4 @@
-import { HashLink, NavHashLink } from 'react-router-hash-link';
+import { HashLink } from 'react-router-hash-link';
 
 import './Home.css';
 import Resume from './Resume';
@@ -14,14 +14,20 @@ function Home() {
         </div>
         <HashLink to="#resume">About Nature!</HashLink>
       </div>
-      <div className="fe-wrap">
-        <h2 id="frontend">Front-end 영역</h2>
+      <div className="fe-wrap" id="frontend">
+        <h2 >Front-end</h2>
+        <div>
+          <img src="https://firebasestorage.googleapis.com/v0/b/nature-portfolio-7b1db.appspot.com/o/nature_web.png?alt=media" alt='web' />
+        </div>
       </div>
-      <div className="be-wrap">
-        <h2 id="backend">Back-end 영역</h2>
+      <div className="be-wrap" id="backend">
+        <h2 >Back-end</h2>
+        <div>
+          <img src="https://firebasestorage.googleapis.com/v0/b/nature-portfolio-7b1db.appspot.com/o/nature_server.png?alt=media" alt='web' />
+        </div>
       </div>
-      <div className="resume-wrap">
-        <h2 id="resume">About Nature</h2>
+      <div className="resume-wrap" id="resume">
+        <h2>About Nature</h2>
         <div>
           <Resume />
         </div>

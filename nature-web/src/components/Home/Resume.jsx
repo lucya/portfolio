@@ -26,8 +26,9 @@ function Resume() {
 
   const handleResizePdf = () => {
     const elm = document.querySelector('.home-container .resume-wrap')
-    let cWidth = elm.clientWidth;
-    setWidth(cWidth);
+    elm && setWidth(elm.clientWidth)
+    // let cWidth = elm?.clientWidth;
+    // setWidth(cWidth);
   }
 
   useEffect(() => {
