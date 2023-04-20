@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import styled from 'styled-components'
 
 const GoUp = styled.div`
@@ -38,7 +38,7 @@ function GoToTop() {
 
   useEffect(() => {
     setElm(document.querySelector('.main-container'))
-    elm && elm.addEventListener('scroll', handleScroll)
+    elm?.addEventListener('scroll', handleScroll)
   }, [elm])
 
 
