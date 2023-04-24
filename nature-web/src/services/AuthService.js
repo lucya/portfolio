@@ -1,7 +1,5 @@
-// import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
-import { userActions } from "../reducers/userSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 
 function AuthService() {

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import styled from 'styled-components'
 
 const GoUp = styled.div`
@@ -31,13 +31,16 @@ function GoToTop() {
       behavior: 'smooth'
     })
   }
-  const handleScroll = (e) => {
-    const hasScroll = elm.scrollHeight > elm.offsetHeight
-    hasScroll ? setUpActive(true) : setUpActive(false);
-  };
+
 
   useEffect(() => {
     setElm(document.querySelector('.main-container'))
+
+    const handleScroll = (e) => {
+      const hasScroll = elm.scrollHeight > elm.offsetHeight
+      hasScroll ? setUpActive(true) : setUpActive(false);
+    };
+
     elm?.addEventListener('scroll', handleScroll)
   }, [elm])
 

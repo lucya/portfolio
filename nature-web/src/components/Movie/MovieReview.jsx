@@ -16,7 +16,7 @@ function MovieReview({ title }) {
     }
 
     getReview();
-  }, [])
+  }, [title])
 
   if (!review) {
     return <LoadingBar />
