@@ -8,9 +8,6 @@ import { persistor } from '../../app/store'
 
 // action
 const login = (user) => {
-  // TODO: 가지고 있는 토큰 넣어주기!
-  // 그럴 땐 로그인 하고 토큰을 받아왔을 때 넣어줍시다.
-  // http.defaults.headers.common["Authorization"] = USER_TOKEN; 
   return async (dispatch, getState) => {
     const res = await http.post('/user/login', user)
       .catch((error) => {
@@ -24,8 +21,6 @@ const login = (user) => {
       let data = res.data;
       dispatch(userActions.login({
         userInfo: data.userInfo,
-        accessToken: data.accessToken,
-        refreshToken: data.refreshToken,
       }));
     }
   }

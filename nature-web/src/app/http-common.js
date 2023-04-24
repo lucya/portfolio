@@ -1,10 +1,5 @@
 import axios from "axios";
-// import { useCookies } from "react-cookie";
 
-// const GetToken = () => {
-//   const [cookies] = useCookies(['access_token', 'refresh_token']);
-//   return { 'access_token': cookies['access_token'], 'refresh_token': cookies['refresh_token'] }
-// }
 const http = axios.create({
   baseURL: process.env.REACT_APP_API_DOMAIN,
   // `withCredentials`은 자격 증명을 사용하여 사이트 간 액세스 제어 요청을 해야 하는지 여부를 나타냅니다.
@@ -18,7 +13,6 @@ const http = axios.create({
     'Access-Control-Allow-Origin': `${process.env.REACT_APP_API_DOMAIN}`,
     'Access-Control-Allow-Credentials': true,
     'Access-Control-Allow-Headers': '*',
-    // 'Authorization': `${GetToken("access_token")}`
   },
   method: ['POST', 'GET', 'OPTIONS', 'DELETE', 'PUT'],
   // `transformResponse`는 응답 데이터가 then/catch로 전달되기 전에 변경할 수 있게 해줍니다.
