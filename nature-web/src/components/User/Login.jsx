@@ -27,11 +27,11 @@ function Login() {
       <h3>로그인</h3>
       <form className="form-container" autoComplete="off" onSubmit={handleSubmit}>
         <div className="form-wrap">
-          <label>Email</label>
+          <label htmlFor='email'>Email</label>
           <input type="email" name="email" inputMode='email' onChange={handleChange} />
         </div>
         <div className="form-wrap">
-          <label>Password</label>
+          <label htmlFor='password'>Password</label>
           <input type="password" name="password" onChange={handleChange} />
         </div>
         <div className="btn-wrap">

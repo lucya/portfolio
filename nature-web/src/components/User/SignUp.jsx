@@ -61,26 +61,26 @@ function SignUp() {
             <img src={imagePreviewUrl ? imagePreviewUrl : profile_base} alt="profile" />
           </span>
           <input type="file" name="photoURL" accept="image/*" ref={profileImg} onChange={handleUpload} />
-          <label>프로필 이미지</label>
+          <label htmlFor="photoURL">프로필 이미지</label>
         </div>
         <div className="form-wrap">
-          <label >Username <span className="warnning">*</span></label>
+          <label htmlFor="usename">Username <span className="warnning">*</span></label>
           <input type="text" name="username" autoComplete="off"
             onChange={handleChange} maxLength="20" required />
         </div>
         <div className="form-wrap">
-          <label >Email <span className="warnning">*</span></label>
+          <label htmlFor="email">Email <span className="warnning">*</span></label>
           <input type="email" name="email" autoComplete="off" inputMode="email"
             onChange={handleChange} required />
         </div>
         <div className="form-wrap">
-          <label>Password <span className="warnning">*</span></label>
+          <label htmlFor="password">Password <span className="warnning">*</span></label>
           <input type="password" name="password" autoComplete="off"
             placeholder="최소 6자 이상"
             onChange={handleChange} required />
         </div>
         <div className="form-wrap">
-          <label>Password Confirm <span className="warnning">*</span></label>
+          <label htmlFor="password-confirm">Password Confirm <span className="warnning">*</span></label>
           <input type="password" name="password-confirm" autoComplete="off"
             placeholder="최소 6자 이상"
             onChange={(e) => setPwdConfirm(e.target.value)} required />

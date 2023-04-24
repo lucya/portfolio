@@ -1,20 +1,20 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import movieAction from "../../actions/movie/actions";
 import LoadingBar from "../../app/pages/LoadingBar";
 
-
 function MovieReview({ title }) {
   const [review, setReview] = useState(null)
-  const getReview = () => {
-    movieAction.getMovieReview({ title })
-      .then((res) => {
-        let answer = res.assistant;
-        setReview(answer);
-      })
-  }
 
   useEffect(() => {
     console.log("Movie getMovieReview")
+    const getReview = () => {
+      movieAction.getMovieReview({ title })
+        .then((res) => {
+          let answer = res.assistant;
+          setReview(answer);
+        })
+    }
+
     getReview();
   }, [])
 

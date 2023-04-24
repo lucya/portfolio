@@ -3,6 +3,7 @@
   flex-direction: column;
   width: calc(100vw - 10%);
   margin: 0 auto;
+  position: relative;
 }
 
 .home-container .breadcrumb {
