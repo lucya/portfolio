@@ -1,5 +1,6 @@
 /**
  * @description login, logout, signup Services
+ * firebas 인증 상태 지속성 유형: https://firebase.google.com/docs/auth/web/auth-state-persistence?hl=ko
  * @author nature
  */
 const db = require('../db/firebaseDb')
@@ -8,33 +9,13 @@ const db = require('../db/firebaseDb')
 const { addDoc, getDoc, setDoc, doc } = require("firebase/firestore/lite");
 const {
   getAuth,
+  setPersistence,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   signOut,
   deleteUser,
-  signInAnonymously,
+  browserSessionPersistence,
 } = require('firebase/auth');
-
-const cookieConfig = {
-  //cookieConfig는 키, 밸류 외에 설정을 보낼 수 있다.
-  maxAge: 60000, // 1분
-  //밀리초 단위로 들어가는데 30분(1800000) 만료 쿠키를 생성한다. 
-  // path: '/',
-  httpOnly: true,
-  //통신할때만 접속할 수 있다. 기본값은 false임 
-  signed: true,
-  //쿠키를 암호화 시킨다. 
-};
-const setCookies = (res, token) => {
-  const accessToken = token.accessToken;
-  const refreshToken = token.refreshToken;
-  res.cookie('access_token', accessToken)
-  res.cookie('refresh_token', refreshToken)
-}
-const clearCookies = (res) => {
-  res.clearCookie('access_token');
-  res.clearCookie('refresh_token');
-}
 
 const getUser = async (uid) => {
   try {
@@ -88,31 +69,49 @@ const deleteUserAuthenticated = async () => {
 
 const doLogin = async (userInfo, res) => {
   const auth = getAuth();
-  return await signInWithEmailAndPassword(auth, userInfo.email, userInfo.password)
-    .then((userCredential) => {
-      // Signed in
-      const user = userCredential.user;
-      // console.log('doLogin success', user);
-      setCookies(res, user.stsTokenManager);
 
-      const token = user.stsTokenManager;
-      console.log('doLogin success', token);
-      const uid = userCredential.user.uid;
-      let loginUser = null;
-      return (async () => {
-        loginUser = await getUser(uid);
-        console.log('doLogin success userInfo', loginUser)
-        return {
-          userInfo: loginUser,
-          accessToken: token.accessToken,
-          refreshToken: token.refreshToken
-        };
-      })();
+  await setPersistence(auth, browserSessionPersistence)
+    .then(async () => {
+      return signInWithEmailAndPassword(auth, userInfo.email, userInfo.password)
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          const uid = user.uid;
 
+          return (async () => {
+            let loginUser = await getUser(uid);
+            console.log('doLogin success userInfo', loginUser)
+            return {
+              userInfo: loginUser
+            };
+          })();
+
+        })
     })
     .catch((error) => {
-      throw error;
+      // Handle Errors here.
+      const errorCode = error.code;
+      const errorMessage = error.message;
     });
+
+  /*   return await signInWithEmailAndPassword(auth, userInfo.email, userInfo.password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        const uid = user.uid;
+  
+        return (async () => {
+          let loginUser = await getUser(uid);
+          console.log('doLogin success userInfo', loginUser)
+          return {
+            userInfo: loginUser
+          };
+        })();
+  
+      })
+      .catch((error) => {
+        throw error;
+      }); */
 }
 
 const doSignup = async (userInfo) => {
@@ -128,47 +127,16 @@ const doSignup = async (userInfo) => {
 
   const user = userCredential.user;
   userInfo.uid = user.uid;
-
-  const token = user.stsTokenManager;
   const loginUser = await addUser(userInfo);
-  console.log('doLogin success userInfo', loginUser)
+
   return {
     userInfo: loginUser,
-    accessToken: token.accessToken,
-    refreshToken: token.refreshToken
   };
-
-
-  /* return await createUserWithEmailAndPassword(auth, userInfo.email, userInfo.password)
-    .then((userCredential) => {
-      const user = userCredential.user;
-      userInfo.uid = user.uid;
-
-      console.log('userCredential', userCredential)
-      // TODO: set photoURL after file upload 
-      const token = user.stsTokenManager;
-      let loginUser = null;
-      return (async () => {
-        loginUser = await addUser(userInfo);
-        console.log('doLogin success userInfo', loginUser)
-        return {
-          userInfo: loginUser,
-          accessToken: token.accessToken,
-          refreshToken: token.refreshToken
-        };
-      })();
-    })
-    .catch((error) => {
-      throw error;
-    }); */
 }
 const doLogout = async (res) => {
   const auth = getAuth();
-  clearCookies(res)
   return await signOut(auth);
 }
-
-
 
 module.exports = {
   doLogin,

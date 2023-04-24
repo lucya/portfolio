@@ -1,13 +1,3 @@
-/* const userState = {
-  uid,
-  email,
-  password,
-  username,
-  photoURL,
-  auth
-}
-module.exports = userState; */
-
 class User {
   constructor(uid, email, password, username, photoURL, auth) {
     this.uid = uid;
