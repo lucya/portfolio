@@ -14,7 +14,7 @@ function ScrollToTop({ stay, top }) {
   }
 
   useEffect(() => {
-    if (stay !== undefined) { //top 위치 유지가 필요한 페이지인 경우 true pass
+    if (stay !== undefined) { //top 위치 유지가 필요한 페이지인 경우
       setScrollTop(localStorage.getItem(config.SET_SCROLLY))
     }
     handelScrollTo()

@@ -17,7 +17,7 @@ function Home() {
   const handleHashMove = (e, ref) => {
     e.preventDefault();
     let breadcrumbHeight = brcRef.current.clientHeight
-    let h = ref.current?.offsetTop - (breadcrumbHeight + 64);
+    let h = ref.current?.offsetTop - (breadcrumbHeight);
     setTop(h)
   }
 
