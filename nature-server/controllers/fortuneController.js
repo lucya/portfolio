@@ -1,10 +1,4 @@
-const { Configuration, OpenAIApi } = require("openai");
-
-const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-console.log('process.env.OPENAI_API_KEY', process.env.OPENAI_API_KEY)
-const openai = new OpenAIApi(configuration);
+const doChatGPT = require('../services/chatGPTService');
 
 const doConversation = async (req, res) => {
   let { userMessages, assistantMessages } = req.body
@@ -31,24 +25,9 @@ const doConversation = async (req, res) => {
   };
   console.log(messages)
 
-  const maxRetries = 3;
-  let retries = 0;
-  let completion
-  while (retries < maxRetries) {
-    try {
-      completion = await openai.createChatCompletion({
-        model: "gpt-3.5-turbo",
-        messages: messages
-      });
-      break;
-    } catch (error) {
-      retries++;
-      console.log(error);
-      console.log(`Error fetching data, retrying (${retries}/${maxRetries})...`);
-    }
-  }
 
-  let fortune = completion.data.choices[0].message['content']
+
+  let fortune = doChatGPT(messages)
   console.log(fortune);
   res.status(200).send({ 'assistant': fortune })
 }
