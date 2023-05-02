@@ -19,7 +19,7 @@ const store = configureStore({
         },
       }
     ).concat(logger).concat(thunk),
-  devTools: process.env.NODE_ENV !== 'production',
+  devTools: process.env.MODE_ENV !== 'production',
 });// redux store 정의
 
 export const persistor = persistStore(store); // redux store 생성
