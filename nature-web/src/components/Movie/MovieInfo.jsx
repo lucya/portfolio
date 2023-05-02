@@ -1,8 +1,8 @@
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { IMG_BASE_URL } from "../../containers/Movie/Movie";
 import movieAction from '../../actions/movie/actions';
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 import './MovieInfo.css'
 import Loading from "../../app/pages/Loading";
@@ -10,8 +10,6 @@ import MovieReview from "./MovieReview";
 import ScrollToTop from "../../app/utils/ScrollToTop";
 function MovieInfo() {
   const { id } = useParams();
-  console.log('id ', id);
-  // const { state } = useLocation();
   const [popupShow, setPopupShow] = useState(true)
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -33,17 +31,6 @@ function MovieInfo() {
     setMovieId(movie.id);
     if (!movieId) {
       dispatch(movieAction.getMovie(id))
-      // const maxRetries = 3;
-      // let retries = 0;
-
-      // while (retries < maxRetries) {
-      //   dispatch(movieAction.getMovie(id)).catch((err) => {
-      //     // alert(err)
-      //     retries++;
-      //     console.log(err)
-      //   })
-      // }
-
     }
 
   }, [movie])
