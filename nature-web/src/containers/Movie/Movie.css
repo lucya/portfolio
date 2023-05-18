@@ -28,10 +28,10 @@
 .movie-wrap {
   /* width: 250px; */
   /* margin: 16px; */
-  background-color: #dadade;
+  /* background-color: #dadade; */
   color: white;
   border-radius: 5px;
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   max-width: 250px;
   border: 10px;
   display: inline;
@@ -40,6 +40,20 @@
 
 .movie-wrap img {
   max-width: 100%;
+}
+
+/* .movie-wrap .movie-info .overview.ellipsis {
+  width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+} */
+.movie-wrap .movie-info .overview {
+  font-weight: 300;
+  color: var(--color-mid);
+  text-align: left;
 }
 
 .movie-more {

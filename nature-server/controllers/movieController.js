@@ -25,8 +25,9 @@ const getMovieReview = async (req, res, next) => {
     { role: "user", content: `지금 상영중인 ${title} 영화에 대한 평균적인 리뷰를 작성해줘.` },
   ]
 
-  let review = doChatGPT(messages)
+  let review = await doChatGPT(messages)
   console.log(review);
+
   res.status(200).send({ 'assistant': review })
 }
 

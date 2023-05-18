@@ -10,13 +10,13 @@ const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin'
 const config = ({ isDev }) => ({
   // name: 'nature-web',
   mode: isDev ? 'development' : 'production',
-  devtool: 'eval', //속도 빠르게
+  devtool: 'inline-source-map', //'eval', //속도 빠르게
   target: 'web',// Webpack v5 버그(Live Reload 문제) 해결
   resolve: {// 번들링 할 파일 확장자
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
   },
   entry: { //여러 개의 모듈로 연결된 파일의 시작점 (ex. ./src/index.js)                                                                                                                                                  
-    main: './src/index',
+    main: './src/index.tsx',
     // app: ['./client'], 
     // 입력, 파일을 입력하는 곳이라고 보면 된다. 배열로 입력
   },
@@ -44,7 +44,12 @@ const config = ({ isDev }) => ({
         // type: 'asset/resource',
       },
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(ts|tsx)$/,
+        exclude: ['/node_modules'],
+        use: [{ loader: "ts-loader" }]
+      },
+      {
+        test: /\.(js|jsx|ts|tsx)$/,
         exclude: ['/node_modules'],  // loader를 배제시킬 파일 명시
         use: [
           {
@@ -106,6 +111,10 @@ const config = ({ isDev }) => ({
       hash: true,       // 모든 스크립트, css 파일에 고유한 컴파일 해시 추가하여 캐시를 무효화
       showErrors: false, // 오류 정보가 html에 기록됨
       favicon: "public/favicon.ico",
+      minify: !isDev ? {
+        collapseWhitespace: true, // 빈칸 제거
+        removeComments: true, // 주석 제거
+      } : false,
     }),
     isDev && new ReactRefreshWebpackPlugin(),
   ].filter(Boolean),
