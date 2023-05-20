@@ -1,4 +1,4 @@
-import { Action, configureStore, ThunkDispatch } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import logger from 'redux-logger'
 import rootReducer from "../reducers";
 import thunk from 'redux-thunk'
@@ -7,7 +7,6 @@ import {
   PERSIST,
   PURGE
 } from 'redux-persist'
-import { useDispatch } from "react-redux";
 
 const store = configureStore({
   reducer: rootReducer,
@@ -19,7 +18,7 @@ const store = configureStore({
         },
       }
     )
-      .concat(logger).concat(thunk),
+      .concat(thunk).concat(logger),
   devTools: process.env.MODE_ENV !== 'production',
 });// redux store 정의
 

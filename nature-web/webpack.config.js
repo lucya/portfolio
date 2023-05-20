@@ -13,7 +13,12 @@ const config = ({ isDev }) => ({
   devtool: 'inline-source-map', //'eval', //속도 빠르게
   target: 'web',// Webpack v5 버그(Live Reload 문제) 해결
   resolve: {// 번들링 할 파일 확장자
-    extensions: ['.js', '.jsx', '.ts', '.tsx'],
+    extensions: ['.tsx', '.ts', '.js', '.jsx'],
+    modules: [path.resolve(__dirname, "src"), "node_modules"],
+    // alias: {
+    //   "react/jsx-dev-runtime": "react/jsx-dev-runtime.js",
+    //   "react/jsx-runtime": "react/jsx-runtime.js"
+    // }
   },
   entry: { //여러 개의 모듈로 연결된 파일의 시작점 (ex. ./src/index.js)                                                                                                                                                  
     main: './src/index.tsx',
@@ -21,15 +26,16 @@ const config = ({ isDev }) => ({
     // 입력, 파일을 입력하는 곳이라고 보면 된다. 배열로 입력
   },
   output: {
-    path: path.join(__dirname, 'dist'), // __dirname은 현재폴더라는 뜻
+    path: path.resolve(__dirname, './dist'), // __dirname은 현재폴더라는 뜻
     publicPath: '/', // 파일들이 위치할 서버 상의 경로
-    filename: '[name].js', //[name].js로 설정할 시, entry에서 설정한 key 값이 파일명으로 설정된다.main.js
+    // 빌드(컴파일, 번들링 등) 결과 파일 브라우저 캐싱(Cachinig)
+    filename: '[name].[contenthash].js', //[name].js로 설정할 시, entry에서 설정한 key 값이 파일명으로 설정된다.main.js
     // filename: 'app.js',//app.js 한개의 파일로 여러개 파일을 하나로 합친다
   },
   module: {
     rules: [
       {
-        test: /\.(pdf|png|jpe?g|svg|gif|ico)$/,
+        test: /\.(pdf|png|jpe?g|svg|gif|ico|mp3)$/,
         exclude: '/node_modules',
         use: [
           {
@@ -49,7 +55,7 @@ const config = ({ isDev }) => ({
         use: [{ loader: "ts-loader" }]
       },
       {
-        test: /\.(js|jsx|ts|tsx)$/,
+        test: /\.(js|jsx)$/,
         exclude: ['/node_modules'],  // loader를 배제시킬 파일 명시
         use: [
           {
@@ -86,13 +92,14 @@ const config = ({ isDev }) => ({
     hot: true, // 핫 모듈 교체(HMR) 활성화설정(새로 고침 안해도 변경된 모듈 자동으로 적용)
     compress: true, // 모든 항목에 대해 gzip압축 사용
     liveReload: true,
-
     proxy: {
       '/': isDev ? 'http://localhost:8080' : 'https://port-0-node-express-3zspi2nlgczjhds.sel3.cloudtype.app',		// 프론트 단에서 CORS 에러 해결하는 방법
     },
   },
+  // 감시 옵션 설정
   watchOptions: {
-    poll: true,
+    aggregateTimeout: 200, //다시 컴파일, 번들링 하기 전 지연 시간(ms) 설정
+    poll: true, //폴링(Polling)을 켜거나, 폴링 간격 시간(ms) 설정
     ignored: '/node_modules/',
   },
   plugins: [
@@ -108,6 +115,8 @@ const config = ({ isDev }) => ({
     new HtmlWebpackPlugin({
       template: `./public/index.html`, // 적용될 html 경로
       filename: "./index.html", // 결과 파일명
+      // 청크
+      chunks: ['main'],
       hash: true,       // 모든 스크립트, css 파일에 고유한 컴파일 해시 추가하여 캐시를 무효화
       showErrors: false, // 오류 정보가 html에 기록됨
       favicon: "public/favicon.ico",

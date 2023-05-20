@@ -2,20 +2,20 @@ import { useEffect, useState } from "react";
 import { Document, Page, pdfjs } from 'react-pdf/dist/esm/entry.webpack5';
 import 'react-pdf/dist/esm/Page/TextLayer.css';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
+import type { PDFDocumentProxy } from 'pdfjs-dist';
 import resumePdf from '../../assets/resource/resume.pdf';
 import * as config from '../../app/config'
 
 // workerSrc 정의 하지 않으면 pdf 보여지지 않음.
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
-
-function Resume() {
+const Resume: React.FC = () => {
   const pdfUrl: string = config.AVOID_CORS_URL + config.GET_FIREBASE_FILE_URL('resume.pdf');
 
   const [numPages, setNumPages] = useState<number>(0);
   const [width, setWidth] = useState<number>(0)
   const [file, setFile] = useState<string | Object>()
 
-  const onDocumentLoadSuccess = (numPages: any): void => {
+  const onDocumentLoadSuccess = ({ numPages }: PDFDocumentProxy): void => {
     setNumPages(numPages); // pdf.numPages와 동일 
   }
   const onDocumentLoadError = (err: Error) => {
@@ -46,11 +46,11 @@ function Resume() {
         loading='Nature에 대해 알아보는 중이예요.. 잠시만 기다려주세요.'
       >
         {/* height, width는 number 타입으로 vh, %는 먹지 않습니다. */}
-        {Array.from(new Array(numPages), (_, index) => (
+        {Array.from(new Array(numPages), (el, index) => (
           <Page
             width={width}
             pageNumber={index + 1}
-            key={index}
+            key={`page_${index + 1}`}
             renderTextLayer={false}
             renderAnnotationLayer={false}
           />

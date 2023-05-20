@@ -23,6 +23,9 @@
         "runtime": "automatic", // defaults to classic
         "importSource": "custom-jsx-library" // defaults to react
       }
+    ],
+    [
+      "@babel/plugin-proposal-class-properties"
     ]
   ]
 }
