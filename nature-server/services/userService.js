@@ -70,48 +70,28 @@ const deleteUserAuthenticated = async () => {
 const doLogin = async (userInfo, res) => {
   const auth = getAuth();
 
-  await setPersistence(auth, browserSessionPersistence)
+  return await setPersistence(auth, browserSessionPersistence)
     .then(async () => {
-      return signInWithEmailAndPassword(auth, userInfo.email, userInfo.password)
-        .then((userCredential) => {
-          // Signed in
-          const user = userCredential.user;
-          const uid = user.uid;
 
-          return (async () => {
-            let loginUser = await getUser(uid);
-            console.log('doLogin success userInfo', loginUser)
-            return {
-              userInfo: loginUser
-            };
-          })();
+      let userCredential = await signInWithEmailAndPassword(auth, userInfo.email, userInfo.password)
 
-        })
+      // Signed in
+      const user = userCredential.user;
+      const uid = user.uid;
+
+      return (async () => {
+        let loginUser = await getUser(uid);
+        console.log('doLogin success userInfo', loginUser)
+        return {
+          userInfo: loginUser
+        };
+      })();
+
     })
     .catch((error) => {
-      // Handle Errors here.
-      const errorCode = error.code;
-      const errorMessage = error.message;
+      console.log(error);
+      throw error;
     });
-
-  /*   return await signInWithEmailAndPassword(auth, userInfo.email, userInfo.password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        const uid = user.uid;
-  
-        return (async () => {
-          let loginUser = await getUser(uid);
-          console.log('doLogin success userInfo', loginUser)
-          return {
-            userInfo: loginUser
-          };
-        })();
-  
-      })
-      .catch((error) => {
-        throw error;
-      }); */
 }
 
 const doSignup = async (userInfo) => {
