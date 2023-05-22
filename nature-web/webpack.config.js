@@ -6,7 +6,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
-
 const config = ({ isDev }) => ({
   // name: 'nature-web',
   mode: isDev ? 'development' : 'production',
@@ -15,10 +14,6 @@ const config = ({ isDev }) => ({
   resolve: {// 번들링 할 파일 확장자
     extensions: ['.tsx', '.ts', '.js', '.jsx'],
     modules: [path.resolve(__dirname, "src"), "node_modules"],
-    // alias: {
-    //   "react/jsx-dev-runtime": "react/jsx-dev-runtime.js",
-    //   "react/jsx-runtime": "react/jsx-runtime.js"
-    // }
   },
   entry: { //여러 개의 모듈로 연결된 파일의 시작점 (ex. ./src/index.js)                                                                                                                                                  
     main: './src/index.tsx',
@@ -29,8 +24,13 @@ const config = ({ isDev }) => ({
     path: path.resolve(__dirname, './dist'), // __dirname은 현재폴더라는 뜻
     publicPath: '/', // 파일들이 위치할 서버 상의 경로
     // 빌드(컴파일, 번들링 등) 결과 파일 브라우저 캐싱(Cachinig)
-    filename: '[name].[contenthash].js', //[name].js로 설정할 시, entry에서 설정한 key 값이 파일명으로 설정된다.main.js
-    // filename: 'app.js',//app.js 한개의 파일로 여러개 파일을 하나로 합친다
+    //[name].js로 설정할 시, entry에서 설정한 key 값이 파일명으로 설정된다.main.js
+    filename: '[name].js',
+  },
+  performance: {
+    hints: isDev ? "warning" : false,
+    maxEntrypointSize: 512000,
+    maxAssetSize: 512000,
   },
   module: {
     rules: [
@@ -84,16 +84,30 @@ const config = ({ isDev }) => ({
   },
   // webpack 서버 설정
   devServer: {
-    static: path.join(__dirname, "dist"), // 빌드 결과물의 path
+    static: path.join(__dirname, "./dist"), // 빌드 결과물의 path
     // publicPath: '/',				// 브라우저에서 접근하는 path. (기본값: '/')
     port: 3000, 				// 개발서버 포트 (기본값: 8080)
     historyApiFallback: true,			// 404 응답 시 index.html로 리다이렉트
     open: true,
     hot: true, // 핫 모듈 교체(HMR) 활성화설정(새로 고침 안해도 변경된 모듈 자동으로 적용)
-    compress: true, // 모든 항목에 대해 gzip압축 사용
+    compress: isDev ? false : true, // 모든 항목에 대해 gzip압축 사용
     liveReload: true,
+    client: {
+      logging: 'info', //'log' | 'info' | 'warn' | 'error' | 'none' | 'verbose'
+      overlay: isDev ? true : false, // { errors boolean = true, warnings boolean = true } 컴파일러 오류 또는 경고가 있는 경우 브라우저에 전체 화면 오버레이를 표시
+      // overlay: {
+      //   errors: true, // error만 표시하기
+      //   warnings: false,
+      // },
+      progress: true, // 브라우저에서 컴파일 진행률을 백분율로 출력
+      reconnect: 3, // 클라이언트 재연결을 시도해야 하는 횟수, true:무제한 | false 
+    },
     proxy: {
-      '/': isDev ? 'http://localhost:8080' : 'https://port-0-node-express-3zspi2nlgczjhds.sel3.cloudtype.app',		// 프론트 단에서 CORS 에러 해결하는 방법
+      '/': {
+        target: isDev ? 'http://localhost:8080' : 'https://port-0-node-express-3zspi2nlgczjhds.sel3.cloudtype.app',		// 프론트 단에서 CORS 에러 해결하는 방법
+        // secure: true,
+        changeOrigin: true,
+      }
     },
   },
   // 감시 옵션 설정
@@ -113,7 +127,7 @@ const config = ({ isDev }) => ({
     }),
     // 분리된 css, js 파일들을 각각 html에 link 자동화
     new HtmlWebpackPlugin({
-      template: `./public/index.html`, // 적용될 html 경로
+      template: './public/index.html', // 적용될 html 경로
       filename: "./index.html", // 결과 파일명
       // 청크
       chunks: ['main'],

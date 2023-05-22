@@ -28,5 +28,8 @@ production : `npm run prod`
 development : `npm run dev:build`  
 production : `npm run prod:build`  
 
-## Axios document
+## Axios documentation
 https://axios-http.com/kr/docs/intro
+
+## webpack documentation
+https://webpack.kr/configuration
