@@ -5,7 +5,7 @@ import { useAppDispatch } from '../../app/hooks'
 import userAction from "../../actions/user/actions";
 import { Link } from 'react-router-dom';
 
-function DropdownMenu() {
+const DropdownMenu: React.FC = () => {
   const dropMenuRef = useRef<HTMLImageElement>(null);
   const dispatch = useAppDispatch();
   const handleLogout = (e: React.MouseEvent<HTMLElement>) => {

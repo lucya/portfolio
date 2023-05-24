@@ -7,9 +7,8 @@ import { useAppSelector, useAppDispatch } from '../../app/hooks'
 import Loading from "../../app/pages/Loading";
 import ScrollToTop from "../../app/utils/ScrollToTop";
 import { MovieType } from "../../actions/movie/types";
-import { RootState } from '../../app/store'
 
-function Movies() {
+const Movies: React.FC = () => {
   const { movies, page } = useAppSelector((state) => state.movieReducer)
   const dispatch = useAppDispatch() //useDispatch();
 

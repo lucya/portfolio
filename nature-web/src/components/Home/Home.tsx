@@ -5,7 +5,7 @@ import ScrollToTop from '../../app/utils/ScrollToTop';
 import * as config from '../../app/config'
 
 
-function Home() {
+const Home: React.FC = () => {
   const brcRef = useRef<HTMLDivElement>(null)
   const feRef = useRef<HTMLDivElement>(null)
   const beRef = useRef<HTMLDivElement>(null)

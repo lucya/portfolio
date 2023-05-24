@@ -7,9 +7,8 @@ import './MovieInfo.css'
 import Loading from "../../app/pages/Loading";
 import MovieReview from "./MovieReview";
 import ScrollToTop from "../../app/utils/ScrollToTop";
-import { MovieType } from "../../actions/movie/types"
 
-function MovieInfo() {
+const MovieInfo: React.FC = () => {
   const { id } = useParams();
   const [popupShow, setPopupShow] = useState<boolean>(true)
   const navigate = useNavigate();

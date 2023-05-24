@@ -3,7 +3,7 @@ import Movies from "../../components/Movie/Moives";
 import MovieInfo from "../../components/Movie/MovieInfo";
 import './Movie.css';
 
-function Movie() {
+const Movie: React.FC = () => {
   return (
     <div className="movies-container">
       <Routes>

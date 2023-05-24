@@ -1,7 +1,7 @@
 import './Footer.css'
 import github from '../../assets/images/github50.png'
 
-function Footer() {
+const Footer: React.FC = () => {
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     window.open('https://github.com/lucya/portfolio', '_blank')

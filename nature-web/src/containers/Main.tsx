@@ -8,7 +8,7 @@ import './Main.css'
 import GoToTop from "../app/utils/GoToTop"
 import Home from "../components/Home/Home"
 
-function Main() {
+const Main: React.FC = () => {
   return (
     <div className="main-container">
       <Header />

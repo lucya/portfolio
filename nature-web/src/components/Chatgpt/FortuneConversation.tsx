@@ -28,8 +28,7 @@ interface DataProps {
   answer?: string,
   question?: string,
 }
-
-function FortuneConversation() {
+const FortuneConversation: React.FC = () => {
   const [waiting, setWaiting] = useState<boolean>(false)
   const msgContentRef = useRef<HTMLDivElement>(null);
   const questionRef = useRef<HTMLTextAreaElement>(null);

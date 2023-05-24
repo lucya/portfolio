@@ -6,10 +6,10 @@ import { useRef } from 'react';
 import userAction from '../../actions/user/actions';
 import profile_base from '../../assets/images/profile_base.png'
 
-function SignUp() {
+const SignUp: React.FC = () => {
   const [userInfo, setUserInfo] = useState(User);
   const [pwdConfirm, setPwdConfirm] = useState('');
-  const [file, setFile] = useState<File|null>();
+  const [file, setFile] = useState<File | null>();
   const [imagePreviewUrl, setImagePreviewUrl] = useState<string>();
 
   const dispatch = useAppDispatch();

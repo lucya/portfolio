@@ -12,7 +12,7 @@ import DropdownMenu from "./DropdownMenu";
 import './Header.css';
 import { RootState } from "../../app/store";
 
-function Header() {
+const Header: React.FC = () => {
   const [isShow, setIsShow] = useState(false);
   const authService = AuthService();
   const dispatch = useAppDispatch();

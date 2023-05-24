@@ -6,7 +6,7 @@ import { User } from '../../actions/user/types';
 import logo from '../../logo.png';
 
 
-function Login() {
+const Login: React.FC = () => {
   const [userState, setUserState] = useState(User)
   const dispatch = useAppDispatch();
 

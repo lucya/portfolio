@@ -7,8 +7,8 @@ import { useSelector } from "react-redux";
 import Footer from "../../components/Footer/Footer";
 import { RootState } from "../../app/store";
 
-function User() {
-  const user = useSelector((state:RootState) => state.userReducer);
+const User: React.FC = () => {
+  const user = useSelector((state: RootState) => state.userReducer);
 
   return (
     <div className="user-container">

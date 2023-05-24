@@ -8,6 +8,7 @@ import * as config from '../../app/config'
 
 // workerSrc 정의 하지 않으면 pdf 보여지지 않음.
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
+
 const Resume: React.FC = () => {
   const pdfUrl: string = config.AVOID_CORS_URL + config.GET_FIREBASE_FILE_URL('resume.pdf');
 
