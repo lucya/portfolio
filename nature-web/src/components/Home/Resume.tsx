@@ -10,7 +10,7 @@ import * as config from '../../app/config'
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
 const Resume: React.FC = () => {
-  const pdfUrl: string = config.AVOID_CORS_URL + config.GET_FIREBASE_FILE_URL('resume.pdf');
+  const pdfUrl: string = config.AVOID_CORS_URL + config.GET_FIREBASE_FILE_URL('resource', 'resume.pdf');
 
   const [numPages, setNumPages] = useState<number>(0);
   const [width, setWidth] = useState<number>(0)
