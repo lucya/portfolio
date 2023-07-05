@@ -27,7 +27,8 @@ const doConversation = async (req, res) => {
 
 
 
-  let fortune = doChatGPT(messages)
+  let fortune = await doChatGPT(messages)
+
   console.log(fortune);
   res.status(200).send({ 'assistant': fortune })
 }
