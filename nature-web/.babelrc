@@ -1,13 +1,20 @@
 {
   "presets": [
-    "@babel/preset-env",
-    [
+    [ "@babel/preset-env", 
+      { 
+        "targets": { 
+          "node": "current" 
+        } 
+      }
+    ]
+    ,[
       "@babel/preset-react",
       {
         "runtime": "automatic"
       }
-    ],
-    "@babel/preset-typescript"
+    ]
+    ,"@babel/preset-typescript"
+    ,"@babel/react"
   ],
   "plugins": [
     [
@@ -27,5 +34,8 @@
     [
       "@babel/plugin-proposal-class-properties"
     ]
+  ],
+  "transformIgnorePatterns": [
+    "node_modules/(?!variables/.*)"
   ]
 }

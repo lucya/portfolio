@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders DropdownMenu link 1`] = `
+<div>
+  <img
+    alt="menu"
+    src="menu_30.png"
+  />
+  <div
+    class="drop-menu"
+    style="display: none;"
+  >
+    <ul>
+      <li>
+        <a
+          href="#/movies"
+        >
+          인기영화
+        </a>
+      </li>
+      <li>
+        <a
+          href="#/fortune"
+        >
+          운세마법사
+        </a>
+      </li>
+      <li>
+        로그아웃
+      </li>
+    </ul>
+  </div>
+</div>
+`;
