@@ -14,7 +14,12 @@ export type MovieType = {
   vote_average: number;
   vote_count: number;
   runtime: number;
-  tagline: string
+  tagline: string;
+}
+
+export type MovieVideoType = {
+  key: string;
+  type: string;
 }
 
 export const Movie: MovieType = {

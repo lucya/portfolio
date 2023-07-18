@@ -22,7 +22,7 @@ const login = (user: UserType) => {
       console.log('res', res)
       let data = res.data;
       dispatch(userActions.login({
-        userInfo: data.userInfo,
+        user: data.userInfo,
       }));
     }
   }
@@ -58,9 +58,7 @@ const signup = (formData: FormData) => {
       console.log('res', res)
       let data = res.data;
       dispatch(userActions.signup({
-        userInfo: data.userInfo,
-        accessToken: data.accessToken,
-        refreshToken: data.refreshToken,
+        user: data.userInfo,
       }));
     }
   }

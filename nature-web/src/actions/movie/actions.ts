@@ -1,7 +1,5 @@
 import { Dispatch } from "react";
 import http from "../../app/http-common"
-import { MovieType } from '../movie/types';
-
 import { movieActions } from "../../reducers/movieSlice";
 
 const getMovies = (page: number) => {
@@ -12,6 +10,7 @@ const getMovies = (page: number) => {
     const movies = res.data
     dispatch(movieActions.getMovies({ movies, page }))
   }
+
 }
 const getMovie = (id: number) => {
   return async (dispatch: Dispatch<any>) => {
@@ -20,9 +19,19 @@ const getMovie = (id: number) => {
 
     const movie = res.data
     dispatch(movieActions.getMovie({ movie }))
-    // return movie
   }
 }
+
+const getMovieVideos = (id: number) => {
+  return async (dispatch: Dispatch<any>) => {
+    const res = await http.get(`/movie/videos/${id}`)
+      .catch((err: Error) => { console.log(err); throw err })
+    console.log('getMovieVideos', res.data)
+    const videos = res.data
+    dispatch(movieActions.getMovieVideos({ videos }))
+  }
+}
+
 const getMovieReview = async (title: string) => {
 
   const res = await http.post('/movie/review', { title: title }, {
@@ -42,6 +51,7 @@ const movieAction = {
   getMovies,
   getMovie,
   getMovieReview,
-  initMovie
+  initMovie,
+  getMovieVideos
 }
 export default movieAction

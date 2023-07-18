@@ -7,18 +7,20 @@ import { useAppSelector, useAppDispatch } from '../../app/hooks'
 import Loading from "../../app/pages/Loading";
 import ScrollToTop from "../../app/utils/ScrollToTop";
 import { MovieType } from "../../actions/movie/types";
+// import { movieSelector } from "../../reducers/movieSlice";
 
 const Movies: React.FC = () => {
-  const { movies, page } = useAppSelector((state) => state.movieReducer)
-  const dispatch = useAppDispatch() //useDispatch();
-
-  const getMovies = () => {
+  let { movies, page } = useAppSelector((state) => state.movieReducer)
+  const dispatch = useAppDispatch()
+  const getMovies = (page?: number) => {
     console.log("getMovies")
-    dispatch(movieAction.getMovies(page || 0 + 1))
+    page = page || 1
+    dispatch(movieAction.getMovies(Number(page)))
   }
   const handleMore = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    getMovies();
+
+    getMovies(Number(page) + 1);
   }
 
   useEffect(() => {
@@ -26,15 +28,15 @@ const Movies: React.FC = () => {
   }, [])
 
   useEffect(() => {
-    // !page && getMovies()
-    // if (!page) {
+    // 목록이 있는 경우 재호출 금지
+    if (movies && movies.length) return;
     getMovies()
-    // }
-  }, [])
+  }, [movies, dispatch])
 
   if (!movies || movies.length === 0) {
     return <Loading />
   }
+
   return (
     <>
       <ScrollToTop stay />

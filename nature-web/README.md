@@ -1,21 +1,22 @@
 # Nature Front-end
+## 구조
 React   
 Redux / Toolkit   
-Webpack + Babel  
-Netlify
-## Available Scripts
-`
-    "start": "react-scripts start",  
-    "start:prod": "env-cmd -f .env.production react-scripts start",  
-    "build": "env-cmd -f .env.production react-scripts build",  
-    "build:dev": "env-cmd -f .env.local react-scripts build",  
-    "test": "react-scripts test",  
-    "eject": "react-scripts eject",  
-    "dev": "webpack serve --mode=development",  
-    "prod": "webpack serve --mode=production",  
-    "dev:build": "webpack --mode=development",  
-    "prod:build": "webpack --mode=production"  
-`
+build : Webpack + Babel  
+Web Server : Netlify
+## 구동 Scripts
+
+"start": "react-scripts start",  
+"start:prod": "env-cmd -f .env.production react-scripts start",  
+"build": "env-cmd -f .env.production react-scripts build",  
+"build:dev": "env-cmd -f .env.local react-scripts build",  
+"test": "react-scripts test",  
+"eject": "react-scripts eject",  
+"dev": "webpack serve --mode=development",  
+"prod": "webpack serve --mode=production",  
+"dev:build": "webpack --mode=development",  
+"prod:build": "webpack --mode=production"  
+
 ### 서버 구동  ( 버그 확인 필요할때 )
 로컬 API : `npm start`  
 production API test : `npm run start:prod`
@@ -35,3 +36,7 @@ https://axios-http.com/kr/docs/intro
 
 ### webpack documentation
 https://webpack.kr/configuration
+
+### Youtube
+라이브러리 : https://www.npmjs.com/package/react-youtube  
+옵션 : https://developers.google.com/youtube/player_parameters

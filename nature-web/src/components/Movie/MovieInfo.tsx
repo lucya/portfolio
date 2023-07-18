@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import './MovieInfo.css'
 import Loading from "../../app/pages/Loading";
 import MovieReview from "./MovieReview";
+import MovieVideo from "./MovieVideo";
 import ScrollToTop from "../../app/utils/ScrollToTop";
 
 const MovieInfo: React.FC = () => {
@@ -24,7 +25,7 @@ const MovieInfo: React.FC = () => {
   useEffect(() => {
     setTimeout(() => {
       setPopupShow(!popupShow)
-    }, 5000)
+    }, 2000)
   }, [])
 
   useEffect(() => {
@@ -33,7 +34,7 @@ const MovieInfo: React.FC = () => {
       dispatch(movieAction.getMovie(Number(id)))
     }
 
-  }, [movie])
+  }, [])
 
   if (!movie) {
     return (
@@ -98,10 +99,16 @@ const MovieInfo: React.FC = () => {
                     <p>{movie.overview || '-'}</p>
                   </div>
                 </div>
+              </section>
+              <section>
                 <div className="ai-review">
                   <h3>AI가 알려주는 영화 리뷰</h3>
                   <MovieReview title={movie.title} />
                 </div>
+              </section>
+              <section className="video">
+                <h3>예고편</h3>
+                <MovieVideo id={movie.id} />
               </section>
             </div>
           </section>

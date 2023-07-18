@@ -12,12 +12,9 @@ const _getPopularMovies = async (_page) => {
     console.log(err)
     throw err;
   }
-
-
 }
 
 const _getMovieInfo = async (id) => {
-
   try {
     const res = await moviedb.movieInfo({ id, language: 'ko' })
     console.log(res)
@@ -26,10 +23,26 @@ const _getMovieInfo = async (id) => {
     console.log(error)
     throw error;
   }
+}
 
+const _getMovieVideos = async (id) => {
+  try {
+    const res = await moviedb.movieVideos({ id, language: 'ko' })
+    const videos = getTrailers(res.results)
+
+    return videos;
+  } catch (error) {
+    throw error;
+  }
+}
+
+function getTrailers(list) {
+  const items = list.filter(video => video.type === "Trailer");
+  return items || null;
 }
 
 module.exports = {
   _getPopularMovies,
-  _getMovieInfo
+  _getMovieInfo,
+  _getMovieVideos
 }

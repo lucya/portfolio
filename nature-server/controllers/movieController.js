@@ -1,4 +1,4 @@
-const { _getPopularMovies, _getMovieInfo } = require('../services/movieService')
+const { _getPopularMovies, _getMovieInfo, _getMovieVideos } = require('../services/movieService')
 const doChatGPT = require('../services/chatGPTService');
 
 const getPopularMovies = async (req, res) => {
@@ -14,6 +14,14 @@ const getMovieInfo = async (req, res, next) => {
   const data = await _getMovieInfo(id)
     .catch(error => { res.status(400).send(error); })
   // console.log('Movie info data', data)
+  res.status(200).send(data);
+}
+
+const getMovieVideos = async (req, res) => {
+  const id = req.params.id;
+  const data = await _getMovieVideos(id)
+    .catch(error => { res.status(400).send(error); })
+  console.log('Movie video list', data)
   res.status(200).send(data);
 }
 
@@ -34,5 +42,6 @@ const getMovieReview = async (req, res, next) => {
 module.exports = {
   getPopularMovies,
   getMovieInfo,
+  getMovieVideos,
   getMovieReview,
 }
