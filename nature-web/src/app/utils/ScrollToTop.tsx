@@ -22,9 +22,9 @@ function ScrollToTop({ stay, top }: IElementProps) {
   useEffect(() => {
     if (stay !== undefined) { //top 위치 유지가 필요한 페이지인 경우
       let val = localStorage.getItem(config.SET_SCROLLY);
-      if (typeof val === 'number') {
-        setScrollTop(val)
-      }
+      // if (typeof val === 'number') {
+      setScrollTop(Number(val))
+      // }
     }
     handelScrollTo()
 

@@ -22,6 +22,7 @@ const store = configureStore({
   devTools: process.env.MODE_ENV !== 'production',
 });// redux store 정의
 
+
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>
 

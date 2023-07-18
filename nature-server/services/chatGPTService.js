@@ -7,7 +7,7 @@ console.log('process.env.OPENAI_API_KEY', process.env.OPENAI_API_KEY)
 const openai = new OpenAIApi(configuration);
 
 const doChatGPT = async (messages) => {
-  const maxRetries = 3;
+  const maxRetries = 5;
   let retries = 0;
   let completion
   while (retries < maxRetries) {
@@ -24,7 +24,7 @@ const doChatGPT = async (messages) => {
     }
   }
 
-  return completion.data.choices[0].message['content']
+  return completion?.data?.choices[0].message['content']
 }
 
 module.exports = doChatGPT
