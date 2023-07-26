@@ -87,6 +87,11 @@
   padding: 2px 10px;
 }
 
+.user-wrap .form-container .form-wrap .inWarnning {
+  display: flex;
+  align-items: center;
+}
+
 
 .user-wrap .form-container .btn-wrap {
   display: flex;

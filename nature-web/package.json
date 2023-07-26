@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "네이처의 포트폴리오",
   "private": true,
-  "type": "module",
+  "type": "commonjs",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.3",
     "@types/react-redux": "^7.1.25",
