@@ -1,0 +1,128 @@
+<template>
+  <div className="main-container">
+    <Header></Header>
+    <router-view></router-view>
+    <GoToTop />
+    <!-- <Footer></Footer> -->
+  </div>
+</template>
+<script>
+import Header from '@/components/header/Header.vue'
+import GoToTop from '@/app/utils/GoToTop.vue'
+// import Footer from '@/components/'
+
+export default {
+  components: {
+    Header,
+    GoToTop,
+  }
+}
+</script>
+
+<style>
+.main-container {
+  overflow-y: auto;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.movies-container {
+  /* position: absolute; */
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  margin: 0 10px 10px 10px;
+  max-width: calc(100vw - 20%);
+  margin: 0 auto;
+  /* padding-top: 10px; */
+}
+
+.page-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 32px;
+}
+
+.movie-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  padding-top: 24px;
+  /* padding: 10px; */
+  /* overflow-y: scroll;
+      height: calc(100vh - 64px); */
+}
+
+.movie-wrap {
+  /* width: 250px; */
+  /* margin: 16px; */
+  /* background-color: #dadade; */
+  color: white;
+  border-radius: 5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  max-width: 250px;
+  border: 10px;
+  display: inline;
+  margin: 10px;
+}
+
+.movie-wrap img {
+  max-width: 100%;
+}
+
+/* .movie-wrap .movie-info .overview.ellipsis {
+      width: 200px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    } */
+.movie-wrap .movie-info .overview {
+  font-weight: 300;
+  color: var(--color-mid);
+  text-align: left;
+}
+
+.movie-more {
+  text-align: center;
+  margin: 10px 0 0 0;
+}
+
+.movie-more button {
+  width: 70%;
+  font-weight: 800;
+  font-size: 20px;
+  padding: 10px 0 10px 0;
+  border-radius: 5px;
+  border: none;
+  background-color: #020024;
+  color: #ffffff;
+}
+
+.movie-more button:hover {
+  border-color: #eb822c;
+  background-color: #eb822c;
+  color: #fff;
+}
+
+.movie-info {
+  display: flex;
+  padding: 10px;
+  justify-content: space-between;
+  /* align-items: center; */
+  color: rgb(53, 14, 14);
+  font-weight: 500;
+  flex-direction: column;
+}
+
+.movie-info h4 {
+  margin: 5px;
+}
+
+.movie-info span {
+  margin-left: 3px;
+  text-align: right;
+}
+</style>
