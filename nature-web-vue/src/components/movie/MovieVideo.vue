@@ -1,4 +1,5 @@
 <template>
+  <h3 v-if="videos && videos.length > 0">예고편</h3>
   <YouTube v-for="video in videos" :key="video.key" :vars="options" width="100%" height="100%"
     :src="`https://www.youtube.com/watch?v=${video.key}`" @ready="onReady" ref="youtube" />
 </template>
@@ -40,13 +41,16 @@ export default {
     }
 
     const onReady = () => {
-      // this.$refs.youtube.playVideo()
-      const $elms = document.querySelectorAll('section.video>div>iframe');
+      // YT is not defined 에러 발생으로 timeout 처리
+      setTimeout(() => {
+        const $elms = document.querySelectorAll('section.video>div>iframe');
 
-      $elms.forEach($elm => {
-        $elm.style = '';
-        $elm.style = 'position:absolute;top:0;left:0;';
-      })
+        $elms.forEach($elm => {
+          $elm.style = '';
+          $elm.style = 'position:absolute;top:0;left:0;';
+        })
+      }, 300)
+
     }
     return {
       videos,

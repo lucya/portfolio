@@ -5,9 +5,9 @@ import * as constants from '@/app/constants'
 const SCROLLY = constants.SET_SCROLLY
 
 export default {
-  props: {
-    top: { type: Number, required: false }
-  },
+  props: [
+    'top'
+  ],
   setup(props) {
     const scrollTop = ref(0)
     const $elm = ref(null)
@@ -15,9 +15,10 @@ export default {
     const handelScrollTo = () => {
       setTimeout(() => {
         $elm.value = document.querySelector('.main-container')
-
-        $elm.value.scrollTo(0, scrollTop.value)
-        props.stay && localStorage.removeItem(SCROLLY);
+        if ($elm.value) {
+          $elm.value.scrollTo(0, scrollTop.value)
+          props.stay && localStorage.removeItem(SCROLLY);
+        }
       }, 300);
     }
 
@@ -33,9 +34,8 @@ export default {
 
     watchEffect(() => {
       let top = props.top;
-      if (typeof top === 'number' && top >= 0) {
-        scrollTop.value = top
-      }
+      scrollTop.value = top
+
       handelScrollTo()
     })
 

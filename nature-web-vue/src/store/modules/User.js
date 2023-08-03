@@ -1,55 +1,56 @@
 import http from "@/http-common";
 
-const API_URL = 'http://localhost:8080'
-
 export const User = {
   namespaced: true,
-  state: {
-    email: '',
-    password: '',
-    isLoggendIn: false,
+  state: { // state 상태 관리해야 할 속성(데이터)을 선언하는 항목
+    user: {}
   },
   mutations: {
-    // setEmail(state, email) {
-    //   state.email = email;
-    // },
-    // setPassword(state, password) {
-    //   state.password = password;
-    // },
-    setLoggedIn(state, value) {
-      state.isLoggedIn = value;
+
+    setUser(state, payload) {
+      state.user.username = payload.username;
+      state.user.loggedIn = payload.loggedIn;
     },
-    setError(state, error) {
-      state.error = error;
-    },
+
   },
   getters: {
 
+    getUser(state) {
+      return state.user;
+    }
   },
   actions: {
-    async login({ state, commit }) {
-      try {
-        const res = await http.post(API_URL + '/user/login', {
-          email: state.email,
-          password: state.password
-        });
-        const token = res.data.token;
-
-        // You can save the token in local storage or use Vuex for state management
-        // For this example, let's save it in local storage
-        localStorage.setItem('token', token);
-        commit('setLoggedIn', true);
-
-        // Redirect the user to the home page or any other route
-        // Note: The exact syntax for navigation may vary based on your router setup
-        // For this example, I'm assuming you're using Vue Router
-        this.$router.push('/home');
-      } catch (error) {
-        // Handle login errors
-        console.log(error);
-        commit('setError', error.response.data);
-      }
+    LOGIN({ state, commit }, payload) {
+      // localStorage.setItem('token', token);
+      payload.loggedIn = true;
+      commit('setUser', payload)
     },
-    async logout({ state, commit }) { },
+    // async LOGIN({ state, commit }, payload) {
+    //   try {
+    //     const res = await http.post('user/login', {
+    //       email: payload.email,
+    //       password: payload.password
+    //     });
+    //     const token = res.data.token;
+
+    //     // You can save the token in local storage or use Vuex for state management
+    //     // For this example, let's save it in local storage
+    //     localStorage.setItem('token', token);
+    //     commit('setUserName', 'username')
+    //     commit('setLoggedIn', true);
+
+    //     // Redirect the user to the home page or any other route
+    //     // Note: The exact syntax for navigation may vary based on your router setup
+    //     // For this example, I'm assuming you're using Vue Router
+    //     this.$router.push('/home');
+    //   } catch (error) {
+    //     // Handle login errors
+    //     console.log(error);
+    //     commit('setError', error.response.data);
+    //   }
+    // },
+    LOGOUT({ state, commit }) {
+      commit('setUser', {})
+    },
   }
 };

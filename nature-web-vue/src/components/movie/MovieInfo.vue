@@ -50,7 +50,7 @@
               </div>
             </section>
             <section class="video">
-              <h3>예고편</h3>
+             
               <MovieVideo :id="movie.id" />
             </section>
           </div>

@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { useStore } from "vuex";
 
 const routes = [
   {
@@ -42,6 +43,7 @@ const routes = [
             path: '/movie/:id',
             name: 'MovieInfo',
             component: () => import('@/components/movie/MovieInfo.vue'),
+            
           },
         ]
       },
@@ -66,4 +68,21 @@ const router = createRouter({
   routes
 })
 
+// router.beforeEach(async (to) => {
+//   // redirect to login page if not logged in and trying to access a restricted page
+//   const publicPages = ['/', '/signup'];
+//   const authRequired = !publicPages.includes(to.path);
+//   const store = useStore();
+//   const user = store.getters["User/getUser"];
+//   alert(user.loggedIn + '/' + authRequired)
+//   // if (authRequired && !user.loggedIn) {
+//   //   if (to.path !== '/')
+//   //     // return '/';
+//   // } else {
+//   //   return '/home';
+//   // }
+//   if (user.loggedIn && authRequired) {
+//     return '/home';
+//   }
+// });
 export default router

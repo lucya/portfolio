@@ -1,15 +1,13 @@
 import { createStore } from 'vuex'
-import axios from 'axios'
-import { User } from './modules/User';
-import { Movie } from './modules/Movie';
+import createPersistedState from 'vuex-persistedstate'; // 새로고침에서도 state 유지
 
-const instance = axios.create({
-  baseURL: process.env.VUE_APP_API_URL,
-});
+import { User } from './modules/user';
 
 export default createStore({
   modules: {
     User,
-    Movie,
-  }
+  },
+  plugins: [
+    createPersistedState()
+  ]
 })

@@ -13,10 +13,11 @@
     "core-js": "^3.8.3",
     "vue": "^3.2.13",
     "vue-pdf": "^4.3.0",
-    "vue-pdf-app": "^2.1.0",
     "vue-router": "^4.0.3",
+    "vue3-pdf-app": "^1.0.3",
     "vue3-youtube": "^0.1.9",
-    "vuex": "^4.0.0"
+    "vuex": "^4.0.0",
+    "vuex-persistedstate": "^4.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
@@ -32,8 +33,10 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.0",
     "eslint-plugin-vue": "^8.0.3",
+    "file-loader": "^6.2.0",
     "stylus": "^0.55.0",
-    "stylus-loader": "^6.1.0"
+    "stylus-loader": "^6.1.0",
+    "url-loader": "^4.1.1"
   },
   "eslintConfig": {
     "root": true,

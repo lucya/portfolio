@@ -34,9 +34,9 @@
             <DropdownMenu />
           </div>
           <div class="header-nav-user" @mouseenter.prevent="isShow = true" @mouseleave.prevent="isShow = false">
-            <img :src="user?.user?.photoURL || profile_base" alt="user" />
+            <img :src="user.photoURL || profile_base" alt="user" />
             <span class="username" :class="isShow ? 'show' : ''">{{
-              user?.user?.username
+              user.username
             }}</span>
           </div>
         </div>
@@ -46,13 +46,14 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import http from '@/http-common'
 import { useRouter } from 'vue-router'
 import logo170 from '@/assets/images/logo170.png'
 import logo120 from '@/assets/images/logo120.png'
 import profile_base from "@/assets/images/profile_base.png";
 import DropdownMenu from '@/components/header/DropdownMenu.vue'
+import { useUser } from "@/composables/user";
 
 
 export default {
@@ -60,13 +61,22 @@ export default {
     DropdownMenu,
   },
   setup() {
-    const user = ref({})
     const isShow = ref(false)
     const router = useRouter()
+    const { user, doLogout } = useUser();
+
+    onMounted(() => {
+      if (!user.value.loggedIn) {
+        router.replace({
+          name: "Login",
+        });
+      }
+    })
 
     const handleLogout = async () => {
       try {
-        await http.post('/user/logout')
+        await http.post('user/logout')
+        doLogout();
         router.replace({
           name: "Login",
         });
@@ -83,6 +93,7 @@ export default {
       isShow,
       profile_base,
       handleLogout,
+      user,
     }
   }
 };

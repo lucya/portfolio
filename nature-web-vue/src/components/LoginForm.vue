@@ -25,6 +25,7 @@
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import http from '@/http-common'
+import { useUser } from "@/composables/user";
 
 export default {
     setup() {
@@ -32,6 +33,7 @@ export default {
         const emailRef = ref(null);
         const pwdRef = ref(null);
         const userInfo = ref({});
+        const { doLogin } = useUser();
 
         onMounted(() => {
             emailRef.value.focus()
@@ -52,7 +54,10 @@ export default {
             }
             try {
                 console.log(userInfo.value)
-                await http.post('/user/login', { email: userInfo.value.email, password: userInfo.value.password })
+                const res = await http.post('user/login', { email: userInfo.value.email, password: userInfo.value.password })
+                console.log(res.data.userInfo)
+                // const user = res.data.userInfo;
+                doLogin(res.data.userInfo)
                 router.push({
                     name: "Home",
                 });
@@ -61,15 +66,15 @@ export default {
                 console.log(error)
             }
         }
-
         return {
             emailRef,
             pwdRef,
             handleChange,
             login,
         }
-    }
+    },
 }
+
 </script>
 
 <style></style>
