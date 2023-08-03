@@ -2,13 +2,13 @@
   <div class="header-container">
     <div class="header-wrap">
       <div class="header-left-wrap">
-        <Link to="/home">
-        <picture>
-          <source :srcset="logo170" media="all and (min-width: 767px)" />
-          <source :srcset="logo120" media="(min-width: 100px)" />
-          <img :src="logo170" alt="로고" />
-        </picture>
-        </Link>
+        <router-link to="/home">
+          <picture>
+            <source :srcset="logo170" media="all and (min-width: 767px)" />
+            <source :srcset="logo120" media="(min-width: 100px)" />
+            <img :src="logo170" alt="로고" />
+          </picture>
+        </router-link>
       </div>
       <div class="header-right-wrap">
         <div class="navigation">
@@ -47,12 +47,18 @@
 
 <script>
 import { ref } from 'vue'
-import http from '@/app/http-common'
+import http from '@/http-common'
 import { useRouter } from 'vue-router'
 import logo170 from '@/assets/images/logo170.png'
 import logo120 from '@/assets/images/logo120.png'
+import profile_base from "@/assets/images/profile_base.png";
+import DropdownMenu from '@/components/header/DropdownMenu.vue'
+
 
 export default {
+  components: {
+    DropdownMenu,
+  },
   setup() {
     const user = ref({})
     const isShow = ref(false)
@@ -75,12 +81,14 @@ export default {
       logo170,
       logo120,
       isShow,
+      profile_base,
+      handleLogout,
     }
   }
 };
 </script>
 
-<style scoped>
+<style>
 .header-container {
   top: 0;
   left: 0;

@@ -1,87 +1,126 @@
-
-<script>
-export default {
-  name: "Movieinfo",
-  data(){},
-  methods: {},
-}
-</script>
-
 <template>
-  <fragment>
+  <div class="movie-info goback">
+    <span @click="handleBack">🔙</span>
+  </div>
+  <Loading v-if="!movie" />
+  <Fragment v-else>
     <ScrollToTop />
-    <div class="movie-info goback">
-      <span onClick="{handleBack}">🔙</span>
-    </div>
-    <div
-      class="movie-info-popup"
-      :style="[popupShow ? 'display:block' : 'display:none']"
-    >
+    <div class="movie-info-popup" :style="popupShow ? 'display:block' : 'display:none'">
       <p>잠깐!<span class="blink">✋🏻</span></p>
       <br />
       <p>AI가 알려주는 영화 리뷰를 꼭 확인하세요!</p>
     </div>
-    <div
-      class="movie-info-container"
-      :style="'{backgroundImage: `url(${backgroundImg})`}'"
-    >
+    <div class="movie-info-container" :style="'backgroundImage: `url(${backgroundImg})`'">
       <div class="movie-info-bg">
         <section class="movie-info-column">
           <div class="poster-wrap">
-            <!-- <img
-                :src={IMG_BASE_URL + movie.poster_path}
-                alt={movie.title}
-              /> -->
+            <img :src="IMG_BASE_URL + movie.poster_path" alt={movie.title} />
           </div>
           <div class="description-wrap">
             <section class="header poster">
               <h2 class="title header">
-                <span class="title">{movie.title}</span>
-                <span class="release_date"
-                  >({movie.release_date ? movie.release_date?.substr(0, 4) :
-                  '미정'})</span
-                >
+                <span class="title">{{ movie.title }}</span>
+                <span class="release_date">({{ movie.release_date ? movie.release_date?.substr(0, 4) :
+                  '미정' }})</span>
               </h2>
               <div class="facts">
-                <span class="certification"> {movie.adult ? 19 : '전체'} </span>
+                <span class="certification"> {{ movie.adult ? 19 : '전체' }} </span>
 
-                <div class="release">{movie.release_date}&nbsp;</div>
+                <div class="release">{{ movie.release_date }}&nbsp;</div>
                 <div class="genres">
-                  { movie.genres.map((gen: any) => (
-                  <span key="{gen.id}">{gen.name},&nbsp;</span>
-                  )) }
+                  <span v-for="gen in movie.genres" :key="gen.id"> {{ gen.name }},&nbsp;</span>
                 </div>
                 <div class="runtime">
-                  {movie.runtime > 0 ? (Math.floor(movie.runtime / 60) + '시간'
-                  + movie.runtime % 60 + '분') : '개봉미정'}
+                  {{ movie.runtime > 0 ? (Math.floor(movie.runtime / 60) + '시간'
+                    + movie.runtime % 60 + '분') : '개봉미정' }}
                 </div>
               </div>
               <div class="header-info">
-                <h3 class="tagline">{movie.tagline}</h3>
+                <h3 class="tagline">{{ movie.tagline }}</h3>
                 <h3>개요</h3>
                 <div class="overview">
-                  <p>{movie.overview || '-'}</p>
+                  <p>{{ movie.overview || '-' }}</p>
                 </div>
               </div>
             </section>
             <section>
               <div class="ai-review">
                 <h3>AI가 알려주는 영화 리뷰</h3>
-                <MovieReview title="{movie.title}" />
+                <MovieReview :title="movie.title" />
               </div>
             </section>
             <section class="video">
               <h3>예고편</h3>
-              <MovieVideo id="{movie.id}" />
+              <MovieVideo :id="movie.id" />
             </section>
           </div>
         </section>
       </div>
     </div>
-  </fragment>
+  </Fragment>
 </template>
+<script>
+import { onMounted, ref, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import ScrollToTop from '@/app/utils/ScrollToTop.vue'
+import Loading from '@/components/Loading.vue'
+import MovieReview from '@/components/movie/MovieReview.vue'
+import MovieVideo from '@/components/movie/MovieVideo.vue'
+import * as constants from '@/app/constants'
+import http from '@/http-common'
 
-<style scoped>
+const IMG_BASE_URL = constants.IMG_BASE_URL
+
+export default {
+  components: {
+    Loading,
+    ScrollToTop,
+    MovieReview,
+    MovieVideo,
+  },
+  setup() {
+    const router = useRouter();
+    const route = useRoute();
+    const id = route.params.id;
+    const movie = ref({})
+    const popupShow = ref(true)
+
+    const handleBack = () => {
+      router.go(-1);
+    }
+
+    onMounted(() => {
+      getMovie(id).then((data) => {
+        movie.value = data
+      })
+    })
+    onMounted(() => {
+      setTimeout(() => {
+        popupShow.value = !popupShow.value
+      }, 2000)
+    })
+
+    const getMovie = async (id) => {
+      try {
+        const res = await http.get(`movie/${id}`)
+        return res.data
+
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+
+    return {
+      popupShow,
+      handleBack,
+      IMG_BASE_URL,
+      movie,
+    }
+  }
+}
+</script>
+<style>
 /* movie info */
 .movie-info.goback {
   padding-bottom: 8px;
@@ -124,12 +163,10 @@ export default {
 .movie-info-container {
   /* background: linear-gradient(to bottom right, #4a3520, #4a3520d6); */
   background: rgb(0, 0, 0);
-  background: radial-gradient(
-    circle,
-    rgba(0, 0, 0, 1) 0%,
-    rgba(145, 105, 61, 1) 2%,
-    rgba(74, 53, 32, 1) 100%
-  );
+  background: radial-gradient(circle,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(145, 105, 61, 1) 2%,
+      rgba(74, 53, 32, 1) 100%);
 }
 
 div.movie-info-container {
@@ -280,24 +317,5 @@ div.ai-review p {
   font-size: 16px;
 }
 
-section.video {
-  border-top: 1px solid #fff;
-  margin-top: 30px;
-}
 
-section.video > div {
-  position: relative;
-  padding-top: 56%;
-  width: 100%;
-  height: 0;
-  margin: 20px 0;
-}
-
-section.video > div > iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
 </style>

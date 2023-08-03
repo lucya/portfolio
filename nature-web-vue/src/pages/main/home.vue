@@ -1,6 +1,5 @@
 <template>
   <ScrollToTop :top="top" />
-
   <div class="home-container">
     <Home @set-top="setTop" />
   </div>

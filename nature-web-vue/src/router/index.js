@@ -1,10 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-import Movies from '@/components/movie/Movies.vue'
-
-import MovieInfo from '@/components/movie/MovieInfo.vue'
-import Fortune from '@/components/chatgpt/FortuneConversation.vue'
-
 const routes = [
   {
     path: '/',
@@ -35,61 +30,36 @@ const routes = [
       },
       {
         path: '/*',
-        name: 'MovieLayout',
-        component: () => import('@/layouts/MovieLayout.vue'),
+        name: 'Movie',
+        component: () => import('@/pages/movie/index.vue'),
         children: [
           {
             path: '/movies',
             name: 'Movies',
-            component: Movies
+            component: () => import('@/components/movie/Movies.vue'),
           },
           {
             path: '/movie/:id',
             name: 'MovieInfo',
-            component: MovieInfo
+            component: () => import('@/components/movie/MovieInfo.vue'),
           },
         ]
       },
       {
         path: '/*',
         name: 'Fortune',
-        component: () => import('@/layouts/FortuneLayout.vue'),
+        component: () => import('@/pages/fortune/index.vue'),
         children: [
           {
             path: '/fortune',
             name: 'FortuneConversation',
-            component: () => import('@/components/chatgpt/FortuneConversation.vue'),
+            component: () => import('@/components/fortune/FortuneConversation.vue'),
           }
         ]
       }
     ]
   }
 ]
-
-
-// const routes = [
-//   {
-//     path: '/',
-//     name: 'Login',
-//     component: Login,
-//     meta: { unauthorized: true, layout: 'UserLayout' },
-//   },
-//   {
-//     path: '/signup',
-//     name: 'SignUp',
-//     component: SignUp,
-//     meta: { unauthorized: true, layout: 'UserLayout' },
-
-//   }
-//   // {
-//   //   path: '/about',
-//   //   name: 'about',
-//   //   // route level code-splitting
-//   //   // this generates a separate chunk (about.[hash].js) for this route
-//   //   // which is lazy-loaded when the route is visited.
-//   //   component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-//   // }
-// ]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),

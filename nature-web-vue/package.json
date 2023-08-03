@@ -15,7 +15,7 @@
     "vue-pdf": "^4.3.0",
     "vue-pdf-app": "^2.1.0",
     "vue-router": "^4.0.3",
-    "vue-styled-components": "^1.6.0",
+    "vue3-youtube": "^0.1.9",
     "vuex": "^4.0.0"
   },
   "devDependencies": {

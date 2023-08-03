@@ -1,4 +1,4 @@
-import http from "@/app/http-common";
+import http from "@/http-common";
 
 const API_URL = 'http://localhost:8080'
 
