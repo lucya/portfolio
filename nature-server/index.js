@@ -11,10 +11,12 @@ const server = http.createServer(app);
 const PORT = process.env.PORT || 8081
 
 console.log('process.env.WEB_DOMAIM', process.env.WEB_DOMAIM);
+console.log('process.env.WEB_DOMAIM', process.env.WEB_DOMAIM_VUE);
+
 console.log('process.env.API_KEY', process.env.API_KEY);
 console.log('process.env.APP_ID', process.env.APP_ID);
 const corsOptions = {
-  origin: [process.env.WEB_DOMAIM, process.env.OPENAI_API_URL, process.env.OPENAI_API_URL_PORT], // '*'
+  origin: [process.env.WEB_DOMAIM, process.env.WEB_DOMAIM_VUE, process.env.OPENAI_API_URL, process.env.OPENAI_API_URL_PORT], // '*'
   credentials: true,
   methods: ['GET', 'PUT', 'POST', 'DELETE'],
   // preflightContinue: false,
