@@ -42,15 +42,12 @@ export default {
 
     const onReady = () => {
       // YT is not defined 에러 발생으로 timeout 처리
-      setTimeout(() => {
-        const $elms = document.querySelectorAll('section.video>div>iframe');
+      const $elms = document.querySelectorAll('section.video>div>iframe');
 
-        $elms.forEach($elm => {
-          $elm.style = '';
-          $elm.style = 'position:absolute;top:0;left:0;';
-        })
-      }, 300)
-
+      $elms.forEach($elm => {
+        $elm.style = '';
+        $elm.style = 'position:absolute;top:0;left:0;';
+      })
     }
     return {
       videos,

@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import LoadingBar from '@/components/LoadingBar.vue'
+import LoadingBar from '@/app/pages/LoadingBar.vue'
 import { toRefs, ref, watch } from 'vue'
 import http from '@/http-common'
 

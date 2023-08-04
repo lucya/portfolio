@@ -7,7 +7,7 @@
 
 <script>
 import ScrollToTop from '@/app/utils/ScrollToTop';
-import Home from '@/components/Home.vue'
+import Home from '@/components/home/Home.vue'
 import { ref } from 'vue'
 
 export default {

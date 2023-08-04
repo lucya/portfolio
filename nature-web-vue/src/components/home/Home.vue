@@ -31,7 +31,7 @@
 <script>
 import { onMounted, ref } from 'vue'
 import * as constants from '@/app/constants'
-import Resume from '@/components/Resume.vue'
+import Resume from '@/components/home/Resume.vue'
 
 const frontEndx = constants.GET_FIREBASE_FILE_URL("images", "nature_web.png");
 const backEndx = constants.GET_FIREBASE_FILE_URL("images", "nature_server.png");

@@ -66,11 +66,11 @@ export default {
     const { user, doLogout } = useUser();
 
     onMounted(() => {
-      if (!user.value.loggedIn) {
-        router.replace({
-          name: "Login",
-        });
-      }
+      // if (!user.value.loggedIn) {
+      //   router.replace({
+      //     name: "Login",
+      //   });
+      // }
     })
 
     const handleLogout = async () => {

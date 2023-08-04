@@ -1,21 +1,46 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { useStore } from "vuex";
+import { useUser } from "@/composables/user";
+
+const authCheck = () => (to, from, next) => {
+  const { user } = useUser();
+  const { requiredLoggin } = to.meta;
+
+  if (user.value.loggedIn === true && requiredLoggin === true) {
+    // 로그인상태 && 로그인이 필요한 페이지
+    return next()
+  }
+
+  next('/')
+}
 
 const routes = [
+  {
+    path: "/:pathMatch(.*)*",
+    name: 'PageNotFound',
+    component: () => import('@/app/pages/PageNotFound.vue')
+  },
   {
     path: '/',
     name: 'User',
     component: () => import('@/pages/user/index.vue'),
     children: [
+      // {
+      //   path: '/', redirect: { name: 'Login' }
+      // },
       {
+        // path: '/login',
         path: '/',
         name: 'Login',
         component: () => import('@/pages/user/login.vue'),
+        // meta: { requiredLoggin: false },
+        // beforeEnter: authCheck()
       },
       {
         path: '/signup',
         name: 'Signup',
         component: () => import('@/pages/user/signup.vue'),
+        // meta: { requiredLoggin: false },
+        // beforeEnter: authCheck(),
       }
     ]
   },
@@ -28,6 +53,8 @@ const routes = [
         path: '/home',
         name: 'Home',
         component: () => import('@/pages/main/home.vue'),
+        meta: { requiredLoggin: true },
+        beforeEnter: authCheck(),
       },
       {
         path: '/*',
@@ -38,12 +65,15 @@ const routes = [
             path: '/movies',
             name: 'Movies',
             component: () => import('@/components/movie/Movies.vue'),
+            meta: { requiredLoggin: true },
+            beforeEnter: authCheck(),
           },
           {
             path: '/movie/:id',
             name: 'MovieInfo',
             component: () => import('@/components/movie/MovieInfo.vue'),
-            
+            meta: { requiredLoggin: true },
+            beforeEnter: authCheck(),
           },
         ]
       },
@@ -56,6 +86,8 @@ const routes = [
             path: '/fortune',
             name: 'FortuneConversation',
             component: () => import('@/components/fortune/FortuneConversation.vue'),
+            meta: { requiredLoggin: true },
+            beforeEnter: authCheck(),
           }
         ]
       }

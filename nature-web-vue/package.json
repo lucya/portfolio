@@ -5,7 +5,11 @@
   "scripts": {
     "serve": "vue-cli-service serve --port 4000",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "dev": "vue-cli-service serve --mode dev --port 4000",
+    "prod": "vue-cli-service serve --mode prod",
+    "dev:build": "vue-cli-service build --mode dev",
+    "prod:build": "vue-cli-service build --mode prod"
   },
   "dependencies": {
     "@vueuse/core": "^10.2.1",

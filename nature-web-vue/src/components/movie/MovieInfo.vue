@@ -3,7 +3,7 @@
     <span @click="handleBack">🔙</span>
   </div>
   <Loading v-if="!movie" />
-  <Fragment v-else>
+  <template v-else>
     <ScrollToTop />
     <div class="movie-info-popup" :style="popupShow ? 'display:block' : 'display:none'">
       <p>잠깐!<span class="blink">✋🏻</span></p>
@@ -50,20 +50,20 @@
               </div>
             </section>
             <section class="video">
-             
+
               <MovieVideo :id="movie.id" />
             </section>
           </div>
         </section>
       </div>
     </div>
-  </Fragment>
+  </template>
 </template>
 <script>
 import { onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import ScrollToTop from '@/app/utils/ScrollToTop.vue'
-import Loading from '@/components/Loading.vue'
+import Loading from '@/app/pages/Loading.vue'
 import MovieReview from '@/components/movie/MovieReview.vue'
 import MovieVideo from '@/components/movie/MovieVideo.vue'
 import * as constants from '@/app/constants'
@@ -316,6 +316,4 @@ div.ai-review p {
 div.ai-review p {
   font-size: 16px;
 }
-
-
 </style>
