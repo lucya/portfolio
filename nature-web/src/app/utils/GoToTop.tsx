@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom"
 import styled from 'styled-components'
 
 interface OwnProps {
@@ -16,7 +17,7 @@ const GoUp = styled.div`
   cursor: pointer;
   /* font-weight: 900; */
   font-size: 20px;
-  display: ${(props:OwnProps) => (props.upActive === true ? 'block' : 'none')};  
+  display: ${(props: OwnProps) => (props.upActive === true ? 'block' : 'none')};  
   z-index: 99;
   outline: none;
 }
@@ -24,7 +25,10 @@ const GoUp = styled.div`
   background-color: var(--color-active);
 }
 `
+
 function GoToTop() {
+  const { pathname } = useLocation();
+
   const [upActive, setUpActive] = useState<boolean>(false);
   const [elm, setElm] = useState<HTMLDivElement | undefined>()
 
@@ -47,8 +51,8 @@ function GoToTop() {
       }
     };
 
-    elm?.addEventListener('scroll', handleScroll)
-  }, [elm])
+    handleScroll()
+  }, [elm, pathname])
 
 
   return (

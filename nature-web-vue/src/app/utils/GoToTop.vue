@@ -20,25 +20,27 @@ export default {
         behavior: "smooth",
       });
     }
-
+    let timeout = null;
     const scrollHandler = () => {
-      // const handleScroll = () => {
-      if ($elm.value) {
-        const hasScroll = $elm.value.scrollHeight > $elm.value.offsetHeight
-        hasScroll ? upActive.value = true : upActive.value = false
-      }
-      // $elm.value.addEventListener('scroll', handleScroll)
+      const hasScroll = $elm.value.scrollHeight > $elm.value.offsetHeight
+      hasScroll ? upActive.value = true : upActive.value = false
     };
-    watch($route, async (to, from) => {
-      setTimeout(() => {
-        scrollHandler()
-      }, 300)
-    });
-    onMounted(() => {
+
+    const setScrollHandler = () => {
       $elm.value = document.querySelector('.main-container')
 
-      // DOM이 마운트 되었을 때 이벤트 핸들러를 등록한다.
-      document.addEventListener('scroll', scrollHandler);
+      timeout = setTimeout(() => {
+        scrollHandler()
+      }, 300)
+    }
+
+    watch($route, async (to, from) => {
+      // 화면 이동할 경우 작동
+      setScrollHandler()
+    });
+    onMounted(() => {
+      // 화면 refresh 할 경우 작동
+      setScrollHandler()
     });
 
     window.onbeforeunload = function (e) {
