@@ -33,8 +33,8 @@ import { onMounted, ref } from 'vue'
 import * as constants from '@/app/constants'
 import Resume from '@/components/home/Resume.vue'
 
-const frontEndx = constants.GET_FIREBASE_FILE_URL("images", "nature_web.png");
-const backEndx = constants.GET_FIREBASE_FILE_URL("images", "nature_server.png");
+const frontEndx = constants.GET_FIREBASE_FILE_URL("resource", "nature-web.png");
+const backEndx = constants.GET_FIREBASE_FILE_URL("resource", "nature-server.png");
 
 export default {
   components: {

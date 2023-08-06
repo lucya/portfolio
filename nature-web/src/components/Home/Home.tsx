@@ -12,8 +12,8 @@ const Home: React.FC = () => {
   const resumeRef = useRef<HTMLDivElement>(null)
   const [top, setTop] = useState(0)
 
-  const frontEnd = config.GET_FIREBASE_FILE_URL('images', 'nature_web.png');
-  const backEnd = config.GET_FIREBASE_FILE_URL('images', 'nature_server.png');
+  const frontEnd = config.GET_FIREBASE_FILE_URL('resource', 'nature-web.png');
+  const backEnd = config.GET_FIREBASE_FILE_URL('resource', 'nature-server.png');
 
   const handleHashMove = (e: React.MouseEvent<HTMLButtonElement>, ref: React.Ref<HTMLDivElement>) => {
     e.preventDefault();
