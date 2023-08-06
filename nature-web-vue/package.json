@@ -6,9 +6,8 @@
     "serve": "vue-cli-service serve --port 4000",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "dev": "vue-cli-service serve --mode dev --port 4000",
-    "prod": "vue-cli-service serve --mode prod",
-    "dev:build": "vue-cli-service build --mode dev",
+    "dev": "vue-cli-service serve --mode local --port 4000",
+    "dev:build": "vue-cli-service build --mode local",
     "prod:build": "vue-cli-service build --mode prod"
   },
   "dependencies": {
