@@ -122,7 +122,7 @@ const config = ({ isDev }) => ({
     }),
     new CleanWebpackPlugin(),// output.path 디렉토리에 있는 이전에 빌드된 결과물 삭제
     new Dotenv({
-      path: isDev ? './.env.local' : './.env.production', // Path to .env file (this is the default)
+      path: isDev ? './.env.local' : './.env.prod', // Path to .env file (this is the default)
       safe: false, // load .env.example (defaults to "false" which does not use dotenv-safe)
     }),
     // 분리된 css, js 파일들을 각각 html에 link 자동화

@@ -9,10 +9,7 @@ import logo from '../../logo.png';
 
 const Login: React.FC = () => {
   const { state } = useLocation(); // 회원 가입 화면에서 넘어온 값
-  let email = ''
-  if (state) {
-    email = state.email;
-  }
+
   const loginPwdRef = useRef<HTMLInputElement>(null)
   const loginEmailRef = useRef<HTMLInputElement>(null)
 
@@ -20,11 +17,17 @@ const Login: React.FC = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (email) {
-      setUserState({
-        ...userState,
-        email: email
-      })
+    let email = state?.email || '';
+    setUserState({
+      ...userState,
+      email: email
+    })
+
+    if (userState.email) {
+
+      if (loginEmailRef?.current?.value) {
+        loginEmailRef.current.value = userState.email
+      }
       loginPwdRef.current?.focus()
     }
     loginEmailRef.current?.focus()
@@ -48,7 +51,7 @@ const Login: React.FC = () => {
       <form className="form-container" autoComplete="off" onSubmit={handleSubmit}>
         <div className="form-wrap">
           <label htmlFor='email'>Email</label>
-          <input type="email" name="email" value={email} inputMode='email' autoComplete='off'
+          <input type="email" name="email" value={userState.email} inputMode='email' autoComplete='off'
             onChange={handleChange} ref={loginEmailRef} />
         </div>
         <div className="form-wrap">

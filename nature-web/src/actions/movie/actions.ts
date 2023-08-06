@@ -42,7 +42,7 @@ const getMovieReview = async (title: string) => {
   return res.data
 }
 const initMovie = () => {
-  return async (dispatch: Dispatch<any>) => {
+  return (dispatch: Dispatch<any>) => {
     dispatch(movieActions.initMovie())
     // return movie
   }

@@ -26,8 +26,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "start:prod": "env-cmd -f .env.production react-scripts start",
-    "build": "env-cmd -f .env.production react-scripts build",
+    "start:prod": "env-cmd -f .env.prod react-scripts start",
+    "build": "env-cmd -f .env.prod react-scripts build",
     "build:dev": "env-cmd -f .env.local react-scripts build",
     "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!axios)/\"",
     "eject": "react-scripts eject",
