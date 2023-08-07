@@ -21,7 +21,7 @@
  * 
  */
 import fortuneAction from "../../actions/chatgpt/fortune.actions";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import fortuneBall from '../../assets/images/crystal-ball.png';
 
 interface DataProps {
@@ -80,19 +80,29 @@ const FortuneConversation: React.FC = () => {
       }
     }, 500)
   }
-  const getFortune = () => {
+  const getFortune = (e: any) => {
+    e.preventDefault()
+
     if (!msgContentRef.current || !questionRef.current) { return null }
     let question: string = questionRef.current.value
     if (!question) return;
 
     const refCrnt = msgContentRef.current;
     setWaiting(true)
-    setUserMessages([...userMessages, question]);
 
+
+    console.log('xx', userMessages)
     let data: DataProps = { question: question }
+
     refCrnt.append(appendUserChat(data))
     refCrnt.append(appendAssistChat({})) // loading.
     handleScroll();
+
+    setUserMessages([...userMessages, question]);
+
+  }
+  useEffect(() => {
+    if (!userMessages.length) return;
 
     fortuneAction.doConversation({ userMessages, assistantMessages })
       .then((res) => {
@@ -118,7 +128,7 @@ const FortuneConversation: React.FC = () => {
         }
         setWaiting(false)
       })
-  }
+  }, [userMessages])
 
   useEffect(() => {
     let qRef = questionRef.current as HTMLTextAreaElement;
