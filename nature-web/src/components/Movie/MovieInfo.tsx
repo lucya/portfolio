@@ -107,7 +107,6 @@ const MovieInfo: React.FC = () => {
                 </div>
               </section>
               <section className="video">
-                <h3>예고편</h3>
                 <MovieVideo id={movie.id} />
               </section>
             </div>

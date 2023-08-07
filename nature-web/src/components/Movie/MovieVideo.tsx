@@ -32,11 +32,16 @@ function MovieVideo({ id }: OwnProps) {
     return <YouTube videoId={video.key} opts={opts} onReady={onPlayerReady} />
   })
 
-  return (
-    <>
-      {itemList}
-    </>
-  )
+  if (videos?.length) {
+    return (
+      <>
+        <h3>예고편</h3>
+        {itemList}
+      </>
+    )
+  } else {
+    return (<></>)
+  }
 
 }
 
