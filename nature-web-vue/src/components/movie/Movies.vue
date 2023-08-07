@@ -11,10 +11,11 @@
 
 
 <script>
-import { onMounted, ref } from 'vue'
+import { onMounted } from 'vue'
 import ScrollToTop from "@/app/utils/ScrollToTop";
 import Movie from "./Movie.vue";
 import http from '@/http-common'
+import { useMovie } from '@/composables/movie'
 
 export default {
   components: {
@@ -22,29 +23,27 @@ export default {
     Movie,
   },
   setup() {
+    const { movies, page, addMovies, setPage } = useMovie()
 
-    let page = ref(1)
-    let movies = ref([])
-
-    const getMovies = async (page) => {
-      console.log("getMovies")
+    const _getMovies = async () => {
       try {
-        const res = await http.get('movie/popular-movies', { params: { page: page } })
-        movies.value = movies.value.concat(res.data)
+        setPage();
+        const res = await http.get('movie/popular-movies', { params: { page: page.value } })
+        addMovies(res.data)
       } catch (error) {
         console.log(error)
       }
     }
     const handleMore = () => {
-      page.value = page.value + 1
-      getMovies(page.value);
+      _getMovies();
     }
 
     onMounted(() => {
       console.log("onMounted")
       // 목록이 있는 경우 재호출 금지
       if (movies.value && movies.value.length) return;
-      getMovies()
+
+      _getMovies()
     })
 
     return {

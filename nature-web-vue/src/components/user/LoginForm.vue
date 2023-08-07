@@ -4,12 +4,11 @@
     <form class="form-container" autocomplete="off" @submit.prevent="login">
         <div class="form-wrap">
             <label for="email">Email</label>
-            <input type="email" name="email" inputmode="email" ref="emailRef" @change.prevent="handleChange"
-                @keyup.enter="login" />
+            <input type="email" name="email" inputmode="email" ref="emailRef" @change.prevent="handleChange" />
         </div>
         <div class="form-wrap">
             <label for="password">Password</label>
-            <input type="password" name="password" ref="pwdRef" @change.prevent="handleChange" @keyup.enter="login" />
+            <input type="password" name="password" ref="pwdRef" @change.prevent="handleChange" />
         </div>
         <div class="btn-wrap">
             <button type="submit">로그인</button>
@@ -41,7 +40,6 @@ export default {
 
         const handleChange = (e) => {
             userInfo.value = { ...userInfo.value, [e.target.name]: e.target.value }
-            console.log(userInfo.value)
         }
 
         const login = async () => {
@@ -53,10 +51,7 @@ export default {
                 return;
             }
             try {
-                console.log(userInfo.value)
                 const res = await http.post('user/login', { email: userInfo.value.email, password: userInfo.value.password })
-                console.log(res.data.userInfo)
-                // const user = res.data.userInfo;
                 doLogin(res.data.userInfo)
                 router.push({
                     name: "Home",

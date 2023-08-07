@@ -19,7 +19,7 @@ export default {
   setup() {
     const store = useStore();
     const router = useRouter()
-    const user = computed(() => store.getters["User/getUser"]);
+    const user = computed(() => store.getters["user/getUser"]);
 
     onMounted(() => {
       if (user.value.loggedIn) {

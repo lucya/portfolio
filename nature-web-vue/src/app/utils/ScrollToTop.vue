@@ -6,10 +6,11 @@ const SCROLLY = constants.SET_SCROLLY
 
 export default {
   props: [
-    'top'
+    'top', 'stay'
   ],
   setup(props) {
-    const scrollTop = ref(0)
+    const scrollTop = ref(props.top);
+    const stay = props.stay !== undefined ? true : false
     const $elm = ref(null)
 
     const handelScrollTo = () => {
@@ -17,13 +18,13 @@ export default {
         $elm.value = document.querySelector('.main-container')
         if ($elm.value) {
           $elm.value.scrollTo(0, scrollTop.value)
-          props.stay && localStorage.removeItem(SCROLLY);
+          stay && localStorage.removeItem(SCROLLY);
         }
       }, 300);
     }
 
     onMounted(() => {
-      if (props.stay !== undefined) { //top 위치 유지가 필요한 페이지인 경우
+      if (stay) { //top 위치 유지가 필요한 페이지인 경우
         let val = localStorage.getItem(SCROLLY);
         // if (typeof val === 'number') {
         scrollTop.value = Number(val)
@@ -33,7 +34,7 @@ export default {
     })
 
     watchEffect(() => {
-      let top = props.top;
+      let top = props.top; // props.top 이 변경되면 작동
       scrollTop.value = top
 
       handelScrollTo()

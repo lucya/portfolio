@@ -1,12 +1,10 @@
 import { createStore } from 'vuex'
 import createPersistedState from 'vuex-persistedstate'; // 새로고침에서도 state 유지
 
-import { User } from './modules/user';
+import modules from './modules';
 
 export default createStore({
-  modules: {
-    User,
-  },
+  modules,
   plugins: [
     createPersistedState()
   ]

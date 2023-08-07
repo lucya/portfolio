@@ -43,9 +43,7 @@ export default {
       setScrollHandler()
     });
 
-    window.onbeforeunload = function (e) {
-      alert('refresh')
-    }
+   
     return {
       upActive,
       handleGoup,

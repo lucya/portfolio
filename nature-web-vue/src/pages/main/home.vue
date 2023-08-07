@@ -17,8 +17,8 @@ export default {
   },
   setup() {
     const top = ref(0)
-    const setTop = (val) => { // ScrollToTop 호출 함수
-      top.value = val
+    const setTop = (h) => { // 자식 component Home.vue에서 호출하는 함수
+      top.value = h
     }
 
     return {

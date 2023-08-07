@@ -40,7 +40,7 @@ export default {
   components: {
     Resume,
   },
-  emits: ['set-top'],
+  // emits: ['set-top'],
   setup(props, context) {
 
     const frontEnd = ref()

@@ -31,7 +31,7 @@
             </li>
           </ul>
           <div class="dropdown-menu">
-            <DropdownMenu />
+            <DropdownMenu @handle-logout="handleLogout" />
           </div>
           <div class="header-nav-user" @mouseenter.prevent="isShow = true" @mouseleave.prevent="isShow = false">
             <img :src="user.photoURL || profile_base" alt="user" />
@@ -54,6 +54,7 @@ import logo120 from '@/assets/images/logo120.png'
 import profile_base from "@/assets/images/profile_base.png";
 import DropdownMenu from '@/components/header/DropdownMenu.vue'
 import { useUser } from "@/composables/user";
+import { useMovie } from "@/composables/movie";
 
 
 export default {
@@ -64,6 +65,7 @@ export default {
     const isShow = ref(false)
     const router = useRouter()
     const { user, doLogout } = useUser();
+    const { initMovies } = useMovie();
 
     onMounted(() => {
       // if (!user.value.loggedIn) {
@@ -77,6 +79,7 @@ export default {
       try {
         await http.post('user/logout')
         doLogout();
+        initMovies();
         router.replace({
           name: "Login",
         });
