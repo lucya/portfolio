@@ -1,33 +1,34 @@
 <template>
-    <div class="footer-container">
-      <div class='footer-wrap'>
-        <div>
-          neddang@gmail.com
-          <button v-on:click="handleClick">
-            <img src="@/assets/images/github50.png" alt='github' />
-          </button>
-        </div>
-        <div>Copyright © 네이처 포트폴리오. All rights reserved</div>
+  <div class="footer-container">
+    <div class='footer-wrap'>
+      <div>
+        neddang@gmail.com
+        <button @click.prevent="handleClick">
+          <img src="@/assets/images/github50.png" alt='github' />
+        </button>
       </div>
+      <div>Copyright © 네이처 포트폴리오. All rights reserved</div>
     </div>
+  </div>
 </template>
 
 <script>
-  export default {
-    name: 'Footer',
-    props: {
-    },
-    methods: {
-    handleClick: function(e) {
-      e.preventDefault();
+export default {
+  setup() {
+    const handleClick = () => {
       window.open('https://github.com/lucya/portfolio', '_blank')
     }
+
+    return {
+      handleClick
     }
   }
+}
 </script>
 
 <style scoped>
 .footer-container {
+  position: relative;
   padding: 10px 20px 35px 20px;
   max-width: calc(100vw - 10%);
   border-top: 0.1rem solid #dde0ea;

@@ -15,14 +15,14 @@
 /*-------------------- Chat --------------------*/
 .chat {
   position: absolute;
-  top: 60%;
+  top: 59%;
   left: 50%;
   transform: translate(-50%, -60%);
   width: 560px;
   max-width: 90%;
   height: 100vh;
   /* max-height: 500px; */
-  max-height: calc(100% - 36px);
+  max-height: calc(100vh - 167px);
   z-index: 2;
   /* overflow: hidden; */
   box-shadow: 0 5px 30px rgba(0, 0, 0, .7);

@@ -21,6 +21,10 @@ export default {
 </script>
 
 <style>
-@import '@/assets/css/pages/main.css'
-
+.main-container {
+  overflow-y: auto;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 </style>
