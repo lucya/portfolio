@@ -7,7 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "cp ./.env.local ./.env && NODE_ENV=development nodemon index.js",
     "start:prod": "cp ./.env.prod ./.env && NODE_ENV=production nodemon index.js",
-    "start:prod:local": "cp ./.env.prod.local ./.env && NODE_ENV=production nodemon index.js"
+    "start:prod:local": "cp ./.env.prod.local ./.env && NODE_ENV=production nodemon index.js",
+    "deploy:prod": "cp ./.env.prod ./.env"
+
   },
   "author": "",
   "license": "ISC",
@@ -22,7 +24,8 @@
     "jsonwebtoken": "^9.0.0",
     "moviedb-promise": "^3.3.1",
     "multer": "^1.4.5-lts.1",
-    "openai": "^3.2.1"
+    "openai": "^3.2.1",
+    "request": "^2.88.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.22"
