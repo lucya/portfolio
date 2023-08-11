@@ -6,14 +6,14 @@ import Fortune from "./Fortune/Fortune"
 import PageNotFound from "../app/pages/PageNotFound"
 import './Main.css'
 import GoToTop from "../app/utils/GoToTop"
-import Home from "../components/Home/Home"
+import About from "../components/Home/About"
 
 const Main: React.FC = () => {
   return (
     <div className="main-container">
       <Header />
       <Routes>
-        <Route path='/home' element={<Home />} />
+        <Route path='/home' element={<About />} />
         <Route path='/movies' element={<Movie />} />
         <Route path='/movie/*' element={<Movie />} />
         <Route path='/fortune' element={<Fortune />} />

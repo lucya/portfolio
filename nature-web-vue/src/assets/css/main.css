@@ -76,7 +76,8 @@ table {
 a {
   /* color: #fff; */
   text-decoration: none;
-  outline: none
+  outline: none;
+  cursor: pointer;
 }
 
 a:hover, a:active {

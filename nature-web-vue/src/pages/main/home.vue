@@ -1,19 +1,19 @@
 <template>
   <ScrollToTop :top="top" />
   <div class="home-container">
-    <Home @set-top="setTop" />
+    <About @set-top="setTop" />
   </div>
 </template>
 
 <script>
 import ScrollToTop from '@/app/utils/ScrollToTop';
-import Home from '@/components/home/Home.vue'
+import About from '@/components/home/About.vue'
 import { ref } from 'vue'
 
 export default {
   components: {
     ScrollToTop,
-    Home,
+    About,
   },
   setup() {
     const top = ref(0)
