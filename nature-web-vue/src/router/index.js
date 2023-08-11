@@ -55,6 +55,13 @@ const routes = [
         component: () => import('@/pages/main/home.vue'),
         meta: { requiredLoggin: true },
         beforeEnter: authCheck(),
+      }, 
+      {
+        path: '/gov/tsunami-shelter',
+        name: 'TsunamiShelter',
+        component: () => import('@/components/gov/TsunamiShelter.vue'),
+        meta: { requiredLoggin: true },
+        beforeEnter: authCheck(),
       },
       {
         path: '/*',
@@ -90,7 +97,21 @@ const routes = [
             beforeEnter: authCheck(),
           }
         ]
-      }
+      },
+      // {
+      //   path: '/',
+      //   name: 'Gov',
+      //   component: () => import('@/pages/main/index.vue'),
+      //   children: [
+      //     {
+      //       path: '/gov/tsunami-shelter',
+      //       name: 'TsunamiShelter',
+      //       component: () => import('@/components/gov/TsunamiShelter.vue'),
+      //       meta: { requiredLoggin: true },
+      //       beforeEnter: authCheck(),
+      //     }
+      //   ]
+      // }
     ]
   }
 ]
