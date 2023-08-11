@@ -8,6 +8,8 @@ export default {
     setUser(state, payload) {
       state.user.username = payload.username;
       state.user.loggedIn = payload.loggedIn;
+      state.user.photoURL = payload.photoURL;
+
     },
 
   },

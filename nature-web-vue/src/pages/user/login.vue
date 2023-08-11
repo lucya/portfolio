@@ -1,7 +1,7 @@
 <template>
   <div class="user-wrap">
     <img src="@/assets/logo.png" class="app-logo" alt="logo" />
-    <LoginForm @handle-change="handleChange" @login="login"/>
+    <LoginForm @handle-change="handleChange" @login="login" />
   </div>
 </template>
 
@@ -15,7 +15,7 @@ export default {
   settup() {
 
     return {
- 
+
     }
   }
 }

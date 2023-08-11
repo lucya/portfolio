@@ -75,7 +75,11 @@ export default {
             formData.append('user', JSON.stringify(userInfo.value));
 
             try {
-                await http.post('/user/signup', formData)
+                await http.post('/user/signup', formData,
+                    {
+                        headers: { "Content-Type": "mutipart/form-data" },
+                    }
+                )
 
                 const email = userInfo.value.email;
                 setTimeout(() => {
@@ -99,15 +103,15 @@ export default {
 
         const handleUpload = (e) => {
             const reader = new FileReader();
-            const file = e.target.files && e.target.files[0]
+            const file2 = e.target.files && e.target.files[0]
 
             reader.onloadend = () => {
-                file.value = file;
+                file.value = file2;
                 if (reader.result) {
                     imagePreviewUrl.value = reader.result.toString();
                 }
             };
-            reader.readAsDataURL(file); // by Blob
+            reader.readAsDataURL(file2); // by Blob
         }
 
 
@@ -143,7 +147,7 @@ export default {
             handleChange,
             handleSubmit,
             setPwdConfirm,
-            file,
+            // file,
             profile_base,
             imagePreviewUrl,
             profileImgRef,

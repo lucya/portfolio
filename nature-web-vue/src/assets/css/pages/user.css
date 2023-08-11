@@ -7,7 +7,7 @@
 
 .user-wrap {
   width: 424px;
-  min-width: 430px;
+  /* min-width: 430px; */
   height: 100vh;
   background: #020024;
   background: linear-gradient(188deg, rgba(var(--color-rgb-base), 1) 0%, rgba(var(--color-rgb-mid), 1) 35%, rgba(var(--color-rgb-last), 1) 100%);
@@ -18,7 +18,7 @@
 }
 
 .user-wrap h3 {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   font-size: 30px;
   color: white;
 }

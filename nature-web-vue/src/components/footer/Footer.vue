@@ -42,6 +42,8 @@ export default {
   font-weight: 500;
   height: 20px;
   padding: 2px 2px;
+  position: relative;
+  transform: translateY(-8%);
 }
 
 /* user */
