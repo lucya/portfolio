@@ -7,19 +7,20 @@ interface OwnProps {
 }
 
 function MovieReview({ title }: OwnProps) {
-  const [review, setReview] = useState(null)
+  const [review, setReview] = useState('')
 
   useEffect(() => {
     console.log("Movie getMovieReview")
-    const getReview = () => {
-      movieAction.getMovieReview(title)
-        .then((res) => {
-          let answer = res.assistant;
-          setReview(answer);
-        })
-    }
+    // const getReview = () => {
+    movieAction.getMovieReview(title)
+      .then((data) => {
+        console.log("MovieReview", data);
+        let answer = data.assistant;
+        setReview(answer);
+      })
+    // }
 
-    getReview();
+    // getReview();
   }, [title])
 
   if (!review) {
