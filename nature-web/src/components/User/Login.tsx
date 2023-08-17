@@ -5,7 +5,7 @@ import userAction from '../../actions/user/actions';
 import { useLocation } from 'react-router-dom' 	// 1번 라인
 
 import { User } from '../../actions/user/types';
-import logo from '../../logo.png';
+import logo from '../../assets/logo.png';
 
 const Login: React.FC = () => {
   const { state } = useLocation(); // 회원 가입 화면에서 넘어온 값

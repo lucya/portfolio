@@ -26,6 +26,7 @@ const config = ({ isDev }) => ({
     // 빌드(컴파일, 번들링 등) 결과 파일 브라우저 캐싱(Cachinig)
     //[name].js로 설정할 시, entry에서 설정한 key 값이 파일명으로 설정된다.main.js
     filename: '[name].js',
+    clean: true,
   },
   performance: {
     hints: isDev ? "warning" : false,
