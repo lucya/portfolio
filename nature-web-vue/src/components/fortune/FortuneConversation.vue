@@ -91,8 +91,8 @@ export default {
       let userMsg = userMessages.value
       let assisMsg = assistantMessages.value
       doConversation({ userMsg, assisMsg })
-        .then((res) => {
-          let answer = res.assistant;
+        .then(({ data }) => {
+          let answer = data.assistant;
           console.log('chat', answer)
 
           waiting.value = false
@@ -121,15 +121,11 @@ export default {
       let userMessages = req.userMsg
       let assistantMessages = req.assisMsg
       req = { userMessages, assistantMessages }
-      try {
-        const res = await http.post('fortune', req, {
-          timeout: 180 * 1000
-        })
-        return res.data
-      } catch (error) {
-        console.log(error)
-        throw error;
-      }
+
+      return await http.post('fortune', req, {
+        timeout: 180 * 1000
+      })
+
     }
 
     watch(waiting, () => {
