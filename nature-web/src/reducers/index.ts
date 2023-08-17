@@ -7,7 +7,7 @@ import storage from "redux-persist/lib/storage/session"; // session storage
 
 const persistConfig = {
   key: "root",
-  storage,//localStorage에 저장해 store를 관리
+  storage,//sessionStorage 저장해 store를 관리
   version: 1,
   // whitelist: ['userReducer', 'movieReducer']
 };

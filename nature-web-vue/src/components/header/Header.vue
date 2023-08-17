@@ -67,19 +67,12 @@ export default {
     const { user, doLogout } = useUser();
     const { initMovies } = useMovie();
 
-    onMounted(() => {
-      // if (!user.value.loggedIn) {
-      //   router.replace({
-      //     name: "Login",
-      //   });
-      // }
-    })
-
     const handleLogout = async () => {
       await http.post('user/logout')
         .then(() => {
           doLogout();
           initMovies();
+          sessionStorage.clear();
           router.replace({
             name: "Login",
           });

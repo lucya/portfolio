@@ -31,7 +31,7 @@ const logout = () => {
     await http.post('/user/logout')
       .then(({ data }) => {
         purge(); // state 초기화
-
+        sessionStorage.clear();
         dispatch(userActions.logout());
       })
       .catch((error) => {

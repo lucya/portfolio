@@ -15,13 +15,13 @@ function ScrollToTop({ stay, top }: IElementProps) {
     setTimeout(() => {
       const elm = document.querySelector('.main-container') as HTMLElement
       elm?.scrollTo(0, scrollTop)
-      stay && localStorage.removeItem(config.SET_SCROLLY);
+      stay && sessionStorage.removeItem(config.SET_SCROLLY);
     }, 300);
   }
 
   useEffect(() => {
     if (stay !== undefined) { //top 위치 유지가 필요한 페이지인 경우
-      let val = localStorage.getItem(config.SET_SCROLLY);
+      let val = sessionStorage.getItem(config.SET_SCROLLY);
       // if (typeof val === 'number') {
       setScrollTop(Number(val))
       // }
