@@ -74,13 +74,11 @@ export default {
             formData.append('file', file.value);
             formData.append('user', JSON.stringify(userInfo.value));
 
-            try {
-                await http.post('/user/signup', formData,
-                    {
-                        headers: { "Content-Type": "mutipart/form-data" },
-                    }
-                )
-
+            await http.post('/user/signup', formData,
+                {
+                    headers: { "Content-Type": "mutipart/form-data" },
+                }
+            ).then(() => {
                 const email = userInfo.value.email;
                 setTimeout(() => {
                     alert("회원 가입을 환영합니다.")
@@ -92,73 +90,74 @@ export default {
                         },
                     });
                 }, 1500)
-            } catch (error) {
+            }).catch((error) => {
                 console.log(error);
                 alert('에러가 발생했습니다. 관리자에게 문의하세요.')
+            });
+
+
+            const setPwdConfirm = (e) => {
+                pwdConfirm.value = e.target.value;
             }
-        }
-        const setPwdConfirm = (e) => {
-            pwdConfirm.value = e.target.value;
-        }
 
-        const handleUpload = (e) => {
-            const reader = new FileReader();
-            const file2 = e.target.files && e.target.files[0]
+            const handleUpload = (e) => {
+                const reader = new FileReader();
+                const file2 = e.target.files && e.target.files[0]
 
-            reader.onloadend = () => {
-                file.value = file2;
-                if (reader.result) {
-                    imagePreviewUrl.value = reader.result.toString();
-                }
-            };
-            reader.readAsDataURL(file2); // by Blob
-        }
-
-
-        const handleUploadClick = () => {
-            profileImgRef.value.click();
-        }
-
-        const validator = (e) => {
-            let name = e.target.name;
-            let value = e.target.value;
-
-            if (name === 'password') {
-                let { invalid, msg } = initValid
-                if (value.length >= 1 && value.length < 6) {
-                    invalid = true;
-                    msg = "6자 이상이 되어야합니다."
-                }
-                isValid1.value = { invalid: invalid, msg: msg }
-                console.log(isValid1.value)
+                reader.onloadend = () => {
+                    file.value = file2;
+                    if (reader.result) {
+                        imagePreviewUrl.value = reader.result.toString();
+                    }
+                };
+                reader.readAsDataURL(file2); // by Blob
             }
-            if (name === 'password-confirm') {
-                let { invalid, msg } = initValid
 
-                if (pwdConfirm.value.length && (userInfo.value.password !== pwdConfirm.value)) {
-                    invalid = true
-                    msg = "비밀번호가 일치하지 않습니다."
-                }
-                isValid2.value = { invalid: invalid, msg: msg }
+
+            const handleUploadClick = () => {
+                profileImgRef.value.click();
             }
-        }
 
-        return {
-            handleChange,
-            handleSubmit,
-            setPwdConfirm,
-            // file,
-            profile_base,
-            imagePreviewUrl,
-            profileImgRef,
-            handleUploadClick,
-            handleUpload,
-            validator,
-            isValid1,
-            isValid2,
+            const validator = (e) => {
+                let name = e.target.name;
+                let value = e.target.value;
+
+                if (name === 'password') {
+                    let { invalid, msg } = initValid
+                    if (value.length >= 1 && value.length < 6) {
+                        invalid = true;
+                        msg = "6자 이상이 되어야합니다."
+                    }
+                    isValid1.value = { invalid: invalid, msg: msg }
+                    console.log(isValid1.value)
+                }
+                if (name === 'password-confirm') {
+                    let { invalid, msg } = initValid
+
+                    if (pwdConfirm.value.length && (userInfo.value.password !== pwdConfirm.value)) {
+                        invalid = true
+                        msg = "비밀번호가 일치하지 않습니다."
+                    }
+                    isValid2.value = { invalid: invalid, msg: msg }
+                }
+            }
+
+            return {
+                handleChange,
+                handleSubmit,
+                setPwdConfirm,
+                // file,
+                profile_base,
+                imagePreviewUrl,
+                profileImgRef,
+                handleUploadClick,
+                handleUpload,
+                validator,
+                isValid1,
+                isValid2,
+            }
         }
     }
-}
 </script>
 
 <style>

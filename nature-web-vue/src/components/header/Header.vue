@@ -76,18 +76,17 @@ export default {
     })
 
     const handleLogout = async () => {
-      try {
-        await http.post('user/logout')
-        doLogout();
-        initMovies();
-        router.replace({
-          name: "Login",
-        });
-      } catch (error) {
-        alert('서버 에러가 발생하고 있습니다.')
-        console.log(error)
-      }
-
+      await http.post('user/logout')
+        .then(() => {
+          doLogout();
+          initMovies();
+          router.replace({
+            name: "Login",
+          });
+        }).catch((error) => {
+          alert('서버 에러가 발생하고 있습니다.')
+          console.log(error)
+        })
     }
 
     return {

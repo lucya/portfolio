@@ -28,14 +28,13 @@ export default {
     })
 
     const getReview = async (title) => {
-      try {
-        const res = await http.post('movie/review', { title: title }, {
-          timeout: 180 * 1000
-        })
-        return res.data.assistant
-      } catch (error) {
+      await http.post('movie/review', { title: title }, {
+        timeout: 180 * 1000
+      }).then(({ data }) => {
+        return data.assistant;
+      }).catch((error) => {
         console.log(error)
-      }
+      })
     }
     return {
       review,

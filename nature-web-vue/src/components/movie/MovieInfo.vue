@@ -101,15 +101,13 @@ export default {
     })
 
     const getMovie = async (id) => {
-      try {
-        const res = await http.get(`movie/${id}`)
-        return res.data
-
-      } catch (error) {
-        console.log(error)
-      }
+      await http.get(`movie/${id}`)
+        .then(({ data }) => {
+          return data;
+        }).catch((error) => {
+          console.log(error)
+        })
     }
-
 
     return {
       popupShow,

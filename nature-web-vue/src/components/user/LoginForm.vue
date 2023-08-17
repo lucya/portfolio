@@ -50,16 +50,18 @@ export default {
                 pwdRef.value.focus()
                 return;
             }
-            try {
-                const res = await http.post('user/login', { email: userInfo.value.email, password: userInfo.value.password })
-                doLogin(res.data.userInfo)
-                router.push({
-                    name: "Home",
-                });
-            } catch (error) {
-                alert("가입된 이메일 또는 비밀번호 확인후 입력해주세요.")
-                console.log(error)
-            }
+            
+            await http.post('user/login', { email: userInfo.value.email, password: userInfo.value.password })
+                .then(({ data }) => {
+                    doLogin(data.userInfo)
+                    router.push({
+                        name: "Home",
+                    });
+                })
+                .catch((error) => {
+                    alert("가입된 이메일 또는 비밀번호 확인후 입력해주세요.")
+                    console.log(error)
+                })
         }
         return {
             emailRef,

@@ -27,12 +27,12 @@ export default {
     })
 
     const getMovieVideos = async (id) => {
-      try {
-        const res = await http.get(`/movie/videos/${id}`)
-        return res.data
-      } catch (error) {
-        console.log(error)
-      }
+      await http.get(`/movie/videos/${id}`)
+        .then(({ data }) => {
+          return data;
+        }).catch((error) => {
+          console.log(error)
+        })
     }
 
     const options = {

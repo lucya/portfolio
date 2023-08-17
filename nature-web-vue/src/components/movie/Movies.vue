@@ -26,13 +26,13 @@ export default {
     const { movies, page, addMovies, setPage } = useMovie()
 
     const _getMovies = async () => {
-      try {
-        setPage();
-        const res = await http.get('movie/popular-movies', { params: { page: page.value } })
-        addMovies(res.data)
-      } catch (error) {
-        console.log(error)
-      }
+      setPage();
+      await http.get('movie/popular-movies', { params: { page: page.value } })
+        .then(({ data }) => {
+          addMovies(data)
+        }).catch((error) => {
+          console.log(error)
+        })
     }
     const handleMore = () => {
       _getMovies();
