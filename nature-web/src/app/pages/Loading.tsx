@@ -26,7 +26,7 @@ const RingMove = keyframes`
 `
 const Ring = styled.div`
   & {
-    position: absolute;
+    position: relative;
     width: 200px;
     height: 200px;
     border-radius:50%;

@@ -3,7 +3,6 @@
   <div class="movie-container">
     <Movie v-for="movie in movies" :key="movie.id" :movie="movie" />
   </div>
-
   <div class="movie-more">
     <button @click="handleMore">More</button>
   </div>
@@ -17,10 +16,12 @@ import Movie from "./Movie.vue";
 import http from '@/http-common'
 import { useMovie } from '@/composables/movie'
 
+
 export default {
   components: {
     ScrollToTop,
     Movie,
+
   },
   setup() {
     const { movies, page, addMovies, setPage } = useMovie()

@@ -82,7 +82,7 @@ export default {
     const router = useRouter();
     const route = useRoute();
     const id = route.params.id;
-    const movie = ref({})
+    const movie = ref(null)
     const popupShow = ref(true)
 
     const handleBack = () => {
@@ -90,24 +90,21 @@ export default {
     }
 
     onMounted(() => {
-      getMovie(id).then((data) => {
-        movie.value = data
-      })
-    })
-    onMounted(() => {
       setTimeout(() => {
         popupShow.value = !popupShow.value
       }, 2000)
     })
 
-    const getMovie = async (id) => {
+    const getMovie = async () => {
       await http.get(`movie/${id}`)
         .then(({ data }) => {
-          return data;
+          // return data;
+          movie.value = data
         }).catch((error) => {
           console.log(error)
         })
     }
+    getMovie();
 
     return {
       popupShow,
