@@ -11,17 +11,16 @@ function MovieReview({ title }: OwnProps) {
 
   useEffect(() => {
     console.log("Movie getMovieReview")
-    // const getReview = () => {
-    movieAction.getMovieReview(title)
-      .then((data) => {
-        console.log("MovieReview", data);
-        let answer = data.assistant;
-        setReview(answer);
-      })
-    // }
-
-    // getReview();
-  }, [title])
+    const getReview = () => {
+      movieAction.getMovieReview(title)
+        .then((data) => {
+          console.log("MovieReview", data);
+          let answer = data.assistant;
+          setReview(answer);
+        })
+    }
+    getReview();
+  }, [])
 
   if (!review) {
     return <LoadingBar />
