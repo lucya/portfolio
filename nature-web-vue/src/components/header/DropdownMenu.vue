@@ -38,7 +38,7 @@ export default {
       const handleOutsideClose = (e) => {
         e.preventDefault();
         // useRef current에 담긴 엘리먼트 바깥을 클릭 시 드롭메뉴 닫힘
-        if (menuOpen.value && (!dropMenuRef.value.contains(e.target))) menuOpen.value = false
+        if (menuOpen.value && (!dropMenuRef.value?.contains(e.target))) menuOpen.value = false
       }
 
       document.addEventListener('click', handleOutsideClose);

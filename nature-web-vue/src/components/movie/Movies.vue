@@ -28,7 +28,7 @@ export default {
 
     const _getMovies = async () => {
       setPage();
-      await http.get('movie/popular-movies', { params: { page: page.value } })
+      await http.get('/api/movie/popular-movies', { params: { page: page.value } })
         .then(({ data }) => {
           addMovies(data)
         }).catch((error) => {
@@ -40,7 +40,6 @@ export default {
     }
 
     onMounted(() => {
-      console.log("onMounted")
       // 목록이 있는 경우 재호출 금지
       if (movies.value && movies.value.length) return;
 

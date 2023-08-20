@@ -7,9 +7,8 @@ export const useUser = () => {
   const store = useStore();
   const user = computed(() => store.state.user.user);
 
-
-  const doLogin = (username, loggedIn = false) => {
-    store.dispatch('user/LOGIN', username, loggedIn);
+  const doLogin = (_user) => {
+    store.dispatch('user/LOGIN', _user);
   }
   const doLogout = () => {
     store.dispatch('user/LOGOUT')

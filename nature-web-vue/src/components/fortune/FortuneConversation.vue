@@ -122,7 +122,7 @@ export default {
       let assistantMessages = req.assisMsg
       req = { userMessages, assistantMessages }
 
-      return await http.post('fortune', req, {
+      return await http.post('/api/fortune', req, {
         timeout: 180 * 1000
       })
 

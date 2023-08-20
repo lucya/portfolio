@@ -11,7 +11,7 @@ import { Dispatch } from "redux";
 // action
 const login = (user: UserType) => {
   return async (dispatch: Dispatch) => {
-    await http.post('/user/login', user)
+    await http.post('/api/user/login', user)
       .then(({ data }) => {
         dispatch(userActions.login({
           user: data.userInfo,
@@ -28,7 +28,7 @@ const logout = () => {
     await persistor.purge();
   }
   return async (dispatch: Dispatch) => {
-    await http.post('/user/logout')
+    await http.post('/api/user/logout')
       .then(({ data }) => {
         purge(); // state 초기화
         sessionStorage.clear();
@@ -42,7 +42,7 @@ const logout = () => {
 }
 const signup = (formData: FormData) => {
   return async (dispatch: Dispatch) => {
-    await http.post('/user/signup', formData,
+    await http.post('/api/user/signup', formData,
       {
         headers: { "Content-Type": "mutipart/form-data" },
       }

@@ -104,7 +104,7 @@ const config = ({ isDev }) => ({
       reconnect: 3, // 클라이언트 재연결을 시도해야 하는 횟수, true:무제한 | false 
     },
     proxy: {
-      '/': {
+      '/api': {
         target: isDev ? 'http://localhost:8080' : 'https://port-0-node-express-3zspi2nlgczjhds.sel3.cloudtype.app',		// 프론트 단에서 CORS 에러 해결하는 방법
         // secure: true,
         changeOrigin: true,

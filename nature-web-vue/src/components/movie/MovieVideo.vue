@@ -27,7 +27,7 @@ export default {
     })
 
     const getMovieVideos = async (id) => {
-      await http.get(`/movie/videos/${id}`)
+      await http.get(`/api/movie/videos/${id}`)
         .then(({ data }) => {
           return data;
         }).catch((error) => {

@@ -96,7 +96,7 @@ export default {
     })
 
     const getMovie = async () => {
-      await http.get(`movie/${id}`)
+      await http.get(`/api/movie/${id}`)
         .then(({ data }) => {
           // return data;
           movie.value = data

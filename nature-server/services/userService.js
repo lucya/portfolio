@@ -3,6 +3,7 @@
  * firebas 인증 상태 지속성 유형: https://firebase.google.com/docs/auth/web/auth-state-persistence?hl=ko
  * @author nature
  */
+const jwt = require('jsonwebtoken')
 const db = require('../db/firebaseDb')
 // setDoc is update
 // addDoc is used when generating a new id.
@@ -27,8 +28,12 @@ const getUser = async (uid) => {
       throw new Error('Has no user')
     }
     const userInfo = userSnapshot.data();
-    delete userInfo.password;
-    return userInfo;
+    const user = {
+      username: userInfo.username,
+      photoURL: userInfo.photoURL,
+      uid: userInfo.uid
+    }
+    return user;
   } catch (error) {
     throw error;
   }
@@ -82,9 +87,7 @@ const doLogin = async (userInfo, res) => {
       return (async () => {
         let loginUser = await getUser(uid);
         console.log('doLogin success userInfo', loginUser)
-        return {
-          userInfo: loginUser
-        };
+        return loginUser
       })();
 
     })
@@ -118,8 +121,37 @@ const doLogout = async (res) => {
   return await signOut(auth);
 }
 
+const getToken = (userInfo) => {
+  const token = jwt.sign({
+    uid: userInfo.uid,
+    photoURL: userInfo.photoURL,
+    username: userInfo.username,
+  }, process.env.TOKEN_KEY, {
+    expiresIn: '30m',
+    issuer: 'nature'
+  })
+  return token;
+}
+
+const checkToken = (req) => {
+  console.log('checkToken', req.cookies.token)
+  if (req.cookies && req.cookies.token) {
+    return jwt.verify(req.cookies.token, process.env.TOKEN_KEY, (err, decoded) => {
+      if (err) {
+        console.log('err', err)
+        throw err
+      }
+      console.log('decoded', decoded)
+      return decoded;
+    })
+  }
+  throw new Error;
+}
+
 module.exports = {
   doLogin,
   doSignup,
   doLogout,
+  getToken,
+  checkToken,
 }

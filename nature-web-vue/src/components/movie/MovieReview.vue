@@ -21,21 +21,24 @@ export default {
     const review = ref(null)
     const { title } = toRefs(props)
 
-    watch(title, () => {
-      getReview(title.value).then((data) => {
-        review.value = data;
-      })
-    })
+    // watch(title.value, () => {
+    // getReview()
+    // .then((data) => {
+    //   review.value = data;
+    // })
+    // })
 
-    const getReview = async (title) => {
-      await http.post('movie/review', { title: title }, {
-        timeout: 180 * 1000
+    const getReview = async () => {
+      await http.post('/api/movie/review', { title: title.value }, {
+        timeout: 180 * 1000,
       }).then(({ data }) => {
-        return data.assistant;
+        review.value = data.assistant;
       }).catch((error) => {
         console.log(error)
       })
     }
+    getReview()
+
     return {
       review,
     }

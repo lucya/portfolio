@@ -20,7 +20,7 @@ export default {
   setup() {
     const handleSaveScroll = () => {
       const $elm = document.querySelector('.main-container');
-      sessionStorage.setItem(constants.SET_SCROLLY, $elm.scrollTop + "")
+      localStorage.setItem(constants.SET_SCROLLY, $elm.scrollTop + "")
     }
 
     return {

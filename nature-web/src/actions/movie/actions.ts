@@ -4,7 +4,7 @@ import { movieActions } from "../../reducers/movieSlice";
 
 const getMovies = (page: number) => {
   return async (dispatch: Dispatch<any>) => {
-    await http.get('/movie/popular-movies', { params: { page: page } })
+    await http.get('/api/movie/popular-movies', { params: { page: page } })
       .then(({ data }) => {
         let movies = data;
         dispatch(movieActions.getMovies({ movies, page }))
@@ -15,7 +15,7 @@ const getMovies = (page: number) => {
 }
 const getMovie = (id: number) => {
   return async (dispatch: Dispatch<any>) => {
-    await http.get(`/movie/${id}`)
+    await http.get(`/api/movie/${id}`)
       .then(({ data }) => {
         const movie = data
         dispatch(movieActions.getMovie({ movie }))
@@ -26,7 +26,7 @@ const getMovie = (id: number) => {
 
 const getMovieVideos = (id: number) => {
   return async (dispatch: Dispatch<any>) => {
-    await http.get(`/movie/videos/${id}`)
+    await http.get(`/api/movie/videos/${id}`)
       .then(({ data }) => {
         const videos = data
         dispatch(movieActions.getMovieVideos({ videos }))
@@ -36,7 +36,7 @@ const getMovieVideos = (id: number) => {
 }
 
 const getMovieReview = async (title: string) => {
-  return await http.post('/movie/review', { title: title }, {
+  return await http.post('/api/movie/review', { title: title }, {
     timeout: 180 * 1000
   })
     .then(({ data }) => {

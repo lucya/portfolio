@@ -1,4 +1,10 @@
-const { doLogin, doSignup, doLogout } = require('../services/userService')
+const {
+  doLogin,
+  doSignup,
+  doLogout,
+  getToken,
+  checkToken,
+} = require('../services/userService')
 const { uploadProfile } = require('../services/fileService')
 const User = require('../models/user')
 
@@ -7,17 +13,21 @@ const login = async (req, res, next) => {
 
   try {
     const data = await doLogin(User, res);
-    console.log('lging in', data)
+    console.log(data);
+    const token = getToken(data);
+    res.cookie('token', token)
     res.status(200).send(data);
   } catch (error) {
-    res.status(400).send(error.message);
+    res.status(404).send(error.message);
   }
 }
 
 const logout = async (req, res, next) => {
   try {
     await doLogout(res);
-
+    if (req.cookies && req.cookies.token) {
+      res.clearCookie('token');
+    }
     res.status(200).send("로그아웃!");
   } catch (error) {
     res.status(400).send(error.message);
@@ -31,29 +41,7 @@ const signup = async (req, res, next) => {
 
   const userInfo = JSON.parse(req.body.user);
   const file = req.files[0];
-  /* try {
-    console.log('signup  ', user)
-    console.log('signup file ', file)
-    if (file) {
-      const photoURL = await uploadProfile(file);
-      console.log('upload', photoURL);
-      user.photoURL = photoURL;
-    }
-    const data = await doSignup(user);
-    console.log('xxx', data);
-    res.status(200).send(data);
-  } catch (error) {
-    res.status(400).send(error.message);
-  } */
-  // if (file) {
-  //   const photoURL = await uploadProfile(file).catch(error => {
-  //     res.status(400).send(error.message);
-  //   });
-  //   console.log('upload', photoURL);
-  //   user.photoURL = photoURL;
-  // }
 
-  console.log('signup file ', file)
   if (file) {
     let photoURL = await uploadProfile(file);
     console.log('upload', photoURL);
@@ -65,17 +53,6 @@ const signup = async (req, res, next) => {
   })
   console.log('xxx', data);
   res.status(200).send(data);
-
-  // const User = req.body.user;
-  // try {
-  //   console.log('signup  ', User)
-
-  //   const data = await doSignup(User);
-  //   console.log('xxx', data);
-  //   res.status(200).send(data);
-  // } catch (error) {
-  //   res.status(400).send(error.message);
-  // }
 }
 
 const upload = async (req, res, next) => {
@@ -89,9 +66,20 @@ const upload = async (req, res, next) => {
   }
 }
 
+const check = async (req, res, next) => {
+  console.log('check');
+  try {
+    const user = checkToken(req)
+    res.status(200).send(user)
+  } catch (error) {
+    res.status(401).send(error.message)
+  }
+}
+
 module.exports = {
   login,
   logout,
   signup,
-  upload
+  upload,
+  check,
 }

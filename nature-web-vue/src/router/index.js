@@ -1,17 +1,27 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { useUser } from "@/composables/user";
+import http from '@/http-common'
 
-const authCheck = () => (to, from, next) => {
-  const { user } = useUser();
-  const { requiredLoggin } = to.meta;
+const check = () => (to, from, next) => {
 
-  if (user.value.loggedIn === true && requiredLoggin === true) {
-    // 로그인상태 && 로그인이 필요한 페이지
-    return next()
-  }
+  http.get('/api/user/check').then(({ data }) => {
 
-  next('/')
+    return next();
+
+  }).catch((error) => {
+    console.log('ssss', error)
+    localStorage.clear();
+
+    if (to.meta.requiredAuth) {
+      alert("로그인 후 이용해주세요.");
+
+      next("/");
+    } else {
+      next()
+    }
+
+  })
 }
+
 
 const routes = [
   {
@@ -32,15 +42,15 @@ const routes = [
         path: '/',
         name: 'Login',
         component: () => import('@/pages/user/login.vue'),
-        // meta: { requiredLoggin: false },
-        // beforeEnter: authCheck()
+        meta: { requiredAuth: false },
+        beforeEnter: check()
       },
       {
         path: '/signup',
         name: 'Signup',
         component: () => import('@/pages/user/signup.vue'),
-        // meta: { requiredLoggin: false },
-        // beforeEnter: authCheck(),
+        meta: { requiredAuth: false },
+        beforeEnter: check(),
       }
     ]
   },
@@ -53,8 +63,8 @@ const routes = [
         path: '/home',
         name: 'Home',
         component: () => import('@/pages/main/home.vue'),
-        meta: { requiredLoggin: true },
-        beforeEnter: authCheck(),
+        meta: { requiredAuth: true },
+        beforeEnter: check(),
       },
       {
         path: '/*',
@@ -65,15 +75,15 @@ const routes = [
             path: '/movies',
             name: 'Movies',
             component: () => import('@/components/movie/Movies.vue'),
-            meta: { requiredLoggin: true },
-            beforeEnter: authCheck(),
+            meta: { requiredAuth: true },
+            beforeEnter: check(),
           },
           {
             path: '/movie/:id',
             name: 'MovieInfo',
             component: () => import('@/components/movie/MovieInfo.vue'),
-            meta: { requiredLoggin: true },
-            beforeEnter: authCheck(),
+            meta: { requiredAuth: true },
+            beforeEnter: check(),
           },
         ]
       },
@@ -86,8 +96,8 @@ const routes = [
             path: '/fortune',
             name: 'FortuneConversation',
             component: () => import('@/components/fortune/FortuneConversation.vue'),
-            meta: { requiredLoggin: true },
-            beforeEnter: authCheck(),
+            meta: { requiredAuth: true },
+            beforeEnter: check(),
           }
         ]
       }
@@ -100,21 +110,4 @@ const router = createRouter({
   routes
 })
 
-// router.beforeEach(async (to) => {
-//   // redirect to login page if not logged in and trying to access a restricted page
-//   const publicPages = ['/', '/signup'];
-//   const authRequired = !publicPages.includes(to.path);
-//   const store = useStore();
-//   const user = store.getters["User/getUser"];
-//   alert(user.loggedIn + '/' + authRequired)
-//   // if (authRequired && !user.loggedIn) {
-//   //   if (to.path !== '/')
-//   //     // return '/';
-//   // } else {
-//   //   return '/home';
-//   // }
-//   if (user.loggedIn && authRequired) {
-//     return '/home';
-//   }
-// });
 export default router

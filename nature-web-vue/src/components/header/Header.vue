@@ -68,11 +68,13 @@ export default {
     const { initMovies } = useMovie();
 
     const handleLogout = async () => {
-      await http.post('user/logout')
+      await http.post('/api/user/logout')
         .then(() => {
           doLogout();
           initMovies();
-          sessionStorage.clear();
+
+          localStorage.clear();
+
           router.replace({
             name: "Login",
           });

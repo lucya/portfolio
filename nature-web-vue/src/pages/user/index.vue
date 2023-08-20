@@ -21,13 +21,13 @@ export default {
     const router = useRouter()
     const user = computed(() => store.getters["user/getUser"]);
 
-    onMounted(() => {
-      if (user.value.loggedIn) {
-        router.replace({
-          name: "Home",
-        });
-      }
-    })
+    // onMounted(() => {
+    //   if (user.value.uid) {
+    //     router.replace({
+    //       name: "Home",
+    //     });
+    //   }
+    // })
   }
 }
 </script>

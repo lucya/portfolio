@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 const multer = require('multer');
 const fileupload = require('express-fileupload');
 /* const socketIO = require("socket.io"); */
+const cookies = require('cookie-parser');
 const indexRouter = require('./routes');
 const server = http.createServer(app);
 const PORT = process.env.PORT || 8081
@@ -33,7 +34,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x
 
 // built-in middleware for json
 app.use(express.json());
-
+app.use(cookies());
 // server static files
 /* app.use(express.static('uploads'));
  *//* app.use(fileupload({

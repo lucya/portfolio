@@ -5,11 +5,11 @@ const fortuneRoutes = require('./fortune');
 
 const router = express.Router();
 
-router.use('/user', userRoutes);
+router.use('/api/user', userRoutes);
 
-router.use('/movie', movieRoutes);
+router.use('/api/movie', movieRoutes);
 
-router.use('/fortune', fortuneRoutes);
+router.use('/api/fortune', fortuneRoutes);
 
 module.exports = router;
 

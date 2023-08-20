@@ -18,14 +18,14 @@ export default {
         $elm.value = document.querySelector('.main-container')
         if ($elm.value) {
           $elm.value.scrollTo(0, scrollTop.value)
-          stay && sessionStorage.removeItem(SCROLLY);
+          stay && localStorage.removeItem(SCROLLY);
         }
       }, 300);
     }
 
     onMounted(() => {
       if (stay) { //top 위치 유지가 필요한 페이지인 경우
-        let val = sessionStorage.getItem(SCROLLY);
+        let val = localStorage.getItem(SCROLLY);
         // if (typeof val === 'number') {
         scrollTop.value = Number(val)
         // }
