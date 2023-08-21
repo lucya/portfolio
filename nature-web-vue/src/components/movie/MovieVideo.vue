@@ -20,20 +20,15 @@ export default {
     const youtube = ref(null)
     const { id } = toRefs(props)
 
-    watch(id, () => {
-      getMovieVideos(id.value).then((data) => {
-        videos.value = data
-      })
-    })
-
-    const getMovieVideos = async (id) => {
-      await http.get(`/api/movie/videos/${id}`)
+    const getMovieVideos = async () => {
+      await http.get(`/api/movie/videos/${id.value}`)
         .then(({ data }) => {
-          return data;
+          return videos.value = data;
         }).catch((error) => {
           console.log(error)
         })
     }
+    getMovieVideos();
 
     const options = {
       autoplay: 0,
