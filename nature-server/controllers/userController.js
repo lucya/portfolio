@@ -7,8 +7,6 @@ const {
 } = require('../services/userService')
 const { uploadProfile } = require('../services/fileService')
 const User = require('../models/user')
-const cookie = require('cookie');
-
 
 const login = async (req, res, next) => {
   const User = req.body;
@@ -26,7 +24,7 @@ const login = async (req, res, next) => {
     // cookies.setCookie = (res, token) => {
     res.cookie("access_token", token, {
       sameSite: process.env.NODE_ENV === "production" ? 'none' : '',
-      // secure: true, // https, ssl 모드에서만
+      secure: false, // https, ssl 모드에서만
       // maxAge: 1000 * 60 * 60 * 24 * 1, // 1D
       httpOnly: true, // javascript 로 cookie에 접근하지 못하게 한다.
     });
@@ -34,6 +32,7 @@ const login = async (req, res, next) => {
 
     res.status(200).send(data);
   } catch (error) {
+    console.log(error);
     res.status(404).send(error.message);
   }
 }
