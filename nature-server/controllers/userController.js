@@ -24,7 +24,7 @@ const login = async (req, res, next) => {
     // cookies.setCookie = (res, token) => {
     res.cookie("access_token", token, {
       sameSite: process.env.NODE_ENV === "production" ? 'none' : '',
-      secure: false, // https, ssl 모드에서만
+      secure: true, // https, ssl 모드에서만
       // maxAge: 1000 * 60 * 60 * 24 * 1, // 1D
       httpOnly: true, // javascript 로 cookie에 접근하지 못하게 한다.
     });
