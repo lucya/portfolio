@@ -17,7 +17,7 @@ const login = async (req, res, next) => {
     const token = getToken(data);
     res.cookie('token', token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+      // secure: process.env.NODE_ENV === "production",
     })
     res.status(200).send(data);
   } catch (error) {
