@@ -15,7 +15,10 @@ const login = async (req, res, next) => {
     const data = await doLogin(User, res);
     console.log(data);
     const token = getToken(data);
-    res.cookie('token', token)
+    res.cookie('token', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+    })
     res.status(200).send(data);
   } catch (error) {
     res.status(404).send(error.message);

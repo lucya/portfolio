@@ -127,7 +127,7 @@ const getToken = (userInfo) => {
     photoURL: userInfo.photoURL,
     username: userInfo.username,
   }, process.env.TOKEN_KEY, {
-    expiresIn: '30m',
+    expiresIn: '1h',
     issuer: 'nature'
   })
   return token;

@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "cp ./.env.local ./.env && NODE_ENV=development nodemon index.js",
     "start:prod": "cp ./.env.prod ./.env && NODE_ENV=production nodemon index.js",
-    "start:prod:local": "cp ./.env.prod.local ./.env && NODE_ENV=production nodemon index.js"
+    "start:prod:local": "cp ./.env.prod.local ./.env && NODE_ENV=production nodemon index.js",
+    "build": "cp ./.env.prod ./.env"
   },
   "author": "",
   "license": "ISC",
