@@ -134,9 +134,9 @@ const getToken = (userInfo) => {
 }
 
 const checkToken = (req) => {
-  console.log('checkToken', req.cookies.token)
-  if (req.cookies && req.cookies.token) {
-    return jwt.verify(req.cookies.token, process.env.TOKEN_KEY, (err, decoded) => {
+  console.log('checkToken', req.cookies.access_token)
+  if (req.cookies && req.cookies.access_token) {
+    return jwt.verify(req.cookies.access_token, process.env.TOKEN_KEY, (err, decoded) => {
       if (err) {
         console.log('err', err)
         throw err

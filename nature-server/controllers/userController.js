@@ -7,6 +7,8 @@ const {
 } = require('../services/userService')
 const { uploadProfile } = require('../services/fileService')
 const User = require('../models/user')
+const cookie = require('cookie');
+
 
 const login = async (req, res, next) => {
   const User = req.body;
@@ -15,10 +17,21 @@ const login = async (req, res, next) => {
     const data = await doLogin(User, res);
     console.log(data);
     const token = getToken(data);
-    res.cookie('token', token, {
-      httpOnly: true,
-      // secure: process.env.NODE_ENV === "production",
-    })
+    // res.cookie('access_token', token, {
+    //   httpOnly: true,
+
+    //   // secure: process.env.NODE_ENV === "production",
+    // })
+
+    // cookies.setCookie = (res, token) => {
+    res.cookie("access_token", token, {
+      sameSite: process.env.NODE_ENV === "production" ? 'none' : '',
+      // secure: true, // https, ssl 모드에서만
+      // maxAge: 1000 * 60 * 60 * 24 * 1, // 1D
+      httpOnly: true, // javascript 로 cookie에 접근하지 못하게 한다.
+    });
+    // }
+
     res.status(200).send(data);
   } catch (error) {
     res.status(404).send(error.message);
@@ -28,8 +41,8 @@ const login = async (req, res, next) => {
 const logout = async (req, res, next) => {
   try {
     await doLogout(res);
-    if (req.cookies && req.cookies.token) {
-      res.clearCookie('token');
+    if (req.cookies && req.cookies.access_token) {
+      res.clearCookie('access_token');
     }
     res.status(200).send("로그아웃!");
   } catch (error) {
