@@ -8,7 +8,7 @@ const check = () => (to, from, next) => {
     return next();
 
   }).catch((error) => {
-    console.log('ssss', error)
+    console.log(error)
     localStorage.clear();
 
     if (to.meta.requiredAuth) {
@@ -18,7 +18,6 @@ const check = () => (to, from, next) => {
     } else {
       next()
     }
-
   })
 }
 
