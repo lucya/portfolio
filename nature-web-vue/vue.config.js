@@ -16,7 +16,9 @@ module.exports = defineConfig({
         warnings: false,
         errors: isDev ? true : false
       }
-    }
+    },
+    allowedHosts: "all",
+    https: false,
   },
   outputDir: path.resolve(__dirname, './dist'),
 })
