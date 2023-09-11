@@ -13,7 +13,6 @@
 import { onMounted } from 'vue'
 import ScrollToTop from "@/app/utils/ScrollToTop";
 import Movie from "./Movie.vue";
-import http from '@/http-common'
 import { useMovie } from '@/composables/movie'
 
 
@@ -24,14 +23,11 @@ export default {
 
   },
   setup() {
-    const { movies, page, addMovies, setPage } = useMovie()
+    const { movies, getMovies } = useMovie()
 
-    const _getMovies = async () => {
-      setPage();
-      await http.get('/api/movie/popular-movies', { params: { page: page.value } })
-        .then(({ data }) => {
-          addMovies(data)
-        }).catch((error) => {
+    const _getMovies = () => {
+      getMovies()
+        .catch((error) => {
           console.log(error)
         })
     }

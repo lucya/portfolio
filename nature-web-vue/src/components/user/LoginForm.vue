@@ -24,7 +24,6 @@
 <script>
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import http from '@/http-common'
 import { useUser } from "@/composables/user";
 
 export default {
@@ -33,7 +32,7 @@ export default {
     const emailRef = ref(null);
     const pwdRef = ref(null);
     const userInfo = ref({});
-    const { doLogin } = useUser();
+    const { login } = useUser();
 
     onMounted(() => {
       emailRef.value.focus()
@@ -44,25 +43,22 @@ export default {
     }
 
     const handleSubmit = async () => {
-      if (!userInfo.value.email) {
+      const user = userInfo.value
+      if (!user.email) {
         emailRef.value.focus()
         return;
-      } else if (!userInfo.value.password) {
+      } else if (!user.password) {
         pwdRef.value.focus()
         return;
       }
 
-      await http.post('/api/user/login', { email: userInfo.value.email, password: userInfo.value.password })
-        .then(({ data }) => {
-          doLogin(data)
+      login({ email: user.email, password: user.password })
+        .then(() => {
           router.push({
             name: "Home",
           });
         })
-        .catch((error) => {
-          alert("가입된 이메일 또는 비밀번호 확인후 입력해주세요.")
-          console.log(error)
-        })
+        .catch(() => alert("가입된 이메일 또는 비밀번호 확인후 입력해주세요."))
     }
     return {
       emailRef,
@@ -72,7 +68,6 @@ export default {
     }
   },
 }
-
 </script>
 
 <style></style>

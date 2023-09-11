@@ -23,7 +23,7 @@
 <script>
 import { onMounted, ref, watch } from 'vue'
 import fortuneBall from '@/assets/images/crystal-ball.png';
-import http from '@/http-common'
+import { getFortuneApi } from '@/api/fortune'
 
 export default {
   setup() {
@@ -116,15 +116,11 @@ export default {
         })
     }
 
-    const doConversation = async (req) => {
-      console.log(req)
-      let userMessages = req.userMsg
-      let assistantMessages = req.assisMsg
-      req = { userMessages, assistantMessages }
+    const doConversation = async ({ userMsg, assisMsg }) => {
+      let userMessages = userMsg
+      let assistantMessages = assisMsg
 
-      return await http.post('/api/fortune', req, {
-        timeout: 180 * 1000
-      })
+      return getFortuneApi({ userMessages, assistantMessages })
 
     }
 

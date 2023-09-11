@@ -4,9 +4,9 @@
     :src="`https://www.youtube.com/watch?v=${video.key}`" @ready="onReady" ref="youtube" />
 </template>
 <script>
-import { ref, onMounted, watch, toRefs } from 'vue';
+import { ref, toRefs } from 'vue';
 import YouTube from 'vue3-youtube'
-import http from '@/http-common'
+import { getMovieVideosApi } from '@/api/movie'
 
 export default {
   props: [
@@ -17,11 +17,11 @@ export default {
   },
   setup(props) {
     const videos = ref([])
-    const youtube = ref(null)
+    // const youtube = ref(null)
     const { id } = toRefs(props)
 
     const getMovieVideos = async () => {
-      await http.get(`/api/movie/videos/${id.value}`)
+      await getMovieVideosApi(id.value)
         .then(({ data }) => {
           return videos.value = data;
         }).catch((error) => {

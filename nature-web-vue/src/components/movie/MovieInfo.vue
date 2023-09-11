@@ -60,14 +60,14 @@
   </template>
 </template>
 <script>
-import { onMounted, ref, watch } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import ScrollToTop from '@/app/utils/ScrollToTop.vue'
 import Loading from '@/app/pages/Loading.vue'
 import MovieReview from '@/components/movie/MovieReview.vue'
 import MovieVideo from '@/components/movie/MovieVideo.vue'
 import * as constants from '@/app/constants'
-import http from '@/http-common'
+import { getMovieApi } from '@/api/movie'
 
 const IMG_BASE_URL = constants.IMG_BASE_URL
 
@@ -96,9 +96,8 @@ export default {
     })
 
     const getMovie = async () => {
-      await http.get(`/api/movie/${id}`)
+      await getMovieApi(id)
         .then(({ data }) => {
-          // return data;
           movie.value = data
         }).catch((error) => {
           console.log(error)

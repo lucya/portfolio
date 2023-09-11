@@ -46,8 +46,7 @@
 </template>
 
 <script>
-import { ref, computed, onMounted } from 'vue'
-import http from '@/http-common'
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import logo170 from '@/assets/images/logo170.png'
 import logo120 from '@/assets/images/logo120.png'
@@ -64,16 +63,15 @@ export default {
   setup() {
     const isShow = ref(false)
     const router = useRouter()
-    const { user, doLogout } = useUser();
+    const { user, logout } = useUser();
     const { initMovies } = useMovie();
 
-    const handleLogout = async () => {
-      await http.post('/api/user/logout')
+    const handleLogout = () => {
+      logout()
         .then(() => {
-          doLogout();
           initMovies();
 
-          localStorage.clear();
+          sessionStorage.clear();
 
           router.replace({
             name: "Login",
