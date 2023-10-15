@@ -3,7 +3,7 @@
  * firebas 인증 상태 지속성 유형: https://firebase.google.com/docs/auth/web/auth-state-persistence?hl=ko
  * @author nature
  */
-const jwt = require('jsonwebtoken')
+// const jwt = require('jsonwebtoken')
 const db = require('../db/firebaseDb')
 // setDoc is update
 // addDoc is used when generating a new id.
@@ -17,6 +17,7 @@ const {
   deleteUser,
   browserSessionPersistence,
 } = require('firebase/auth');
+const { sign, verify } = require('../modules/jwt')
 
 const getUser = async (uid) => {
   try {
@@ -122,30 +123,43 @@ const doLogout = async (res) => {
 }
 
 const getToken = (userInfo) => {
-  const token = jwt.sign({
-    uid: userInfo.uid,
-    photoURL: userInfo.photoURL,
-    username: userInfo.username,
-  }, process.env.TOKEN_KEY, {
-    expiresIn: '1h',
-    issuer: 'nature'
-  })
-  return token;
+  // const token = jwt.sign({
+  //   uid: userInfo.uid,
+  //   photoURL: userInfo.photoURL,
+  //   username: userInfo.username,
+  // }, process.env.TOKEN_SECRET, {
+  //   expiresIn: '30s',//'1h',
+  //   issuer: 'nature'
+  // })
+  // return token;
+  return sign(userInfo).token
 }
 
 const checkToken = (req) => {
   console.log('checkToken', req.cookies.access_token)
   if (req.cookies && req.cookies.access_token) {
-    return jwt.verify(req.cookies.access_token, process.env.TOKEN_KEY, (err, decoded) => {
-      if (err) {
-        console.log('err', err)
-        throw err
-      }
-      console.log('decoded', decoded)
-      return decoded;
-    })
+    let token = req.cookies.access_token
+    console.log('checkToken', token)
+    return verify(token)
+
+    // let decoded = verify(token)
+    // if (decoded === TOKEN_EXPIRED) {
+    //   throw new Error('Expired token')
+    // } else if(decoded === TOKEN_INVALID) {
+    //   throw new Error('Invalid token');
+    // }
+    // return decoded
+
+    // return jwt.verify(req.cookies.access_token, process.env.TOKEN_SECRET, (err, decoded) => {
+    //   if (err) {
+    //     console.log('err', err)
+    //     throw err
+    //   }
+    //   console.log('decoded', decoded)
+    //   return decoded;
+    // })
   }
-  throw new Error;
+  throw new Error('Access denied');
 }
 
 module.exports = {
