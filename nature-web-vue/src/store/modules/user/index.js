@@ -24,10 +24,14 @@ export default {
       }
     },
 
-    async login({ commit }, payload) {
+    async login({ commit, dispatch }, payload) {
       try {
         await loginApi(payload)
-          .then(({ data }) => commit('setUser', data))
+          .then(({ data }) => {
+            commit('setUser', data)
+            // 다른 store modules의 actions call 하기
+            dispatch('movie/initMovies', null, { root: true })
+          })
       } catch (error) {
         throw new Error(`API ${error}`)
       }
