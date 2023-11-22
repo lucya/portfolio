@@ -10,7 +10,7 @@ module.exports = {
       username: user.username,
     };
     const options = {
-      expiresIn: '1m',
+      expiresIn: '1h',
       issuer: 'nature'
     }
     const result = {
@@ -50,6 +50,6 @@ module.exports = {
       console.log('decoded', decoded)
       return decoded;
     })
-   
+
   }
 }
