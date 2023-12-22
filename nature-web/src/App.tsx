@@ -1,8 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Route, Routes } from 'react-router-dom';
+
 import User from './containers/User/User';
 import PageNotFound from './app/pages/PageNotFound';
 import Main from './containers/Main';
+
 
 const App: React.FC = () => {
   return (

@@ -15,6 +15,6 @@ module.exports = function (req, res, next) {
     next();
   } catch (err) {
     console.log('verifyToken error : ', err.message)
-    res.status(400).send('Invalid token')
+    res.status(401).send(err.message)
   }
 };

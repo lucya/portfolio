@@ -16,9 +16,9 @@ const login = (user: UserType) => {
         dispatch(userActions.login({
           user: data.userInfo,
         }));
+
       }).catch((error) => {
         alert('없는 계정이거나 email 또는 비밀번호를 확인해주세요.');
-        console.error('login error', error)
         throw error;
       })
   }
@@ -60,9 +60,23 @@ const signup = (formData: FormData) => {
   }
 }
 
+const check = () => {
+  return async () => {
+    await http.get('/api/user/check')
+      .then(({ data }) => {
+        return data;
+      })
+      .catch((error) => {
+        alert("로그인 후 이용해주세요.");
+        return null;
+      })
+  }
+}
+
 const userAction = {
   login,
   logout,
   signup,
+  check,
 }
 export default userAction;

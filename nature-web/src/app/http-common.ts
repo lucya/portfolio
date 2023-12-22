@@ -21,33 +21,30 @@ const http = axios.create({
   //   return data;
   // }],
 });
+
 // Request interceptors
 // http.interceptors.request.use(
-//   config => {
-//     console.log("Request intercept")
-//     return config;
-//   },
-//   error => {
-//     return Promise.reject(error)
-//   },
-// )
-
-// Response interceptors
-// http.interceptors.response.use(
-//   response => {
-//     // response.headers.setAuthorization('aaaa')
-//     console.log('response', response)
-
-//     if (response.status === 403) {
-//       //call refreshToken
-//       console.log('sending refreshToken')
-//     }
-//     return response
-//   },
 //   error => {
 //     return Promise.reject({ ...error })
 //   },
 // )
+
+// Store requests
+let responseChk: boolean = true;
+
+// Response interceptors
+http.interceptors.response.use(
+  response => response,
+  error => {
+    const status = error.response ? error.response.status : null;
+    if (status === 401 && responseChk) {
+      alert('로그인이 필요합니다.');
+      responseChk = false;
+      window.location.href = "/";
+    }
+    return Promise.reject({ ...error })
+  },
+)
 
 export default http;
 

@@ -6,6 +6,7 @@ export type UserType = {
   photoURL?: string;
   auth: string | '1' | '2'
 }
+
 export const User: UserType = {
   uid: 0,
   email: '',
@@ -14,14 +15,3 @@ export const User: UserType = {
   photoURL: '',
   auth: '2',
 }
-
-/* type UserType = {
-  uid: number;
-  email: string;
-  username: string;
-  password: string;
-  photoURL: string;
-  auth: '1' | '2';
-};
-
-export type UserState = UserType & { isLogged: boolean }; */

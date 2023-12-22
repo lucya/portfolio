@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useAppDispatch } from '../../app/hooks'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import userAction from '../../actions/user/actions';
 import { useLocation } from 'react-router-dom' 	// 1번 라인
 
@@ -15,6 +15,8 @@ const Login: React.FC = () => {
 
   const [userState, setUserState] = useState(User)
   const dispatch = useAppDispatch();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     let email = state?.email || '';
@@ -41,7 +43,10 @@ const Login: React.FC = () => {
   }
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(userAction.login(userState));
+    dispatch(userAction.login(userState)).then(() => {
+      navigate('/home');
+    });
+
   }
 
   return (

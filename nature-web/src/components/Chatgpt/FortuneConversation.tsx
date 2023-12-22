@@ -119,8 +119,6 @@ const FortuneConversation: React.FC = () => {
         }
         handleScroll();
       }).catch((error) => {
-
-        alert(error);
         let crnt = msgContentRef.current;
         if (crnt && crnt.lastChild) {
           (crnt.lastChild.lastChild as HTMLElement).innerText = '운세 마법사가 오늘 컨디션이 안좋안가봐요.\n질문을 다시 해줄래요?';
